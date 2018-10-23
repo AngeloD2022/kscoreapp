@@ -19,6 +19,7 @@ function contactDB(url){
 
             if(this.responseText != "not found"){
                 var acct = JSON.parse(this.responseText);
+                finishUp(acct);
             }else{
                 alert("Account not found.");
             }
@@ -29,6 +30,7 @@ function contactDB(url){
     xhttp.send();
 }
 
-function testSys(arr){
-    
+function finishUp(arr){
+    document.querySelector("#test").innerHTML = "Logging you in...";
+
 }
