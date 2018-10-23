@@ -1,0 +1,48 @@
+<head>
+
+    <center>
+        <h1>Administrator login</h1>
+    </center>
+
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    
+    #credInputs{
+        border: 2px solid black;
+        margin-top: 70px;
+        padding: 7px;
+        width: 200px;
+    }
+    .inputs{
+        margin-top: 7px;
+    }
+
+    body{
+        font-family: 'Roboto', sans-serif;
+    }
+
+</style>
+
+<body>
+    <center>
+    <div id="credInputs">
+
+        <div class="inputs">
+            <input type="text" id="uname" placeholder="Username"/><br/>
+        </div>
+        <div class="inputs">
+            <input type="text" id="pswd" placeholder="Password"/><br/> 
+        </div>
+        <div class="inputs">
+            <label for="remember"> Remember me </label>
+            <input type="checkbox" id="remember"/>
+        </div>
+        <button onclick="Login()">Login</button>
+    </div>
+    <p id="test">here</p>
+
+    </center>
+    <script type="text/javascript" src="script.js"></script>
+</body>
