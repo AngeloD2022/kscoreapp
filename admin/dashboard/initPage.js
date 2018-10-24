@@ -1,8 +1,12 @@
 
 
 function initializePage(){
-    if(findCookie("ksb_usr") == "" || findCookie("ksb_pswd") == ""){
+    var usr = findCookie("ksb_usr");
+    var pw = findCookie("ksb_pswd");
+    if(usr == "" || pw == ""){
         document.location.href = "/admin";
+    }else{
+        if()
     }
 }
 
