@@ -1,5 +1,5 @@
-
-
+var xhttp = new XMLHttpRequest();
+var url = "/script.php";
 function initializePage(){
     var usr = findCookie("ksb_usr");
     var pw = findCookie("ksb_pswd");
@@ -27,4 +27,13 @@ function findCookie(cname){
         }
     }
     return "";
+}
+
+
+function contactDB(){
+    xhttp.onreadystatechange = function() {
+        if()
+    }
+        xhttp.open("GET", url, true);
+        xhttp.send();
 }
