@@ -8,6 +8,7 @@ function Login(){
     showLoad();
     if(uname.value == "" || password.value == ""){
         alert("You can't leave fields blank.");
+        endLoad();
     }else{
         contactDB("script.php?u="+uname.value+"&p="+password.value);
     }
