@@ -17,9 +17,13 @@ $result = $conn->query($sql);
 
 if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()){
-		$resultArray[] = $row;
+		if($row["disabled"] == 1){
+			echo "disabled";
+		}else{
+			$resultArray[] = $row;
+			echo json_encode($resultArray);
+		}
 	}
-	echo json_encode($resultArray);
 }else{
 	echo "not found";
 }
