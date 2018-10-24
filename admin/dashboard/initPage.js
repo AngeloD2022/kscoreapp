@@ -2,7 +2,7 @@
 
 function initializePage(){
     if(findCookie("ksb_usr") == "" || findCookie("ksb_pswd") == ""){
-        
+        document.location.href = "/admin";
     }
 }
 
@@ -14,10 +14,11 @@ function findCookie(cname){
     var cookieSplit = cookies.split(';');
     for(var i = 0; cookieSplit.length; i++){
         var c = cookieSplit[i];
-        while(c.charAt(0) == ' '){
+        
+        while(String(c).charAt(0) == ' '){
             c = c.substring(1);
         }
-        if(c.indexOf(cname) == 0){
+        if(String(c).indexOf(name) == 0){
             return c.substring(name.length, c.length);
         }
     }
