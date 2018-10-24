@@ -59,12 +59,18 @@ function finishUp(arr){
     
     //set cookie
     
-    
-    var d = new Date();
-    d.setTime(d.getTime() + (30*24*60*60*1000));
-    var expires = "expires="+ d.toGMTString();
-    document.cookie = "ksb_usr="+account.name+";"+expires+";path=/";
-    document.cookie = "ksb_pswd="+account.passwordSHA256+";"+expires+";path=/";
+    var checkbox = document.querySelector("#remember");
+    if(remember.checked == true){
+
+        var d = new Date();
+        d.setTime(d.getTime() + (30*24*60*60*1000));
+        var expires = "expires="+ d.toGMTString();
+        document.cookie = "ksb_usr="+account.name+";"+expires+";path=/";
+        document.cookie = "ksb_pswd="+account.passwordSHA256+";"+expires+";path=/";
+    }else{
+        document.cookie = "ksb_usr="+account.name+";path=/";
+        document.cookie = "ksb_pswd="+account.passwordSHA256+";path=/";
+    }
 
     //navigate to mainPage
     document.location.href = "/admin/dashboard/";
