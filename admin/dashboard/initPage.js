@@ -12,7 +12,7 @@ function findCookie(cname){
     var cookies = decodeURIComponent(document.cookie);
     var name = cname + "=";
     var cookieSplit = cookies.split(';');
-    for(var i = 0; cookieSplit.length; i++){
+    for(var i = 0; i < cookieSplit.length; i++){
         var c = cookieSplit[i];
         
         while(String(c).charAt(0) == ' '){
