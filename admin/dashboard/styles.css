@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+header{
+    font-family: 'Open-Sans', sans-serif;
+    background-color: #0085CA;
+    padding: 15px;
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
+    border-radius: 5px;
+}
+#eventTbl{
+    border: 1px solid rgb(80, 80, 80);
+    margin-top: 70px;
+    height: 120px;
+}
