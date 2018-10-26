@@ -19,7 +19,7 @@ function contactDB(){
             }else{
                 var acc = JSON.parse(this.responseText);
                 var acct = acc[0];
-                document.getElementById("loginas").innerHTML = "Logged in as: "+ acct.name;
+                document.getElementById("loginas").innerHTML = "Logged in as: "+ acct.name +" ("+acct.rname+")";
             }
 
         }
