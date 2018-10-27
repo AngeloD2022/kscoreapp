@@ -15,22 +15,35 @@ function Login() {
 }
 
 function testForCookies() {
+  showLoad();
   if (findCookie("ksb_usr") != null && findCookie("ksb_pswd") != null) {
     cookieTest();
   }
 }
 
+document.querySelector("#pswd").onkeypress = function(e) {
+  var event = e || window.event;
+  var char = event.which || event.keyCode;
+  if(char == '13'){
+    Login();
+  }
+}
+
+
 function cookieTest() {
+  
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == "not found" || this.responseText == "disabled") {
       } else {
+
         document.location.href = "/admin/dashboard";
       }
     }
   };
   xhttp.open("GET", "script.php", true);
   xhttp.send();
+  endLoad();
 }
 
 function contactDB(url) {

@@ -5,11 +5,32 @@
     </center>
     
 </header>
+
+
 <body onload="initializePage()">
     <div id="eventTbl">
-        <p id="loginas">Logged in as: Loading...</p>
+        <p id="loginas">Loading...</p>
     </div>
     <center>
+        <br/>
+        <div class="buttons">
+            <button class="createEvent">Create event</button>
+            <button class="modEvent">Modify event</button>
+            <button class="cancelEvent">Cancel event</button>
+        </div>
     </center>
+    <div class="Modal" id="createEvent">
+        <div class="ModalContents">
+            <span class="closeBtn">&times;</span>
+            <p>createEvent</p>
+            <button>Submit</button>
+        </div>
+    </div>
+
+
+
 </body>
+
+
 <script src="initPage.js" type="text/javascript"></script>
+<script src="main.js" type="text/javascript"></script>

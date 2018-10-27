@@ -29,14 +29,14 @@ if ($username == "0" || $password == "0") {
 	if ($result->num_rows > 0) {
 		while ($row = $result->fetch_assoc()) {
 			if ($row["disabled"] == 1) {
-				echo "disabled Here";
+				echo "disabled";
 			} else {
 				$resultArray[] = $row;
 				echo json_encode($resultArray);
 			}
 		}
 	} else {
-		echo "not found HERE";
+		echo "not found";
 	}
 	$conn->close();
 
