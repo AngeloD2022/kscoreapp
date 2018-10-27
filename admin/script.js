@@ -15,24 +15,31 @@ function Login() {
 }
 
 function testForCookies() {
-  showLoad();
   if (findCookie("ksb_usr") != null && findCookie("ksb_pswd") != null) {
+    var loader = document.querySelector(".loader");
+    loader.style.visibility = "visible";
+    loader.style.display = "block";
     cookieTest();
   }
 }
 
-document.querySelector("#pswd").onkeypress = function(e) {
+function resetStatbar(){
+  statbar.innerHTML = "Please enter your Login details.";
+  statbar.style.color = "black";
+}
+
+document.querySelector("#pswd").onkeypress = function (e) {
   var event = e || window.event;
   var char = event.which || event.keyCode;
-  if(char == '13'){
+  if (char == '13') {
     Login();
   }
 }
 
 
 function cookieTest() {
-  
-  xhttp.onreadystatechange = function() {
+
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == "not found" || this.responseText == "disabled") {
       } else {
@@ -48,7 +55,7 @@ function cookieTest() {
 
 function contactDB(url) {
   showLoad();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == "not found") {
         statbar.style.color = "red";
