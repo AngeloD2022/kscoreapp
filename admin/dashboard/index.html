@@ -13,16 +13,38 @@
     </div>
     <center>
         <br/>
+        <!-- Buttons are here -->
         <div class="buttons">
-            <button class="createEvent">Create event</button>
-            <button class="modEvent">Modify event</button>
-            <button class="cancelEvent">Cancel event</button>
+            <button onclick="toggleDialog('create')" class="createEvent">Create event</button>
+            <button onclick="toggleDialog('mod')" class="modEvent">Modify event</button>
+            <button onclick="toggleDialog('cancel')" class="cancelEvent">Cancel event</button>
         </div>
     </center>
+
+
+    <!-- CreateEvent Dialog -->
     <div class="Modal" id="createEvent">
         <div class="ModalContents">
-            <span class="closeBtn">&times;</span>
+            <span onclick="toggleDialog(lastClicked)" class="closeBtn">&times;</span>
             <p>createEvent</p>
+            <button>Submit</button>
+        </div>
+    </div>
+    
+    <!-- modEvent Dialog -->
+    <div class="Modal" id="modEvent">
+        <div class="ModalContents">
+            <span onclick="toggleDialog(lastClicked)" class="closeBtn">&times;</span>
+            <p>modEvent</p>
+            <button>Submit</button>
+        </div>
+
+    </div>
+    <!-- cancelEvent Dialog -->
+    <div class="Modal" id="cancelEvent">
+        <div class="ModalContents">
+            <span onclick="toggleDialog(lastClicked)" class="closeBtn">&times;</span>
+            <p>cancelEvent</p>
             <button>Submit</button>
         </div>
     </div>

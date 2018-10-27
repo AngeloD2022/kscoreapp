@@ -3,59 +3,67 @@ var xhttp = new XMLHttpRequest();
 
 
 
-function createEvent(){
+function createEvent() {
 
 }
 
 
-function getEventsFromDB(){
-    xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
+function getEventsFromDB() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
 
-            if(this.responseText == "not found" || this.responseText == "disabled"){
+            if (this.responseText == "not found" || this.responseText == "disabled") {
                 document.location.href = "/admin";
-            }else{
+            } else {
                 //do stuff here
             }
 
         }
     }
-        xhttp.open("GET", "/data/script.php", true);
-        xhttp.send();
+    xhttp.open("GET", "/data/script.php", true);
+    xhttp.send();
 }
 
 
-function getAcct(){//Contact database and verify cookies. get acct[]
-    xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
+function getAcct() {//Contact database and verify cookies. get acct[]
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
 
-            if(this.responseText == "not found" || this.responseText == "disabled"){
+            if (this.responseText == "not found" || this.responseText == "disabled") {
                 console.log("not found or disabled");
 
                 document.location.href = "/admin";
-            }else{
+            } else {
                 var acc = JSON.parse(this.responseText);
                 var acct = acc[0];
             }
 
         }
     }
-        xhttp.open("GET", "/admin/script.php", true);
-        xhttp.send();
+    xhttp.open("GET", "/admin/script.php", true);
+    xhttp.send();
 }
 
 
-var modal = document.querySelector("#createEvent");
-var ceTrigger = document.querySelector(".createEvent");
-var closeBtn = document.querySelector(".closeBtn");
-//event listeners
-ceTrigger.addEventListener("click", function(){ toggleDialog("create"); }, false);
-closeBtn.addEventListener("click", function(){ toggleDialog(lastClicked); }, false);
+var cemodal = document.querySelector("#createEvent");
+var memodal = document.querySelector("#modEvent");
+var cancelmodal = document.querySelector("#cancelEvent");
 
-var lastClicked;
-function toggleDialog(winType){
+var ceTrigger = document.querySelector(".createEvent");
+var metrigger = document.querySelector(".modEvent");
+var cancelEvtrigger = document.querySelector(".cancelEvent");
+
+
+
+
+var lastClicked = "create";
+function toggleDialog(winType) {
     lastClicked = winType;
-    if(winType == "create"){
-        modal.classList.toggle("ModalOpened");
+    if (winType == "create") {
+        cemodal.classList.toggle("ModalOpened");
+    } else if (winType == "mod") {
+        memodal.classList.toggle("ModalOpened");
+    } else if (winType == "cancel") {
+        cancelmodal.classList.toggle("ModalOpened");
     }
 }
