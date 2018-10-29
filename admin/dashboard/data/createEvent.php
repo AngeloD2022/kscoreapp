@@ -20,14 +20,15 @@ if(isset($eUsr) && isset($ePswd)){
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             if ($row["disabled"] == 1) {
-                echo "disabled";
+                echo "error_auth";
             } else {
                 $resultArray[] = $row;
                 echo json_encode($resultArray);
+                createEvent();
             }
         }
     } else {
-        echo "not found";
+        echo "error_auth";
     }
     $conn->close();
     
@@ -46,7 +47,7 @@ function createEvent(){
     $name = $_GET["name"];
     $name = $_GET["name"];
 
-    
+
 }
 
 
