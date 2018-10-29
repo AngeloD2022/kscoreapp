@@ -17,7 +17,7 @@ function contactDB(){
             }else{
                 var acc = JSON.parse(this.responseText);
                 var acct = acc[0];
-                document.getElementById("loginas").innerHTML = "Logged in as: "+ acct.name +" ("+acct.rname+")";
+                document.getElementById("loginas").innerHTML = "Logged in as: "+ acct.name +" ("+acct.rname+")"+ ' <a href="#" onclick="Logout()"> Log out</a>';
                 
             }
 
@@ -26,5 +26,7 @@ function contactDB(){
         xhttp.open("GET", "/admin/script.php", true);
         xhttp.send();
 }
+
+
 
 

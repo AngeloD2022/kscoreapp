@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
+ .ins{
+     margin: 6px;
+ }
 
 header{
     font-family: 'Open-Sans', sans-serif;

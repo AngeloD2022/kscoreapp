@@ -67,3 +67,19 @@ function toggleDialog(winType) {
         cancelmodal.classList.toggle("ModalOpened");
     }
 }
+
+
+function Logout(){
+    document.cookie = "ksb_usr=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "ksb_pswd=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.location.href="/admin";
+}
+
+
+
+
+
+
+// --------- DATA PROCESSING -------------
+
+
