@@ -68,7 +68,7 @@ function createEvent($auth)
         }
     }
 
-    
+    //Test URL: http://localhost/admin/dashboard/data/createEvent.php?gname=TestEvent&gopposing=Chardon&timeStart=2018-06-07T00:00&tclass=v&grade=8&gloc=Home&opplogo=https://example.com&sport=Football
 
 }
 
