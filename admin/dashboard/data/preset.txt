@@ -1,0 +1,46 @@
+xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200){
+
+            if(this.responseText == "not found" || this.responseText == "disabled"){
+                document.location.href = "/admin";
+            }else{
+                //do stuff here
+            }
+
+        }
+    }
+        xhttp.open("GET", "URL HERE", true);
+        xhttp.send();
+
+
+
+PHP AUTH TEST
+
+
+$eUsr = isset($_COOKIE["ksb_usr"]) ? $_COOKIE["ksb_usr"] : "x";
+$ePswd = isset($_COOKIE["ksb_pswd"]) ? $_COOKIE["ksb_pswd"] : "x";
+$conn = new mysqli("localhost", "root", null, "scoreboard");
+
+
+if ($conn->connect_error) {
+    die("Failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * from users WHERE name='" . $eUsr . "' and passwordSHA256='" . $ePswd ."'";
+
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row["disabled"] == 1) {
+            echo "error_auth";
+        } else {
+            $resultArray = $row;
+            //EXECUTE FUNCTION HERE 
+        }
+    }
+} else {
+    echo "error_auth";
+}
+$conn->close();

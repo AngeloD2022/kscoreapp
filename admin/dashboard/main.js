@@ -107,7 +107,7 @@ function createSportEvent(){
                         alert("Error from server: "+ this.responseText);
                     }
                 } else {
-                    alert("Table created successfully.");
+                    alert("Event created successfully.");
                     toggleDialog("create");
                     clearFields();
                 }
@@ -130,8 +130,8 @@ function clearFields() {
     opposingTeam.value = "";
     startTime.value = "";
     teamClass.value = "";
-    grade.value = "";
+    grade.value = "NONE";
     eventLocation.value = "";
     opponentLogoUrl.value = "";
-    sport.value = "";
+    sport.value = "NONE";
 }

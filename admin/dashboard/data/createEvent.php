@@ -33,14 +33,14 @@ $conn->close();
 
 function createEvent($auth)
 {
-    $name = isset($_GET["gname"])? $_GET["gname"]:"x";
-    $opposing = isset($_GET["gopposing"])? $_GET["gopposing"]:"x";
+    $name = isset($_GET["gname"])? addslashes($_GET["gname"]):"x";
+    $opposing = isset($_GET["gopposing"])? addslashes($_GET["gopposing"]):"x";
     $startTimestamp = isset($_GET["timeStart"])? $_GET["timeStart"]:"x";
-    $teamClass = isset($_GET["tclass"])? $_GET["tclass"]:"x";
-    $grade = isset($_GET["grade"])? $_GET["grade"]:"x";
-    $location = isset($_GET["gloc"])? $_GET["gloc"]:"x";
-    $oppLogoUrl = isset($_GET["opplogo"])? $_GET["opplogo"]:"x";
-    $sport = isset($_GET["sport"])? $_GET["sport"]:"x";
+    $teamClass = isset($_GET["tclass"])?addslashes( $_GET["tclass"]):"x";
+    $grade = isset($_GET["grade"])? addslashes($_GET["grade"]):"x";
+    $location = isset($_GET["gloc"])? addslashes($_GET["gloc"]):"x";
+    $oppLogoUrl = isset($_GET["opplogo"])? addslashes($_GET["opplogo"]):"x";
+    $sport = isset($_GET["sport"])? addslashes($_GET["sport"]):"x";
     
     if($name == "x" ||$opposing == "x" ||$startTimestamp == "x" ||$teamClass == "x" ||$grade == "x" ||$location == "x" ||$oppLogoUrl == "x" ||$sport == "x"){
         echo "error_invparams";
