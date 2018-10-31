@@ -1,9 +1,9 @@
 <header>
-    <link rel="stylesheet" type="text/css" href="styles.css"/>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <center>
         <h1 style="color: white;">Dashboard</h1>
     </center>
-    
+
 </header>
 
 
@@ -12,7 +12,7 @@
         <p id="loginas">Loading...</p>
     </div>
     <center>
-        <br/>
+        <br />
         <!-- Buttons are here -->
         <div class="buttons">
             <button onclick="toggleDialog('create')" class="createEvent">Create event</button>
@@ -25,13 +25,14 @@
     <!-- CreateEvent Dialog -->
     <div class="Modal" id="createEvent">
         <div class="ModalContents">
-            <span onclick="toggleDialog(lastClicked)" class="closeBtn">&times;</span>
-
+            <span style="color: white;" onclick="toggleDialog(lastClicked)" class="closeBtn">&times;</span>
+            <h2>Create new event...</h2>
             <!--EVENT NAME-->
             <input class="ins" type="text" placeholder="Event Name" id="ce_name"><br>
             <input class="ins" type="text" placeholder="Opposing Team" id="ce_opposing"><br>
-            <input class="ins"  type="datetime-local" id="ce_timestart"><br>
-            <label class="ins" for="ce_teamclass">Team Class: </label>
+            <label for="ce_timestart">Event start time:</label>
+            <input class="ins" type="datetime-local" id="ce_timestart"><br>
+            <p style="margin-bottom: 0px;">Team Class</p>
             <select class="ins" id="ce_teamclass" size="3">
                 <option value="varsity">Varsity</option>
                 <option value="jv">Junior Varsity</option>
@@ -39,6 +40,7 @@
             </select><br>
             <label for="ce_grade">Grade: </label>
             <select class="ins" id="ce_grade">
+                <option value="NONE">- Select one -</option>
                 <option value="pre">Preschool</option>
                 <option value="k">Kidnergarden</option>
                 <option value="1">1</option>
@@ -57,12 +59,17 @@
             <input class="ins" type="text" placeholder="Event location" id="ce_location"><br>
             <input class="ins" type="text" placeholder="Opponent's logo URL" id="ce_oppLogo"><br>
             <select class="ins" id="ce_sport">
+                <option value="NONE">- Select one -</option>
                 <option value="football">Football</option>
-            </select>
-            <button class="ins">Submit</button>
+                <option value="soccer">Soccer</option>
+            </select><br/><br/>
+
+            <button onclick="createSportEvent()" style="float: right;margin-bottom: 11px;margin-right: 19px;" class="ins" id="subm">OK</button>
+            <button class="ins" style="float: right;margin-top: 6px;margin-right: 25px;" onclick="toggleDialog(lastClicked)">Cancel</button>
+
         </div>
     </div>
-    
+
     <!-- modEvent Dialog -->
     <div class="Modal" id="modEvent">
         <div class="ModalContents">

@@ -3,9 +3,7 @@ var xhttp = new XMLHttpRequest();
 
 
 
-function createEvent() {
 
-}
 
 
 function getEventsFromDB() {
@@ -77,9 +75,63 @@ function Logout(){
 
 
 
-
-
-
 // --------- DATA PROCESSING -------------
+var eventName = document.getElementById("ce_name");
+var opposingTeam = document.getElementById("ce_opposing");
+var startTime = document.getElementById("ce_timestart");
+var teamClass = document.getElementById("ce_teamclass");
+var grade = document.getElementById("ce_grade");
+var eventLocation = document.getElementById("ce_location");
+var opponentLogoUrl = document.getElementById("ce_oppLogo");
+var sport = document.getElementById("ce_sport");
 
 
+function createSportEvent(){
+    //get vals from fields
+    //check if any are null
+    if(eventName.value == null || opposingTeam.value == null || startTime.value == null || teamClass.value == null || grade.value == "NONE" || eventLocation.value == null || opponentLogoUrl.value == null || sport.value == "NONE"){
+        alert("You must complete all required fields.");
+    }else{
+        var url = "data/createEvent.php?gname="+eventName.value+"&gopposing="+opposingTeam.value+"&timeStart="+startTime.value+"&tclass="+teamClass.value+"&grade="+grade.value+"&gloc="+eventLocation.value+"&opplogo="+opponentLogoUrl.value+"&sport="+sport.value;
+        xhttp = new XMLHttpRequest();
+
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+    
+                if (this.responseText.includes("error")) {
+                    console.log(this.responseText);
+                    if(this.responseText.includes("auth")){
+                        alert("Authentication error. Reloading page...");
+                        document.location.reload();
+                    }else{
+                        alert("Error from server: "+ this.responseText);
+                    }
+                } else {
+                    alert("Table created successfully.");
+                    toggleDialog("create");
+                    clearFields();
+                }
+    
+            }
+        }
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    }
+
+
+}
+
+
+
+
+
+function clearFields() {
+    eventName.value = "";
+    opposingTeam.value = "";
+    startTime.value = "";
+    teamClass.value = "";
+    grade.value = "";
+    eventLocation.value = "";
+    opponentLogoUrl.value = "";
+    sport.value = "";
+}

@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
  .ins{
      margin: 6px;
+     border: 1px solid gray;
+     border-radius: 2px;
  }
 
 header{
@@ -25,6 +27,7 @@ header{
 
 /*Modal stuff*/
 .Modal{
+    font-family: 'Open-Sans', sans-serif;
     position: fixed;
     left: 0;
     top: 0;

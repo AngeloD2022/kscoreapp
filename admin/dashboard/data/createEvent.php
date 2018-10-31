@@ -55,7 +55,7 @@ function createEvent($auth)
 
 
         $sql = "INSERT INTO `events` (`id`, `name`, `opposing`, `createdTS`, `startingTS`, `usrCreated`, `usrID`, `teamClass`, `grade`, `location`, `oppLogoUrl`, `sport`, `postponed`, `homeScore`, `oppScore`)
-         VALUES (NULL, '".$name."', '".$opposing."', CURRENT_TIMESTAMP, '".$tsFormatted."', '".$creatorName."', '".$creatorID."', '".$teamClass."', '".$grade."', '".$location."', '".$oppLogoUrl."', '".$sport."', '0', '0', '12')";
+         VALUES (NULL, '".$name."', '".$opposing."', CURRENT_TIMESTAMP, '".$tsFormatted."', '".$creatorName."', '".$creatorID."', '".$teamClass."', '".$grade."', '".$location."', '".$oppLogoUrl."', '".$sport."', '0', '0', '0')";
         
         $res = $conn->query($sql);
         //print "last sql error: " . $conn->error() . "<br>\r\n";
