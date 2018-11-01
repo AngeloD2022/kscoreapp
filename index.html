@@ -9,6 +9,9 @@
         #cardContainer {
             text-align: center;
         }
+        .cardSep{
+            border-left: 2px solid rgb(0, 150, 209);
+        }
     </style>
 </head>
 
@@ -17,9 +20,29 @@
         <div id="cardContainer">
             <div class="eventcard">
                 <div class="cardContents">
-                    <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
-                    <p>Something@something</p>
-                    
+                    <!--<div>
+                        <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
+                        <hr width="40%" align="left">
+                        <p>Something@something</p>
+                    </div>
+
+                    <div style="float: right" class="cardSep">
+                        <p>test</p>
+                    </div>-->
+                    <table>
+                        <tr>
+                            <td>
+                                <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
+                                <hr width="40%" align="left">
+                                <p>Something@something</p>
+                            </td>
+
+                            <td class="cardSep">
+                                <p>test</p>
+                            </td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
         </div>
