@@ -12,13 +12,21 @@
         .cardSep{
             border-left: 2px solid rgb(0, 150, 209);
         }
+        .teamIcon{
+            filter: drop-shadow(0px 2px 2px #adadad);
+            -webkit-filter: drop-shadow(0px 2px 2px #adadad);
+            -moz-filter: drop-shadow(0px 2px 2px #adadad);
+        }
+        .gameData{
+            padding-right: 6px;
+        }
     </style>
 </head>
 
 <body>
     <center>
         <div id="cardContainer">
-            <div class="eventcard">
+            <div class="eventcard" id="event1">
                 <div class="cardContents">
                     <!--<div>
                         <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
@@ -32,13 +40,23 @@
                     <table>
                         <tr>
                             <td>
-                                <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
-                                <hr width="40%" align="left">
-                                <p>Something@something</p>
+                                <div class="gameData">
+                                    <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
+                                    <hr width="100%" align="left">
+                                    <div class="gdDetailed">
+                                        <p>grade | sport</p>
+                                        <p>Kenston@Chagrin</p>
+                                    </div>
+                                </div>
                             </td>
-
+                                <!--Past blue line-->
                             <td class="cardSep">
-                                <p>test</p>
+                                <div class="cardScores" style="padding: 6px;">
+                                    <img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
+                                    <p style="display: inline;margin-left: 8px;margin-right: 8px;">VS.</p>
+                                    <img class="teamIcon" src="https://schoolassets.s3.amazonaws.com/logos/428/428.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
+                                    
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -47,4 +65,8 @@
             </div>
         </div>
     </center>
+
+
+
+    
 </body>
