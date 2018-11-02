@@ -50,10 +50,9 @@
 
             $results = ...;
 
-            while($r = $conn->fetch_array($results))
-            {?>
+            while ($r = $conn->fetch_array($results)) { ?>
         
-                <div class="eventcard" id="event<?=$r["id"];?>">
+                <div class="eventcard" id="event<?= $r["id"]; ?>">
                     <div class="cardContents">
                         <!--<div>
                             <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
@@ -91,7 +90,8 @@
 
                     </div>
                 </div>
-            <?}?>
+            <?
+        } ?>
 
 
 
