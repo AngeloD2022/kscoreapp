@@ -24,6 +24,10 @@
             font-size: 12px;
             margin-top: 3px;
         }
+        table, th, td {
+    border: 1px solid black;
+    border-colapse: 1px; 
+}
     </style>
     <script>
         function updateEvents()
@@ -75,8 +79,8 @@
                     } else {
                         $afterGrade = "th";
                     }
-                    $tc = $r["teamClass"] == "jv"? "JV": $r["teamClass"] == "varsity"? "Varsity": "";
-                    $sport = $r["sport"] == "soccer"? "Soccer": $r["sport"] == "football"? "Football": "";
+                    $tc = $r["teamClass"] == "jv" ? "JV" : $r["teamClass"] == "varsity" ? "Varsity" : "";
+                    $sport = $r["sport"] == "soccer" ? "Soccer" : $r["sport"] == "football" ? "Football" : "";
                     $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
                     ?>
         
@@ -89,19 +93,28 @@
                                                     <p style="margin-bottom: 7px;margin-top: 0px;"><?= $r["name"]; ?></p>
                                                     <hr width="100%" align="left">
                                                     <div class="gdDetailed">
-                                                        <p>Kenston@<?=$r["location"];?></p>
-                                                        <p style="margin-top: 5px;" class="smallTxt"><?=$r["grade"]. $afterGrade ." grade ". $tc ." ". $sport ?></p>
-                                                        <p style="margin-top: 3px;" class="smallTxt"><?=$gtime;?></p>
+                                                        <p>Kenston@<?= $r["location"]; ?></p>
+                                                        <p style="margin-top: 5px;" class="smallTxt"><?= $r["grade"] . $afterGrade . " grade " . $tc . " " . $sport ?></p>
+                                                        <p style="margin-top: 3px;" class="smallTxt"><?= $gtime; ?></p>
                                                     </div>
                                                 </div>
                                             </td>
                                                 <!--Past blue line-->
                                             <td class="cardSep">
                                                 <div class="cardScores" style="padding: 6px;">
-                                                    <img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
-                                                    <p style="display: inline;margin-left: 8px;margin-right: 8px;">VS.</p>
-                                                    <img class="teamIcon" src="<?=$r["oppLogoUrl"];?>" style="width: 45px; height: 45px; vertical-align: middle;"/>
-                                                    <span name="homeScore">0</span>
+                                                    <table>
+                                                        <tr>
+                                                            <td><img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
+                                                            <td style="margin-left: 8px;margin-right: 8px;">VS.</td>
+                                                            <td><img class="teamIcon" src="<?= $r["oppLogoUrl"]; ?>" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</td>
+                                                            <td>to</td>
+                                                            <td></td>
+                                                        </tr>
+
+                                                    </table>
                                                 </div>
                                             </td>
                                         </tr>
