@@ -46,52 +46,80 @@
     <center>
         <div id="cardContainer">
 
-            <? //perform the sql query here
+            <?php //perform the sql query here
 
-            $results = ...;
+            $conn = new mysqli("localhost", "root", null, "scoreboard");
+            if ($conn->connect_error) {
+                die("Failed: " . $conn->connect_error);
+            }
 
-            while ($r = $conn->fetch_array($results)) { ?>
+
+            $sql = "SELECT * FROM events";
+
+            $result = $conn->query($sql);
+
+
+            if ($result->num_rows > 0) {
+               
+                        //here
+                while ($r = $result->fetch_array()) {
+
+                    $afterGrade;
+                    if ($r["grade"] == 1) {
+                        $afterGrade = "st";
+                    } else if ($r["grade"] == 2) {
+                        $afterGrade = "nd";
+
+                    } else if ($r["grade"] == 3) {
+                        $afterGrade = "rd";
+                    } else {
+                        $afterGrade = "th";
+                    }
+                    $tc = $r["teamClass"] == "jv"? "JV": $r["teamClass"] == "varsity"? "Varsity": "";
+                    $sport = $r["sport"] == "soccer"? "Soccer": $r["sport"] == "football"? "Football": "";
+
+                    ?>
         
-                <div class="eventcard" id="event<?= $r["id"]; ?>">
-                    <div class="cardContents">
-                        <!--<div>
-                            <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
-                            <hr width="40%" align="left">
-                            <p>Something@something</p>
-                        </div>
+                            <div class="eventcard" id="event<?= $r["id"]; ?>">
+                                <div class="cardContents">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <div class="gameData">
+                                                    <p style="margin-bottom: 7px;margin-top: 0px;"><?= $r["name"]; ?></p>
+                                                    <hr width="100%" align="left">
+                                                    <div class="gdDetailed">
+                                                        <p>Kenston@<?=$r["location"];?></p>
+                                                        <p style="margin-top: 5px;" class="smallTxt"><?=$r["grade"]. $afterGrade ." grade ". $tc ." ". $sport ?></p>
+                                                        <p style="margin-top: 3px;" class="smallTxt">Starting time: Friday at 4:30PM</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                                <!--Past blue line-->
+                                            <td class="cardSep">
+                                                <div class="cardScores" style="padding: 6px;">
+                                                    <img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
+                                                    <p style="display: inline;margin-left: 8px;margin-right: 8px;">VS.</p>
+                                                    <img class="teamIcon" src="https://schoolassets.s3.amazonaws.com/logos/428/428.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
+                                                    <span name="homeScore">0</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+            
+                                </div>
+                            </div><br>
+                        <?php
 
-                        <div style="float: right" class="cardSep">
-                            <p>test</p>
-                        </div>-->
-                        <table>
-                            <tr>
-                                <td>
-                                    <div class="gameData">
-                                        <p style="margin-bottom: 7px;margin-top: 0px;">Name</p>
-                                        <hr width="100%" align="left">
-                                        <div class="gdDetailed">
-                                            <p>Kenston@Chagrin</p>
-                                            <p style="margin-top: 5px;" class="smallTxt">.grade.[st/nd/th] grade, .tclass. .sport.</p>
-                                            <p style="margin-top: 3px;" class="smallTxt">Starting time: Friday at 4:30PM</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                    <!--Past blue line-->
-                                <td class="cardSep">
-                                    <div class="cardScores" style="padding: 6px;">
-                                        <img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
-                                        <p style="display: inline;margin-left: 8px;margin-right: 8px;">VS.</p>
-                                        <img class="teamIcon" src="https://schoolassets.s3.amazonaws.com/logos/428/428.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
-                                        <span name="homeScore">0</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                    }
+                } else {
+                    echo "error_noevents";
+                }
+                $conn->close();
 
-                    </div>
-                </div>
-            <?
-        } ?>
+
+
+                ?>
 
 
 
