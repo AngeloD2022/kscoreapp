@@ -77,7 +77,7 @@
                     }
                     $tc = $r["teamClass"] == "jv"? "JV": $r["teamClass"] == "varsity"? "Varsity": "";
                     $sport = $r["sport"] == "soccer"? "Soccer": $r["sport"] == "football"? "Football": "";
-
+                    $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
                     ?>
         
                             <div class="eventcard" id="event<?= $r["id"]; ?>">
@@ -91,7 +91,7 @@
                                                     <div class="gdDetailed">
                                                         <p>Kenston@<?=$r["location"];?></p>
                                                         <p style="margin-top: 5px;" class="smallTxt"><?=$r["grade"]. $afterGrade ." grade ". $tc ." ". $sport ?></p>
-                                                        <p style="margin-top: 3px;" class="smallTxt">Starting time: Friday at 4:30PM</p>
+                                                        <p style="margin-top: 3px;" class="smallTxt"><?=$gtime;?></p>
                                                     </div>
                                                 </div>
                                             </td>
@@ -100,7 +100,7 @@
                                                 <div class="cardScores" style="padding: 6px;">
                                                     <img class="teamIcon" src="kcrop.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
                                                     <p style="display: inline;margin-left: 8px;margin-right: 8px;">VS.</p>
-                                                    <img class="teamIcon" src="https://schoolassets.s3.amazonaws.com/logos/428/428.png" style="width: 45px; height: 45px; vertical-align: middle;"/>
+                                                    <img class="teamIcon" src="<?=$r["oppLogoUrl"];?>" style="width: 45px; height: 45px; vertical-align: middle;"/>
                                                     <span name="homeScore">0</span>
                                                 </div>
                                             </td>
