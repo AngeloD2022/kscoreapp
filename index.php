@@ -24,9 +24,7 @@
             font-size: 12px;
             margin-top: 3px;
         }
-        table, th, td {
-    border: 1px solid black;
-    border-colapse: 1px; 
+     
 }
     </style>
     <script>
@@ -140,6 +138,23 @@
         </div>
     </center>
 
+
+    <!-- AutoUpdate Scripts -->
+
+    <script>
+    <?php
+        while ($r = $result->fetch_array()) { 
+    ?>
+        var evcard = document.getElementByID("<?=")
+
+
+
+
+
+        <?php
+        }
+        ?>
+    </script>
 
 
     
