@@ -165,6 +165,10 @@
             xhttp.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
                 var arr = JSON.parse(this.responseText);
+                for(var i = 0; i < ids.length; i++){
+                    var item;
+                    if(arr[i].homeScore == )
+                }
             }
             xhttp.open("GET", "data/events.php", true);
             xhttp.send();
