@@ -11,9 +11,15 @@ body{
     -moz-box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.47);
     border-radius: 3px;
-    background: white;
+    background-color: white;
     padding: 10px;
     display: inline-block;
+    transition: background-color 0.25s 0s;
+}
+
+.eventcard:hover {
+    background-color: rgb(183, 255, 183);
+    transition: background-color 0.25s 0s;
     
 }
 

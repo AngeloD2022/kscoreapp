@@ -24,6 +24,7 @@
             font-size: 12px;
             margin-top: 3px;
         }
+
      
 }
     </style>
@@ -59,13 +60,12 @@
             $sql = "SELECT * FROM events";
 
             $result = $conn->query($sql);
-
+ 
 
             if ($result->num_rows > 0) {
                
-                        //here
                 while ($r = $result->fetch_array()) {
-
+                    $dbEntrys[] = $r;
                     $afterGrade;
                     if ($r["grade"] == 1) {
                         $afterGrade = "st";
@@ -107,9 +107,9 @@
                                                             <td><img class="teamIcon" src="<?= $r["oppLogoUrl"]; ?>" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
                                                         </tr>
                                                         <tr>
-                                                            <td id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</td>
+                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</p></td>
                                                             <td>to</td>
-                                                            <td></td>
+                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</p></td>
                                                         </tr>
 
                                                     </table>
@@ -142,18 +142,38 @@
     <!-- AutoUpdate Scripts -->
 
     <script>
+        var ids = [
     <?php
-        while ($r = $result->fetch_array()) { 
-    ?>
-        var evcard = document.getElementByID("<?=")
-
-
-
-
-
-        <?php
-        }
+        $length = count($dbEntrys);
+        $x = 0;
+        foreach($dbEntrys as $row) {
+            
+       
         ?>
+        <?=$row["id"]; if($x != $length-1){
+            echo ", ";
+        }?> 
+    <?php
+        
+        $x++;
+}
+?>
+        ];
+        var xhttp = new XMLHttpRequest();
+
+        function updateGames(){
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                var arr = JSON.parse(this.responseText);
+            }
+            xhttp.open("GET", "data/events.php", true);
+            xhttp.send();
+        }
+        
+
+}
+
+
     </script>
 
 
