@@ -37,6 +37,11 @@
 
             <?php //perform the sql query here
 
+            $sbTime = $_GET["ftime"] == null? "x": $_GET["ftime"];
+            $sbSport = $_GET["fsport"] == null? "x": $_GET["fsport"];
+            $sbTeam = $_GET["fteam"] == null? "x": $_GET["fteam"];
+            
+
             $conn = new mysqli("localhost", "root", null, "scoreboard");
             if ($conn->connect_error) {
                 die("Failed: " . $conn->connect_error);
