@@ -6,7 +6,7 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT * FROM events";
+$sql = "SELECT id, homeScore, oppScore FROM events";
 
 $result = $conn->query($sql);
 
@@ -14,11 +14,11 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             $resultArray[] = $row;
-            echo json_encode($resultArray);
     }
 } else {
     echo "error_noevents";
 }
 $conn->close();
+echo json_encode($resultArray);
 
 ?>

@@ -28,21 +28,7 @@
      
 }
     </style>
-    <script>
-        function updateEvents()
-        {
-            //perform the query to get the fields that may have changed
-            //for each one of those:
-            {
-                var event = document.getElementById('event' + rowID);
-                event.homeScore.innerText = ...;
-                event.opponentScore.innerText = ...;
-            }
-
-        }
-        setInterval('updateEvents();', 1000);
-
-    </script>
+    
 </head>
 
 <body>
@@ -60,10 +46,10 @@
             $sql = "SELECT * FROM events";
 
             $result = $conn->query($sql);
- 
+
 
             if ($result->num_rows > 0) {
-               
+
                 while ($r = $result->fetch_array()) {
                     $dbEntrys[] = $r;
                     $afterGrade;
@@ -144,39 +130,49 @@
     <script>
         var ids = [
     <?php
-        $length = count($dbEntrys);
-        $x = 0;
-        foreach($dbEntrys as $row) {
-            
-       
+    $length = count($dbEntrys);
+    $x = 0;
+    foreach ($dbEntrys as $row) {
+
         ?>
-        <?=$row["id"]; if($x != $length-1){
-            echo ", ";
-        }?> 
-    <?php
-        
-        $x++;
+        <?= $row["id"];
+        if ($x != $length - 1) { // makes sure there isn't a comma at the end of the array initialization.
+            print(", ");
+        } ?> 
+<?php
+
+$x++;
 }
 ?>
-        ];
-        var xhttp = new XMLHttpRequest();
-
-        function updateGames(){
-            xhttp.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status == 200){
-                var arr = JSON.parse(this.responseText);
+ ];
+ var xhttp = new XMLHttpRequest();
+ function updateGames(){
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var updated = JSON.parse(this.responseText);
                 for(var i = 0; i < ids.length; i++){
-                    var item;
-                    if(arr[i].homeScore == )
-                }
-            }
-            xhttp.open("GET", "data/events.php", true);
-            xhttp.send();
-        }
+                    if(document.getElementById("hsID"+ids[i]) != null && document.getElementById("hsID"+ids[i]) != null){
+                        var hs = document.getElementById("hsID"+ids[i]);
+                        var gs = document.getElementById("gsID"+ids[i]);
         
+                        if(hs.innerHTML != updated[i].homeScore || gs.innerHTML != updated[i].oppScore) // if the updated homeScore isn't the same as the one displayed on the page...
+                        {
+                            //updates the page w/ latest scores.
+                            hs.innerHTML = updated[i].homeScore;
+                            gs.innerHTML = updated[i].oppScore;
+        
+                        }
+                    }
 
+                }
+
+            }
+        }
+     xhttp.open("GET", "data/events.php", true);
+     xhttp.send();
+ 
 }
-
+setInterval("updateGames();", 1000);
 
     </script>
 
