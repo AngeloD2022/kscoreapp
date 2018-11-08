@@ -26,3 +26,15 @@ body{
 .eventcard p{
     margin: 0px;
 }
+.searchbtn{
+    width:33px;
+    height:33px;
+    float: right;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    transition: background-color 0.25s 0s;
+}
+.searchbtn:hover{
+    background-color: rgb(211, 211, 211);
+    transition: background-color 0.25s 0s;
+}
