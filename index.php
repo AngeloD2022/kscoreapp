@@ -31,15 +31,25 @@
     
 </head>
 
+<!-- $_GET["ftime"] == null? "x": $_GET["ftime"];
+ $_GET["fsport"] == null? "x": $_GET["fsport"
+ $_GET["fteam"] == null? "x": $_GET["fteam"];-->
 <body>
     <center>
         <div id="cardContainer">
 
             <?php //perform the sql query here
 
-            $sbTime = $_GET["ftime"] == null? "x": $_GET["ftime"];
-            $sbSport = $_GET["fsport"] == null? "x": $_GET["fsport"];
-            $sbTeam = $_GET["fteam"] == null? "x": $_GET["fteam"];
+            $sql = "SELECT * FROM events WHERE 1=1"
+            .(isset($_GET["ftime"]) ? " AND startingTS='".addslashes($_GET["ftime"])."'" : "")
+            .(isset($_GET["fsport"]) ? " AND sport='".addslashes($_GET["fsport"])."'" : "")
+            .(isset($_GET["fteam"]) ? " AND ='".addslashes($_GET["fteam"])."'" : "");
+            
+
+
+            
+            
+            
             
 
             $conn = new mysqli("localhost", "root", null, "scoreboard");
@@ -48,7 +58,6 @@
             }
 
 
-            $sql = "SELECT * FROM events";
 
             $result = $conn->query($sql);
 
@@ -98,9 +107,9 @@
                                                             <td><img class="teamIcon" src="<?= $r["oppLogoUrl"]; ?>" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</p></td>
+                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["homeScore"];?></p></td>
                                                             <td>to</td>
-                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;">0</p></td>
+                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["oppScore"];?></p></td>
                                                         </tr>
 
                                                     </table>
