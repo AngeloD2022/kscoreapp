@@ -43,15 +43,26 @@ body{
     text-align: right;
     display: inline-block;
     width: 1px;
+    height: 1px;
     float: right;
+    position: fixed;
     transition: width .25s;
 }
-.SearchMenuOpened{
-    background-color: rgb(211, 211, 211);
+.SearchMenuDefault:hover{
+    background-color: rgb(240, 240, 240);
     text-align: right;
     display: inline-block;
+    position: fixed;
     width: 180px;
-    transition: width .25s;
+    height:170px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1;
+    transition:
+        width .25s,
+        height .25s 
+    ;
 }
+
+
 
 
