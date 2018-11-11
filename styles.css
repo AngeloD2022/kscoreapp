@@ -38,29 +38,38 @@ body{
     background-color: rgb(211, 211, 211);
     transition: background-color 0.25s 0s;
 }
-.SearchMenuDefault{
-    background-color: rgb(211, 211, 211);
-    text-align: right;
-    display: inline-block;
-    width: 1px;
-    height: 1px;
-    float: right;
-    position: fixed;
-    transition: width .25s;
+
+.sbClicked{
+    background-color: rgb(167, 167, 167);
+    transition: background-color 0.25s 0s;
 }
-.SearchMenuDefault:hover{
+
+
+.SearchMenuDefault{
+    /* text-align: right; */
     background-color: rgb(240, 240, 240);
-    text-align: right;
+    width: 332px;
+    height: 0;
+    /* float: right; */
+    position: fixed;
+    transition: all .20s;
+    top: 9px;
+    right: 51px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.SearchMenuOpened{
+    
+    /* text-align: right; */
     display: inline-block;
     position: fixed;
-    width: 180px;
-    height:170px;
+    height: 352px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     z-index: 1;
-    transition:
-        width .25s,
-        height .25s 
-    ;
+    opacity: 1;
+    transition: opacity .20s, height .20s, top .20s;
+    top: 49px;
 }
 
 

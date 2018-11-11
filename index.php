@@ -24,11 +24,11 @@
 }
     </style>
     <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
-    <div class="SearchContainer" style="padding:7px;">
-    <svg class="searchbtn" version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l100.0 0l0 100.0l-100.0 0l0 -100.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l100.0 0l0 100.0l-100.0 0z" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m15.443569 39.133858l0 0c0 -13.254833 10.745167 -24.0 24.0 -24.0l0 0c6.365196 0 12.469688 2.5285635 16.970562 7.029437c4.5008736 4.5008736 7.029438 10.605366 7.029438 16.970562l0 0c0 13.254833 -10.745167 24.0 -24.0 24.0l0 0c-13.254833 0 -24.0 -10.745167 -24.0 -24.0z" fill-rule="evenodd"/><path stroke="#1f92d5" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt" d="m15.443569 39.133858l0 0c0 -13.254833 10.745167 -24.0 24.0 -24.0l0 0c6.365196 0 12.469688 2.5285635 16.970562 7.029437c4.5008736 4.5008736 7.029438 10.605366 7.029438 16.970562l0 0c0 13.254833 -10.745167 24.0 -24.0 24.0l0 0c-13.254833 0 -24.0 -10.745167 -24.0 -24.0z" fill-rule="evenodd"/><path fill="#1f92d5" d="m57.7187 54.776917l21.511814 25.385826l-7.6850433 6.519684l-21.51181 -25.385822z" fill-rule="evenodd"/><path fill="#1f92d5" d="m70.42737 83.39392l0 0c0 -2.7483826 2.2279968 -4.9763794 4.976372 -4.9763794l0 0c1.3198166 0 2.585579 0.524292 3.518837 1.4575424c0.9332504 0.93325806 1.4575424 2.1990204 1.4575424 3.518837l0 0c0 2.748375 -2.2279968 4.976372 -4.9763794 4.976372l0 0c-2.748375 0 -4.976372 -2.2279968 -4.976372 -4.976372z" fill-rule="evenodd"/></g></svg>
-    </div>
+    
+    <svg id="sbtn" onclick="toggleSearchBox()" class="searchbtn" version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><clipPath id="p.0"><path d="m0 0l100.0 0l0 100.0l-100.0 0l0 -100.0z" clip-rule="nonzero"/></clipPath><g clip-path="url(#p.0)"><path fill="#000000" fill-opacity="0.0" d="m0 0l100.0 0l0 100.0l-100.0 0z" fill-rule="evenodd"/><path fill="#000000" fill-opacity="0.0" d="m15.443569 39.133858l0 0c0 -13.254833 10.745167 -24.0 24.0 -24.0l0 0c6.365196 0 12.469688 2.5285635 16.970562 7.029437c4.5008736 4.5008736 7.029438 10.605366 7.029438 16.970562l0 0c0 13.254833 -10.745167 24.0 -24.0 24.0l0 0c-13.254833 0 -24.0 -10.745167 -24.0 -24.0z" fill-rule="evenodd"/><path stroke="#1f92d5" stroke-width="8.0" stroke-linejoin="round" stroke-linecap="butt" d="m15.443569 39.133858l0 0c0 -13.254833 10.745167 -24.0 24.0 -24.0l0 0c6.365196 0 12.469688 2.5285635 16.970562 7.029437c4.5008736 4.5008736 7.029438 10.605366 7.029438 16.970562l0 0c0 13.254833 -10.745167 24.0 -24.0 24.0l0 0c-13.254833 0 -24.0 -10.745167 -24.0 -24.0z" fill-rule="evenodd"/><path fill="#1f92d5" d="m57.7187 54.776917l21.511814 25.385826l-7.6850433 6.519684l-21.51181 -25.385822z" fill-rule="evenodd"/><path fill="#1f92d5" d="m70.42737 83.39392l0 0c0 -2.7483826 2.2279968 -4.9763794 4.976372 -4.9763794l0 0c1.3198166 0 2.585579 0.524292 3.518837 1.4575424c0.9332504 0.93325806 1.4575424 2.1990204 1.4575424 3.518837l0 0c0 2.748375 -2.2279968 4.976372 -4.9763794 4.976372l0 0c-2.748375 0 -4.976372 -2.2279968 -4.976372 -4.976372z" fill-rule="evenodd"/></g></svg>
+    
 
-    <div id="sb" style="margin-top: 31px;margin-right: 7px;" class="SearchMenuDefault">
+    <div id="sbox" class="SearchMenuDefault">
 
         <p>SearchMenu</p>
 
@@ -90,8 +90,19 @@
                     } else {
                         $afterGrade = "th";
                     }
-                    $tc = $r["teamClass"] == "jv" ? "JV" : $r["teamClass"] == "varsity" ? "Varsity" : "";
-                    $sport = $r["sport"] == "soccer" ? "Soccer" : $r["sport"] == "football" ? "Football" : "";
+                    
+                    
+                    if($r["sport"] == "soccer"){
+                        $sport = "Soccer";
+                    }else if($r["sport"] == "football"){
+                        $sport = "Football";
+                    }
+                    if($r["teamClass"] == "varsity"){
+                        $tc = "Varsity";
+                    }else if($r["teamClass"] == "jv"){
+                        $tc = "JV";
+                    }
+                    
                     $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
                     ?>
         
@@ -121,7 +132,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["homeScore"];?></p></td>
-                                                            <td>to</td>
+                                                            <td style="padding-left:7px;">to</td>
                                                             <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["oppScore"];?></p></td>
                                                         </tr>
 
@@ -137,7 +148,7 @@
 
                     }
                 } else {
-                    echo "error_noevents";
+                    echo "<br><br><p>No events found in the database.</p>";
                 }
                 $conn->close();
 
@@ -203,6 +214,6 @@ setInterval("updateGames();", 1000);
 
     </script>
 
-
+<script src="search.js" type="text/javascript"></script>
     
 </body>
