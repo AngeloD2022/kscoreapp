@@ -29,9 +29,18 @@
     
     
 
-    <div id="sbox" class="SearchMenuDefault">
+    <div style="padding: 15px;" id="sbox" class="SearchMenuDefault">
+        <h4>Search active events</h4>
+        <form action="" method="get">
+            <input name="ftime" type="datetime-local"/>
+            <select name="fsport">
+                <option value="football">Sport</option>
+                <option value="soccer">Soccer</option>
+                <option value="football">Football</option>
+            </select>
 
-        <p>SearchMenu</p>
+            <input name="fteam" placeholder="Team"/>
+        </form>
 
     </div>
 
