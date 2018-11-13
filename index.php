@@ -31,15 +31,20 @@
 
     <div style="padding: 15px;" id="sbox" class="SearchMenuDefault">
         <h4>Search active events</h4>
-        <form action="" method="get">
-            <input name="ftime" type="datetime-local"/>
-            <select name="fsport">
-                <option value="football">Sport</option>
+        <p>Leave a field as it's default value to ignore it.</p>
+        <form action="/" method="get">
+            <p class="searchLabel"><label for="fti">Event starting time:</label><br>
+            <input style="margin: 7px;" id="fti" name="ftime" type="datetime-local"/></p>
+            <p class="searchLabel"><label for="fs">Sport:</label><br>
+            <select style="margin: 7px;" id="fs" name="fsport">
+                <option>Sport</option>
                 <option value="soccer">Soccer</option>
                 <option value="football">Football</option>
-            </select>
+            </select></p>
 
-            <input name="fteam" placeholder="Team"/>
+            <p class="searchLabel"><label for="ft">Opposing team:</label><br>
+            <input style="margin: 7px;" id="ft" name="fteam" placeholder="Team"/></p>
+            <input type="submit"/>
         </form>
 
     </div>
@@ -48,8 +53,36 @@
     <link href="styles.css" rel="stylesheet" />
     <h1>Kenston Athletic Events</h1>
     <p>scores.kenstonapps.org</p>
+    <center>
+            <?php //perform the sql query here
+            function filterFunction($a) { return !empty($a);}
+            if(isset($_GET["ftime"]) && $_GET["ftime"] !=""||
+            isset($_GET["fsport"]) && $_GET["fsport"] !=""||
+            isset($_GET["fteam"]) && $_GET["fteam"] !=""){
+                /*echo "Search query: ". (isset($_GET["ftime"]) && $_GET["ftime"] !="" ? "Starting time: ". $_GET["ftime"]." ":"")
+                .(isset($_GET["fsport"]) && $_GET["fsport"] !="" ? "Sport: ". $_GET["fsport"]." " : "")
+                .(isset($_GET["fteam"]) && $_GET["fteam"] !="" ? "Opposing team: ". $_GET["fteam"]." " : "");
+                echo '<br><a href="/">Clear Query</a>';*/
+                $criteria = array();
+                foreach($_GET as $key => $value)
+                    if($value != '')
+                        array_push($criteria, $key = "ftime" . ": " . $value);
+                //echo "<p>".implode(", ", $criteria)."</p>";
 
+                $strQuery = "";
+                $iter = 0;
+                foreach($_GET as $key => $val){
+                    $k = $key == "ftime"? "Event time: ": ($key == "fsport"? "Sport: ": ($key == "fteam"? "Opposing team: ":""));
+                    $strQuery = $strQuery . ($k.$val);
+                    if ($iter != count($_GET) - 1 && $val != "") { // makes sure there isn't a comma at the end of the array initialization.
+                        $strQuery = $strQuery.", ";
+                    } 
+                    $iter++;
+                }
+                echo $strQuery;
 
+            }?>
+    <center>
 
     
 </head>
@@ -61,14 +94,12 @@
     <center>
         <div id="cardContainer">
 
-            <?php //perform the sql query here
-
+            <?php
             $sql = "SELECT * FROM events WHERE 1=1"
-            .(isset($_GET["ftime"]) ? " AND startingTS='".addslashes($_GET["ftime"])."'" : "")
-            .(isset($_GET["fsport"]) ? " AND sport='".addslashes($_GET["fsport"])."'" : "")
-            .(isset($_GET["fteam"]) ? " AND ='".addslashes($_GET["fteam"])."'" : "");
+            .(isset($_GET["ftime"]) && $_GET["ftime"] !="" ? " AND startingTS='".addslashes($_GET["ftime"])."'" : "")
+            .(isset($_GET["fsport"]) && $_GET["fsport"] !="" ? " AND sport='".addslashes($_GET["fsport"])."'" : "")
+            .(isset($_GET["fteam"]) && $_GET["fteam"] !="" ? " AND opposing='".addslashes($_GET["fteam"])."'" : "");
             
-
 
             
             
@@ -81,7 +112,7 @@
             }
 
 
-
+            
             $result = $conn->query($sql);
 
 
@@ -159,6 +190,14 @@
                     }
                 } else {
                     echo "<br><br><p>No events found in the database.</p>";
+                    if(isset($_GET["ftime"]) || isset($_GET["fsport"]) || isset($_GET["fteam"])){
+                        ?> 
+                        <script>
+                            //alert("Your search query returned nothing.");
+                            //document.location.href = "/";
+                        </script>
+                        <?php
+                    }
                 }
                 $conn->close();
 
