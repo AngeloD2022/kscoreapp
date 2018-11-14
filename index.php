@@ -59,20 +59,12 @@
             if(isset($_GET["ftime"]) && $_GET["ftime"] !=""||
             isset($_GET["fsport"]) && $_GET["fsport"] !=""||
             isset($_GET["fteam"]) && $_GET["fteam"] !=""){
-                /*echo "Search query: ". (isset($_GET["ftime"]) && $_GET["ftime"] !="" ? "Starting time: ". $_GET["ftime"]." ":"")
-                .(isset($_GET["fsport"]) && $_GET["fsport"] !="" ? "Sport: ". $_GET["fsport"]." " : "")
-                .(isset($_GET["fteam"]) && $_GET["fteam"] !="" ? "Opposing team: ". $_GET["fteam"]." " : "");
-                echo '<br><a href="/">Clear Query</a>';*/
-                $criteria = array();
-                foreach($_GET as $key => $value)
-                    if($value != '')
-                        array_push($criteria, $key = "ftime" . ": " . $value);
-                //echo "<p>".implode(", ", $criteria)."</p>";
+                
 
                 $strQuery = "";
                 $iter = 0;
                 foreach($_GET as $key => $val){
-                    $k = $key == "ftime"? "Event time: ": ($key == "fsport"? "Sport: ": ($key == "fteam"? "Opposing team: ":""));
+                    $k = $key == "ftime" && $val != ""? "Event time: ": ($key == "fsport" && $val != ""? "Sport: ": ($key == "fteam" && $val != ""? "Opposing team: ":""));
                     $strQuery = $strQuery . ($k.$val);
                     if ($iter != count($_GET) - 1 && $val != "") { // makes sure there isn't a comma at the end of the array initialization.
                         $strQuery = $strQuery.", ";
@@ -80,7 +72,7 @@
                     $iter++;
                 }
                 echo $strQuery;
-
+                echo '<br><a href="/">Clear query</a>';
             }?>
     <center>
 
@@ -193,8 +185,8 @@
                     if(isset($_GET["ftime"]) || isset($_GET["fsport"]) || isset($_GET["fteam"])){
                         ?> 
                         <script>
-                            //alert("Your search query returned nothing.");
-                            //document.location.href = "/";
+                            alert("Your search query returned nothing.");
+                            document.location.href = "/";
                         </script>
                         <?php
                     }
