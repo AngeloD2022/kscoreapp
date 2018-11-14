@@ -10,6 +10,45 @@
 <body onload="initializePage()">
     <div id="eventTbl">
         <p id="loginas">Loading...</p>
+        <center>
+            <table id="events">
+                <tr>
+                    <th>Event name</th>
+                    <th>Event creator</th>
+                    <th>Sport</th>
+                    <th>Opposing team</th>
+                    <th>Your options...</th>
+                </tr>
+                <?php
+require "db.php";
+require "authentication.php";
+$auth = authenticate();
+
+$sql = "SELECT * FROM events where usrID='".$auth["id"]."' and deleted=0";
+
+$result = $conn->query($sql);
+
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {    
+        ?>
+            <tr>
+                <td><?=$row["name"];?></td>
+                <td><?=$row["usrCreated"];?></td>
+                <td><?=$row["sport"];?></td>
+                <td><?=$row["opposing"];?></td>
+                <td><button>Modify</button><button>Delete</button></td>
+            </tr>
+
+
+        <?php
+    }
+} else {
+    echo "error_noevents";
+}
+                ?>
+            </table>
+        </center>
     </div>
     <center>
         <br />

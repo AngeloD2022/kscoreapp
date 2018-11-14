@@ -87,7 +87,7 @@
         <div id="cardContainer">
 
             <?php
-            $sql = "SELECT * FROM events WHERE 1=1"
+            $sql = "SELECT * FROM events WHERE deleted=0"
             .(isset($_GET["ftime"]) && $_GET["ftime"] !="" ? " AND startingTS='".addslashes($_GET["ftime"])."'" : "")
             .(isset($_GET["fsport"]) && $_GET["fsport"] !="" ? " AND sport='".addslashes($_GET["fsport"])."'" : "")
             .(isset($_GET["fteam"]) && $_GET["fteam"] !="" ? " AND opposing='".addslashes($_GET["fteam"])."'" : "");
