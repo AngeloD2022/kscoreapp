@@ -15,7 +15,7 @@ if(event.target.nearestViewportElement == btn){
 
 });
 
-
+btn.addEventListener("touchend", toggleSearchBox);
 function toggleSearchBox() {
 
     btn.classList.toggle("sbClicked");
