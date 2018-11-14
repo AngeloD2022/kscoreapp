@@ -6,7 +6,7 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT id, homeScore, oppScore FROM events";
+$sql = "SELECT id, homeScore, oppScore FROM events WHERE deleted=0";
 
 $result = $conn->query($sql);
 
