@@ -14,7 +14,7 @@ header{
     box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.53);
     border-radius: 5px;
 }
-#eventTbl{
+#ctrlPanel{
     border: 1px solid rgb(80, 80, 80);
     margin-top: 70px;
     height: 120px;
@@ -70,6 +70,7 @@ header{
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
 }
+<<<<<<< HEAD
 td, th{
     border-width: 1px;
     border-style: solid;
@@ -80,5 +81,18 @@ th{
     padding-right: 56px;
 }
 #events{
+=======
+
+tr, th, td{
+    border: 1px solid black;
+    padding: 4px;
+}
+
+th{
+    padding-right: 56px;
+}
+
+#evTbl{
+>>>>>>> 98f5050c71affe14d61da39faea4169c561d1356
     border-collapse: collapse;
 }

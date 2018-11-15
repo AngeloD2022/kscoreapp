@@ -8,9 +8,10 @@
 
 
 <body onload="initializePage()">
-    <div id="eventTbl">
+    <div id="ctrlPanel">
         <p id="loginas">Loading...</p>
         <center>
+<<<<<<< HEAD:admin/dashboard/index.php
             <table id="events">
                 <tr>
                     <th>Event name</th>
@@ -47,6 +48,39 @@ if ($result->num_rows > 0) {
     echo "error_noevents";
 }
                 ?>
+=======
+            <table id="evTbl">
+                <tr>
+                    <th>Identifier</th>
+                    <th>Name</th>
+                    <th>Opposing</th>
+                    <th>Sport</th>
+                    <th>Team Class</th>
+                    <th>Your options...</th>
+                </tr>
+                <?php
+require "globalassets/dbinit.php";
+require "globalassets/authentication.php";
+$authBack = authenticate();
+$sql="SELECT * from events WHERE usrID=".$authBack["id"]." AND deleted=0";
+$result = $conn->query($sql);
+if($result->num_rows > 0)
+{
+    while($row = $result->fetch_assoc()){
+        ?>
+        <tr>
+            <td><?=$row["id"];?></td>
+            <td><?=$row["name"];?></td>
+            <td><?=$row["opposing"];?></td>
+            <td><?=$row["sport"];?></td>
+            <td><?=$row["teamClass"];?></td>
+            <td><button>Edit</button><button>Delete</button></td>
+        </tr>
+        <?php
+    }
+}
+?>
+>>>>>>> 98f5050c71affe14d61da39faea4169c561d1356:admin/dashboard/index.php
             </table>
         </center>
     </div>
