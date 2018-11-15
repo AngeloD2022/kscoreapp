@@ -83,3 +83,22 @@ th{
 #evTbl{
     border-collapse: collapse;
 }
+.launch{
+    border: none;
+    background-color: rgb(84, 194, 89);
+    padding: 3px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color .25s; 
+}
+.launch:hover{
+    background-color: rgb(0, 216, 11);
+    transition: background-color .25s; 
+}
+.launch:active{
+    background-color: rgb(3, 143, 10);
+ 
+}
+.btn:focus {
+    outline: none;
+  }

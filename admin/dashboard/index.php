@@ -29,6 +29,7 @@ $result = $conn->query($sql);
 if($result->num_rows > 0)
 {
     while($row = $result->fetch_assoc()){
+        $dbEntrys[] = $row;
         ?>
         <tr>
             <td><?=$row["id"];?></td>
@@ -36,7 +37,7 @@ if($result->num_rows > 0)
             <td><?=$row["opposing"];?></td>
             <td><?=$row["sport"];?></td>
             <td><?=$row["teamClass"];?></td>
-            <td><button>Edit</button><button>Delete</button></td>
+            <td><button class="launch" id="launch<?=$row["id"];?>">Launch</button><button id="edit<?=$row["id"];?>">Edit</button><button id="delete<?=$row["id"];?>">Delete</button></td>
         </tr>
         <?php
     }
@@ -122,10 +123,52 @@ if($result->num_rows > 0)
         </div>
     </div>
 
+    <script type="text/javascript" src="fetchEvents.js"></script>
+    <script language="javascript">
+        var ids = [
+    <?php
+    $length = count($dbEntrys);
+    $x = 0;
+    foreach ($dbEntrys as $row) {
+
+        ?>
+        <?= $row["id"];
+        if ($x != $length - 1) { // makes sure there isn't a comma at the end of the array initialization.
+            print(", ");
+        } 
+        ?> 
+        
+<?php
+$x++;
+}
+?>
+ ];
+
+<?php
+    $length = count($dbEntrys);
+    $x = 0;
+    foreach ($dbEntrys as $row) {
+
+        ?>
+        var edit<?=$row["id"]?> = document.getElementById("edit<?=$row["id"]?>");
+        var delete<?=$row["id"]?> = document.getElementById("delete<?=$row["id"]?>");
+        var launch<?=$row["id"]?> = document.getElementById("launch<?=$row["id"]?>");
+        edit<?=$row["id"]?>.addEventListener("click", function(){editEvent(<?=$row["id"]?>);});
+        delete<?=$row["id"]?>.addEventListener("click", function(){deleteEvent(<?=$row["id"]?>);});
+        launch<?=$row["id"]?>.addEventListener("click", function(){launchEvent(<?=$row["id"]?>);});
+<?php
+$x++;
+}
+?>
+ // actual coding here
+
+
+
+
+</script>
 
 
 </body>
-
 
 <script src="initPage.js" type="text/javascript"></script>
 <script src="main.js" type="text/javascript"></script>
