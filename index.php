@@ -52,7 +52,7 @@
 
     <link href="styles.css" rel="stylesheet" />
     <h1>Kenston Athletic Events</h1>
-    <p>scores.kenstonapps.org</p>
+    <p>Please note that not all events may be added.</p>
     <center>
             <?php //perform the sql query here
             function filterFunction($a) { return !empty($a);}

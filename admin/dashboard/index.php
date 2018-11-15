@@ -155,7 +155,7 @@ $x++;
         var launch<?=$row["id"]?> = document.getElementById("launch<?=$row["id"]?>");
         edit<?=$row["id"]?>.addEventListener("click", function(){editEvent(<?=$row["id"]?>);});
         delete<?=$row["id"]?>.addEventListener("click", function(){deleteEvent(<?=$row["id"]?>);});
-        launch<?=$row["id"]?>.addEventListener("click", function(){launchEvent(<?=$row["id"]?>);});
+        launch<?=$row["id"]?>.addEventListener("click", function(){launchEvent(<?=$row["id"]?>, launch<?=$row["id"]?>);});
 <?php
 $x++;
 }
