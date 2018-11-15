@@ -70,18 +70,6 @@ header{
     transform: scale(1.0);
     transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s; 
 }
-<<<<<<< HEAD
-td, th{
-    border-width: 1px;
-    border-style: solid;
-    border-color: black;
-    padding: 4px;
-}
-th{
-    padding-right: 56px;
-}
-#events{
-=======
 
 tr, th, td{
     border: 1px solid black;
@@ -93,6 +81,5 @@ th{
 }
 
 #evTbl{
->>>>>>> 98f5050c71affe14d61da39faea4169c561d1356
     border-collapse: collapse;
 }

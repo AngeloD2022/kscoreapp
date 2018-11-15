@@ -11,44 +11,6 @@
     <div id="ctrlPanel">
         <p id="loginas">Loading...</p>
         <center>
-<<<<<<< HEAD:admin/dashboard/index.php
-            <table id="events">
-                <tr>
-                    <th>Event name</th>
-                    <th>Event creator</th>
-                    <th>Sport</th>
-                    <th>Opposing team</th>
-                    <th>Your options...</th>
-                </tr>
-                <?php
-require "db.php";
-require "authentication.php";
-$auth = authenticate();
-
-$sql = "SELECT * FROM events where usrID='".$auth["id"]."' and deleted=0";
-
-$result = $conn->query($sql);
-
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {    
-        ?>
-            <tr>
-                <td><?=$row["name"];?></td>
-                <td><?=$row["usrCreated"];?></td>
-                <td><?=$row["sport"];?></td>
-                <td><?=$row["opposing"];?></td>
-                <td><button>Modify</button><button>Delete</button></td>
-            </tr>
-
-
-        <?php
-    }
-} else {
-    echo "error_noevents";
-}
-                ?>
-=======
             <table id="evTbl">
                 <tr>
                     <th>Identifier</th>
@@ -80,7 +42,6 @@ if($result->num_rows > 0)
     }
 }
 ?>
->>>>>>> 98f5050c71affe14d61da39faea4169c561d1356:admin/dashboard/index.php
             </table>
         </center>
     </div>
