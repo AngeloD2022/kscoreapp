@@ -29,9 +29,21 @@ function deleteEvent(id){
     
 }
 
+function disableButtons(except){
+    var buttons = document.getElementsByClassName("launch");
 
+    for(var i = 0; i < buttons.length; i++){
+        if(!buttons[i].id.includes(except)){
+            buttons[i].disabled = true;
+            buttons[i].style.cursor = "not-allowed";
+            buttons[i].innerHTML = "Disabled";
+            buttons[i].style.backgroundColor = "gray";
+        }
+    }
+}
 
 function launchEvent(id, btn){
+    disableButtons(id);
     button = btn;
     console.log("LAUNCHING EV"+ id);
     console.log("Loading...");
@@ -70,5 +82,14 @@ function closed(btn){
     btn.disabled = false;
     btn.style = null;
     btn.innerHTML = "Launch";
+
+    var buttons = document.getElementsByClassName("launch");
+
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].disabled = false;
+        buttons[i].style = "";
+        buttons[i].innerHTML = "Launch";
+    }
+    
 }
 

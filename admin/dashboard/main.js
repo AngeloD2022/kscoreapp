@@ -110,6 +110,7 @@ function createSportEvent(){
                     alert("Event created successfully.");
                     toggleDialog("create");
                     clearFields();
+                    document.location.reload();
                 }
     
             }

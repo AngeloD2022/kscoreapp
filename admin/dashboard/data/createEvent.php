@@ -54,7 +54,7 @@ function createEvent($auth)
         $creatorName = $auth["rname"];
 
 
-        $sql = "INSERT INTO `events` (`id`, `name`, `opposing`, `createdTS`, `startingTS`, `usrCreated`, `usrID`, `teamClass`, `grade`, `location`, `oppLogoUrl`, `sport`, `postponed`, `homeScore`, `oppScore`)
+        $sql = "INSERT INTO `events` (`id`, `name`, `opposing`, `createdTS`, `startingTS`, `usrCreated`, `usrID`, `teamClass`, `grade`, `location`, `oppLogoUrl`, `sport`, `cancelled`, `homeScore`, `oppScore`)
          VALUES (NULL, '".$name."', '".$opposing."', CURRENT_TIMESTAMP, '".$tsFormatted."', '".$creatorName."', '".$creatorID."', '".$teamClass."', '".$grade."', '".$location."', '".$oppLogoUrl."', '".$sport."', '0', '0', '0')";
         
         $res = $conn->query($sql);
