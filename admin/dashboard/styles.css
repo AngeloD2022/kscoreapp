@@ -18,6 +18,10 @@ header{
     border: 1px solid rgb(80, 80, 80);
     margin-top: 70px;
     height: 120px;
+    display: inline-block;
+    height: auto;
+    width: -webkit-fill-available;
+    padding-bottom: 14px;
 }
 
 #loginas{
