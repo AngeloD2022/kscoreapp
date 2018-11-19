@@ -6,7 +6,6 @@ $event = isset($_GET["id"])? $_GET["id"]: "x";
 
 
 $sql = "SELECT usrID from events where id=".$event;
-echo $sql;
 $result = $conn->query($sql);
 if($result->num_rows < 1){
     ?>
@@ -31,6 +30,24 @@ if(secs < 6){
     
     
     <?php
+}else{
+    showUi();
 }
+function showUi(){
+    //gData
+    global $event;
+    global $conn;
+    $sql = "SELECT * from events where id=".$event;
+    $result = $conn->query($sql);
+    $game = $result->fetch_array();
+
+    ?>
+<script>
+    window.location.href = "ui.html";
+</script>
+
+    <?php
+}
+
 
 ?>

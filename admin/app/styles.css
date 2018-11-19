@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+body {
+    background-color: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    -moz-box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    padding: 12px;
+}
+
+.logo-container{
+    margin-left: 18px;
+    margin-top: 15px;
+    display: inline-block;
+    float: left;
+}
+.app-logo{
+    width: 47px;
+    height: 47px;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+.app-logo-text{
+    font-family: 'Comfortaa', cursive;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 6px;
+}
+.app-logo-text-sub{
+    font-family: 'Comfortaa', cursive;
+    padding-left: 64px;
+    color: rgb(0, 163, 204);
+    font-size: 15px;
+}
+
+
+.gameDetails{
+    background-color: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    -moz-box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
+    display: inline-block;
+    padding: 8px;
+}
