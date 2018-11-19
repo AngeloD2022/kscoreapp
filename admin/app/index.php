@@ -5,7 +5,8 @@ $authBack = null !== authenticate() ? authenticate() : "x";
 $event = isset($_GET["id"])? $_GET["id"]: "x";
 
 
-$sql = "SELECT usrID from events where id=".$authBack["id"];
+$sql = "SELECT usrID from events where id=".$event;
+echo $sql;
 $result = $conn->query($sql);
 if($result->num_rows < 1){
     ?>
