@@ -13,6 +13,7 @@ body {
     margin-top: 15px;
     display: inline-block;
     float: left;
+    position: fixed;
 }
 .app-logo{
     width: 47px;
