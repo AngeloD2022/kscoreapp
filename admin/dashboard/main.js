@@ -80,7 +80,7 @@ var eventName = document.getElementById("ce_name");
 var opposingTeam = document.getElementById("ce_opposing");
 var startTime = document.getElementById("ce_timestart");
 var teamClass = document.getElementById("ce_teamclass");
-var grade = document.getElementById("ce_school");
+var school = document.getElementById("ce_school");
 var eventLocation = document.getElementById("ce_location");
 var opponentLogoUrl = document.getElementById("ce_oppLogo");
 var sport = document.getElementById("ce_sport");
@@ -89,10 +89,10 @@ var sport = document.getElementById("ce_sport");
 function createSportEvent(){
     //get vals from fields
     //check if any are null
-    if(eventName.value == null || opposingTeam.value == null || startTime.value == null || teamClass.value == null || grade.value == "NONE" || eventLocation.value == null || opponentLogoUrl.value == null || sport.value == "NONE"){
+    if(eventName.value == null || opposingTeam.value == null || startTime.value == null || teamClass.value == null || school.value == "NONE" || eventLocation.value == null || opponentLogoUrl.value == null || sport.value == "NONE"){
         alert("You must complete all required fields.");
     }else{
-        var url = "data/createEvent.php?gname="+eventName.value+"&gopposing="+opposingTeam.value+"&timeStart="+startTime.value+"&tclass="+teamClass.value+"&school="+grade.value+"&gloc="+eventLocation.value+"&opplogo="+opponentLogoUrl.value+"&sport="+sport.value;
+        var url = "data/createEvent.php?gname="+eventName.value+"&gopposing="+opposingTeam.value+"&timeStart="+startTime.value+"&tclass="+teamClass.value+"&school="+school.value+"&gloc="+eventLocation.value+"&opplogo="+opponentLogoUrl.value+"&sport="+sport.value;
         xhttp = new XMLHttpRequest();
 
         xhttp.onreadystatechange = function () {
@@ -131,7 +131,7 @@ function clearFields() {
     opposingTeam.value = "";
     startTime.value = "";
     teamClass.value = "";
-    grade.value = "NONE";
+    school.value = "NONE";
     eventLocation.value = "";
     opponentLogoUrl.value = "";
     sport.value = "NONE";

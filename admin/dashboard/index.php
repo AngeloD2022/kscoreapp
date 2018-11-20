@@ -77,19 +77,9 @@ if($result->num_rows > 0)
             <select class="ins" id="ce_school">
                 <option value="NONE">- Select one -</option>
                 <option value="pre">Preschool</option>
-                <option value="k">Kidnergarden</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
+                <option value="elem">Elementary School</option>
+                <option value="ms">Middle School</option>
+                <option value="hs">High School</option>
             </select><br>
             <input class="ins" type="text" placeholder="Event location" id="ce_location"><br>
             <input class="ins" type="text" placeholder="Opponent's logo URL" id="ce_oppLogo"><br>

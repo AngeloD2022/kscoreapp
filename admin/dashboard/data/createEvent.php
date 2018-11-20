@@ -41,6 +41,16 @@ function createEvent($auth)
     $location = isset($_GET["gloc"])? addslashes($_GET["gloc"]):"x";
     $oppLogoUrl = isset($_GET["opplogo"])? addslashes($_GET["opplogo"]):"x";
     $sport = isset($_GET["sport"])? addslashes($_GET["sport"]):"x";
+
+    if($school == "pre"){
+        $school = "Preschool";
+    }else if($school == "elem"){
+        $school = "Elementary School";
+    }else if($school == "ms"){
+        $school = "Middle School";
+    }else if($school == "hs"){
+        $school = "High School";
+    }
     
     if($name == "x" ||$opposing == "x" ||$startTimestamp == "x" ||$teamClass == "x" ||$school == "x" ||$location == "x" ||$oppLogoUrl == "x" ||$sport == "x"){
         echo "error_invparams";
