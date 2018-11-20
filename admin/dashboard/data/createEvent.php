@@ -37,12 +37,12 @@ function createEvent($auth)
     $opposing = isset($_GET["gopposing"])? addslashes($_GET["gopposing"]):"x";
     $startTimestamp = isset($_GET["timeStart"])? $_GET["timeStart"]:"x";
     $teamClass = isset($_GET["tclass"])?addslashes( $_GET["tclass"]):"x";
-    $grade = isset($_GET["grade"])? addslashes($_GET["grade"]):"x";
+    $school = isset($_GET["school"])? addslashes($_GET["school"]):"x";
     $location = isset($_GET["gloc"])? addslashes($_GET["gloc"]):"x";
     $oppLogoUrl = isset($_GET["opplogo"])? addslashes($_GET["opplogo"]):"x";
     $sport = isset($_GET["sport"])? addslashes($_GET["sport"]):"x";
     
-    if($name == "x" ||$opposing == "x" ||$startTimestamp == "x" ||$teamClass == "x" ||$grade == "x" ||$location == "x" ||$oppLogoUrl == "x" ||$sport == "x"){
+    if($name == "x" ||$opposing == "x" ||$startTimestamp == "x" ||$teamClass == "x" ||$school == "x" ||$location == "x" ||$oppLogoUrl == "x" ||$sport == "x"){
         echo "error_invparams";
     }else{
         $conn = new mysqli("localhost", "root", null, "scoreboard");
@@ -54,8 +54,8 @@ function createEvent($auth)
         $creatorName = $auth["rname"];
 
 
-        $sql = "INSERT INTO `events` (`id`, `name`, `opposing`, `createdTS`, `startingTS`, `usrCreated`, `usrID`, `teamClass`, `grade`, `location`, `oppLogoUrl`, `sport`, `cancelled`, `homeScore`, `oppScore`)
-         VALUES (NULL, '".$name."', '".$opposing."', CURRENT_TIMESTAMP, '".$tsFormatted."', '".$creatorName."', '".$creatorID."', '".$teamClass."', '".$grade."', '".$location."', '".$oppLogoUrl."', '".$sport."', '0', '0', '0')";
+        $sql = "INSERT INTO `events` (`id`, `name`, `opposing`, `createdTS`, `startingTS`, `usrCreated`, `usrID`, `teamClass`, `school`, `location`, `oppLogoUrl`, `sport`, `cancelled`, `homeScore`, `oppScore`)
+         VALUES (NULL, '".$name."', '".$opposing."', CURRENT_TIMESTAMP, '".$tsFormatted."', '".$creatorName."', '".$creatorID."', '".$teamClass."', '".$school."', '".$location."', '".$oppLogoUrl."', '".$sport."', '0', '0', '0')";
         
         $res = $conn->query($sql);
         //print "last sql error: " . $conn->error() . "<br>\r\n";

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
     background-color: white;
     border-radius: 5px;
@@ -43,4 +45,25 @@ body {
     box-shadow: 0px 2px 11px -1px rgba(0, 0, 0, 0.53);
     display: inline-block;
     padding: 8px;
+    font-family: 'Roboto', sans-serif;
+}
+.gameDetails p{
+    margin:6px;
+}
+.closeBtn{
+    background-color: red;
+    float: right;
+    color: white;
+    width: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20pt;
+    position: fixed;
+    right: 25px;
+    top: 25px;
+    cursor: default;
+}
+.closeBtn:hover{
+    background-color: rgb(255, 83, 83);
 }

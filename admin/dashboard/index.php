@@ -73,8 +73,8 @@ if($result->num_rows > 0)
                 <option value="jv">Junior Varsity</option>
                 <option value="other">Other</option>
             </select><br>
-            <label for="ce_grade">Grade: </label>
-            <select class="ins" id="ce_grade">
+            <label for="ce_school">Grade: </label>
+            <select class="ins" id="ce_school">
                 <option value="NONE">- Select one -</option>
                 <option value="pre">Preschool</option>
                 <option value="k">Kidnergarden</option>

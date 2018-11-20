@@ -112,17 +112,7 @@
 
                 while ($r = $result->fetch_array()) {
                     $dbEntrys[] = $r;
-                    $afterGrade;
-                    if ($r["grade"] == 1) {
-                        $afterGrade = "st";
-                    } else if ($r["grade"] == 2) {
-                        $afterGrade = "nd";
-
-                    } else if ($r["grade"] == 3) {
-                        $afterGrade = "rd";
-                    } else {
-                        $afterGrade = "th";
-                    }
+                    
                     
                     
                     if($r["sport"] == "soccer"){
@@ -134,6 +124,8 @@
                         $tc = "Varsity";
                     }else if($r["teamClass"] == "jv"){
                         $tc = "JV";
+                    }else{
+                        $tc = "";
                     }
                     
                     $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
@@ -149,7 +141,7 @@
                                                     <hr width="100%" align="left">
                                                     <div class="gdDetailed">
                                                         <p>Kenston@<?= $r["location"]; ?></p>
-                                                        <p style="margin-top: 5px;" class="smallTxt"><?= $r["grade"] . $afterGrade . " grade " . $tc . " " . $sport ?></p>
+                                                        <p style="margin-top: 5px;" class="smallTxt"><?= $r["school"] ." ". $tc . " " . $sport ?></p>
                                                         <p style="margin-top: 3px;" class="smallTxt"><?= $gtime; ?></p>
                                                     </div>
                                                 </div>
