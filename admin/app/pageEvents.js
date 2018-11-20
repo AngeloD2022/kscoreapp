@@ -1,3 +1,6 @@
 
 
-document.getElementById("closeBtn")
+document.getElementById("closeBtn").addEventListener("click", function(event){
+    window.close();
+
+})

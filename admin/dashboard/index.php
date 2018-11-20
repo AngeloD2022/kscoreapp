@@ -15,6 +15,7 @@
                 <tr>
                     <th>Identifier</th>
                     <th>Name</th>
+                    <th>Status</th>
                     <th>Opposing</th>
                     <th>Sport</th>
                     <th>Team Class</th>
@@ -31,9 +32,10 @@ if($result->num_rows > 0)
     while($row = $result->fetch_assoc()){
         $dbEntrys[] = $row;
         ?>
-        <tr>
+        <tr <?= $row["active"] == 1? 'style="background-color:rgb(153, 255, 153);"':""?>>
             <td><?=$row["id"];?></td>
             <td><?=$row["name"];?></td>
+            <td><?=$row["active"] == 1? "Active":"Inactive"?></td>
             <td><?=$row["opposing"];?></td>
             <td><?=$row["sport"];?></td>
             <td><?=$row["teamClass"];?></td>
