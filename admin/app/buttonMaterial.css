@@ -37,9 +37,9 @@ button:active{
     color: white;
     font-weight: bold;
     border-radius: 5px;
-    transition: background-color .2s box-shadow .2s;
+    transition: background-color .2s, box-shadow .2s;
 }
 .purpleBtn:hover{
     background-color: rgb(171, 48, 253);
-    transition: background-color .2s box-shadow .2s;
+    transition: background-color .2s, box-shadow .2s;
 }
