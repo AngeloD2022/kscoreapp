@@ -17,19 +17,29 @@ button:hover{
 }
 button:active{
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 0px 2px 0 rgba(0,0,0,.14), 0 0px 1px 0 rgba(0,0,0,.12);
-    transition: box-shadow .2s;
+    transition: box-shadow .05s;
 }
 .upBtn{
     width: 135px;
     height: 135px;
     border-radius: 17px;
     background-color: rgb(86, 255, 85);
+    transition: box-shadow .2s, background-color .2s;
+}
+.upBtn:hover{
+    background-color: rgb(130, 255, 130);
+    transition: box-shadow .2s, background-color .2s;
 }
 .dnBtn{
     width: 135px;
     height: 135px;
     border-radius: 17px;
     background-color: rgb(255, 72, 72);
+    transition: box-shadow .2s, background-color .2s;
+}
+.dnBtn:hover{
+    background-color: rgb(255, 107, 107);
+    transition: box-shadow .2s, background-color .2s;
 }
 .purpleBtn{
     background-color: #9900ffff;
