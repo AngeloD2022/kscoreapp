@@ -14,7 +14,7 @@ function authenticate(){
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             if ($row["disabled"] == 1) {
-                echo "error_auth";
+                echo "error_auth》disabled";
             } else {
                 $resultArray = $row;
                 //EXECUTE FUNCTION HERE 

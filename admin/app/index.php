@@ -1,13 +1,20 @@
 <?php
 require "globalassets/dbinit.php";
 require "globalassets/authentication.php";
-$authBack = null !== authenticate() ? authenticate() : "x";
-$event = isset($_GET["id"])? $_GET["id"]: "x";
+$authBack = authenticate();
+if(!isset($authBack)){
+    $authBack = "x";
+}
+else
+{
+    $event = isset($_GET["id"])? $_GET["id"]: "x";
+    $sql = "SELECT * from events where usrID=".$authBack["id"]." and id=".$event;
+    $result = $conn->query($sql);
+    if($result->num_rows < 1)
+        $authBack = "x";
+}
 
-
-$sql = "SELECT usrID from events where id=".$event;
-$result = $conn->query($sql);
-if($result->num_rows < 1){
+if($authBack == "x"){
     ?>
 <p id="s">You are not authorized to control this event.</p>
 <script>
