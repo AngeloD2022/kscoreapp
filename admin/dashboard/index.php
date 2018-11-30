@@ -39,7 +39,7 @@ if($result->num_rows > 0)
             <td><?=$row["opposing"];?></td>
             <td><?=$row["sport"];?></td>
             <td><?=$row["teamClass"];?></td>
-            <td><button class="launch" id="launch<?=$row["id"];?>">Launch</button><button style="margin:2px;" id="edit<?=$row["id"];?>">Edit</button><button id="delete<?=$row["id"];?>">Delete</button></td>
+            <td><button class="launch" id="launch<?=$row["id"];?>"><?=$row["active"] == 1? "Open":"Start"?></button><button style="margin:2px;" id="edit<?=$row["id"];?>">Edit</button><button id="delete<?=$row["id"];?>">Delete</button></td>
         </tr>
         <?php
     }
