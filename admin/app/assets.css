@@ -87,8 +87,36 @@
     border-radius: 9px;
     text-align: center;
     display: inline-block;
-    min-width: 71px;
-    min-height: 71px;
-    margin-top: 78px;
+    min-width: 530px;
+    min-height: 110px;
+    margin-top: 24px;
     padding: 9px;
+}
+
+.ball{
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid gray;
+    display: inline-block;
+    padding: 6px;
+float: left;
+min-width: 115px;
+min-height: 40px;
+}
+.quarter{
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid gray;
+    display: inline-block;
+    padding: 6px;
+    float: left;
+    min-width: 115px;
+    min-height: 40px;
+}
+.togo{
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid gray;
+    display: inline-block;
+    padding: 6px;
+    float: left;
+    min-width: 115px;
+    min-height: 40px;
 }

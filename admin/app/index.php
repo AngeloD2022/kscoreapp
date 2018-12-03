@@ -52,6 +52,9 @@ function showUi(){
     ?>
 <!--KENSTON GT-ADMIN FOOTBALL UI-->
 <!--Designed by Angelo DeLuca-->
+<script>
+window.location.href = "ui.html";
+</script>
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" />
