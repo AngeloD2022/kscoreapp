@@ -28,12 +28,13 @@ function deleteEvent(id){
     }
     
 }
-
+var btntxt = new Array();
 function disableButtons(except){
     var buttons = document.getElementsByClassName("launch");
 
     for(var i = 0; i < buttons.length; i++){
         if(!buttons[i].id.includes(except)){
+            btntxt[i] = buttons[i].innerHTML;
             buttons[i].disabled = true;
             buttons[i].style.cursor = "not-allowed";
             buttons[i].innerHTML = "Disabled";
@@ -41,10 +42,12 @@ function disableButtons(except){
         }
     }
 }
-
+var buttontxt;
+var buttonID;
 function launchEvent(id, btn){
     disableButtons(id);
-    button = btn;
+    buttontxt = btn.innerHTML;
+    buttonID = btn.id;
     console.log("LAUNCHING EV"+ id);
     console.log("Loading...");
     btn.disabled = true;
@@ -79,16 +82,19 @@ function launchEvent(id, btn){
 
 function closed(btn){
     console.log("GameTime: App closed");
-    btn.disabled = false;
-    btn.style = null;
-    btn.innerHTML = "Launch";
 
     var buttons = document.getElementsByClassName("launch");
 
     for(var i = 0; i < buttons.length; i++){
-        buttons[i].disabled = false;
-        buttons[i].style = "";
-        buttons[i].innerHTML = "Launch";
+        if(buttons[i].id != buttonID){
+            buttons[i].disabled = false;
+            buttons[i].style = "";
+            buttons[i].innerHTML = btntxt[i];
+        }else{
+            buttons[i].disabled = false;
+            buttons[i].style = "";
+            buttons[i].innerHTML = buttontxt;
+        }
     }
     
 }
