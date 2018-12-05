@@ -121,6 +121,14 @@ min-height: 40px;
     min-height: 40px;
 }
 
+.loaderShown{
+    opacity: 1;
+}
+.loaderHidden{
+    opacity: 0;
+    transition: opacity .2s;
+}
+
 .determinateLoad{
     fill: none;
     stroke: rgb(0, 195, 255);
@@ -131,5 +139,5 @@ min-height: 40px;
 }
 .dC{
     stroke-dasharray: 1000;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: -313;
 }
