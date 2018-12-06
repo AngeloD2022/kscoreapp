@@ -90,8 +90,9 @@ function readServer(){
     }
     xhttp.onloadstart = function(){ //starts the request
         //show indeterminite
-        dLoad.className.baseVal = "indeterminateLoad";
+        dLoad.style.strokeDashoffset = "";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
+        dLoad.className.baseVal = "indeterminateLoad";
         
     }
     xhttp.onload = function(){
