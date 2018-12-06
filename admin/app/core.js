@@ -88,13 +88,15 @@ function readServer(){
             
         }
     }
-    xhttp.onloadstart = function(){
+    xhttp.onloadstart = function(){ //starts the request
         //show indeterminite
+        dLoad.className.baseVal = "indeterminateLoad";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
         
     }
     xhttp.onload = function(){
         dLsvg.style.stroke = "rgb(0, 216, 11)";
+        dLoad.className.baseVal = "dC";
         setTimeout(function(){
             lDiv.className = "loaderHidden";
         }, 1000);
