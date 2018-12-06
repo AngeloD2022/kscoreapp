@@ -55,7 +55,7 @@ var dLoad = document.getElementById("dLoad");
 var dLsvg = document.getElementById("determinateSVG");
 var lDiv = document.getElementById("loader");
 function sendTimer() {
-    dLoad.style.color = "rgb(0, 195, 255)";
+    dLsvg.style.stroke = "rgb(0, 195, 255)";
     dLoad.style.strokeDashoffset = -313;
     lDiv.className = "loaderShown";
     console.log("start");
@@ -97,7 +97,14 @@ function readServer(){
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         setTimeout(function(){
             lDiv.className = "loaderHidden";
-        }, 1000)
+        }, 1000);
+    }
+    xhttp.onerror = function(){
+        dLsvg.style.stroke = "rgb(255, 73, 73)";
+        setTimeout(function(){
+            alert("A network error occurred.");
+            document.location.reload();
+        }, 1000);
     }
     xhttp.open("GET", "/data/events.php", true);
     xhttp.send();
