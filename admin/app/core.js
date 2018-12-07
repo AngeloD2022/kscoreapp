@@ -1,17 +1,35 @@
+//KENSTON GT ADMIN PANEL - CORE FRAMEWORK
+//CODED BY: ANGELO DELUCA
+//Copyright (c) 2018 Kenston Local School District
 var request = {};
 var xhttp = new XMLHttpRequest();
 var ms = 0;
-
-
+var uid;
+getUserID();
 //elements
 var kenstonScoreDisplay = document.getElementById("kscore");
 var guestScoreDisplay = document.getElementById("gscore");
-//scores
+//stats
 var KenstonScore = 0;
 var GuestScore = 0;
-
+var quarter = 1;
+var toGo;
+var ballOn;
+var down;
 //misc
+var quarter1Button = document.getElementById("q1");
+var quarter2Button = document.getElementById("q2");
+var quarter3Button = document.getElementById("q3");
+var quarter4Button = document.getElementById("q4");
+
+var ydsToGo = document.getElementById("ydsToGo");
 //readServer();
+window.onload = function(){
+    console.log("GID: "+gameId);
+    KenstonScore = kScore;
+    GuestScore = gScore;
+}
+
 
 
 
@@ -34,6 +52,9 @@ function incrementScore(amount, team) {
     sendTimer();
 }
 
+
+
+
 function decrementScore(amount, team) {
     if (team == "k") {
         if (request.homeScore == null) {
@@ -53,16 +74,49 @@ function decrementScore(amount, team) {
     sendTimer();
 }
 
-function changeMisc() {
-    
+
+
+
+//MISC JSON
+var miscReq = {};
+var psqb;
+function changeQuarter(value){
+    psqb = document.getElementById("q"+quarter);
+    miscReq.quarter = value;
+    if(value == 1){
+        psqb.className = "qBtn";
+        quarter1Button.className = "qBtnSelected";
+    }else if(value == 2){
+        psqb.className = "qBtn";
+        quarter2Button.className = "qBtnSelected";
+    }else if(value == 3){
+        psqb.className = "qBtn";
+        quarter3Button.className = "qBtnSelected";
+    }else if(value == 4){
+        psqb.className = "qBtn";
+        quarter4Button.className = "qBtnSelected";
+    }
+    quarter = value;
+    sendTimer();
 }
+function changeHasBall(team){
+    miscReq.hasBall = team;
+}
+function changeToGo(value){
+    miscReq.toGo = value;
+}
+
+
+
+
 
 var dLoad = document.getElementById("dLoad");
 var dLsvg = document.getElementById("determinateSVG");
 var lDiv = document.getElementById("loader");
 var running = false;
+
 function sendTimer() {
-    if(!running){
+    if (!running) {
         running = true;
         dLsvg.style.stroke = "rgb(0, 195, 255)";
         dLoad.style.strokeDashoffset = -313;
@@ -70,7 +124,7 @@ function sendTimer() {
         console.log("start");
         var timer = setInterval(function () {
             ms++;
-            dLoad.style.strokeDashoffset = parseInt(-313+((ms/300)*313));
+            dLoad.style.strokeDashoffset = parseInt(-313 + ((ms / 300) * 313));
             if (ms == 300) {
                 postServer();
                 console.log("Done");
@@ -79,48 +133,56 @@ function sendTimer() {
                 clearInterval(timer);
             }
         }, 10);
-    }else{
+    } else {
         ms = 0;
     }
-    
+
 }
 
-function postServer(){
+
+
+
+function postServer() {
+    console.log(kScore);
     request.id = gameId;
-    request.uid = 3;
+    request.uid = uid;
+    if(miscReq != null){
+        request.misc = miscReq;
+    }
     var rawData = JSON.stringify(request);
     console.log(rawData);
     xhttp.open("POST", "update.php", true);
     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
-            if(this.responseText.includes("error")){
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.includes("error")) {
                 alert("there was an error contacting the server");
             }
             console.log(this.responseText);
         }
     }
-    xhttp.onloadstart = function(){ //starts the request
+    xhttp.onloadstart = function () { //starts the request
         //show indeterminite
         dLoad.style.strokeDashoffset = "";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
         dLoad.className.baseVal = "indeterminateLoad";
-        
+
     }
-    xhttp.onload = function(){
+    xhttp.onload = function () {
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         dLoad.className.baseVal = "dC";
         request = {};
-        setTimeout(function(){
+        miscReq = {};
+        setTimeout(function () {
             lDiv.className = "loaderHidden";
         }, 1000);
         running = false;
     }
-    xhttp.onerror = function(){
+    xhttp.onerror = function () {
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(255, 73, 73)";
-        setTimeout(function(){
+        setTimeout(function () {
             alert("A network error occurred.");
             document.location.reload();
         }, 1000);
@@ -130,9 +192,44 @@ function postServer(){
 
 }
 
+
+
+
 function sendToSrv() {
     for (var k in request) {
         console.log("POST: " + k + " || " + request[k]);
     }
-    
+
+}
+
+
+
+
+var xhttp = new XMLHttpRequest();
+var acct;
+function initializePage(){
+    contactDB();
+}
+
+
+
+function getUserID(){
+    xhttp.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200){
+
+            if(this.responseText == "not found" || this.responseText == "disabled"){
+                console.log("not found or disabled");
+
+                window.close();
+            }else{
+                var acc = JSON.parse(this.responseText);
+                var acct = acc[0];
+                uid = acct.id
+                
+            }
+
+        }
+    }
+        xhttp.open("GET", "/admin/script.php", true);
+        xhttp.send();
 }

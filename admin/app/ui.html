@@ -93,10 +93,10 @@
                                 </div>
                                 <div class="quarter">
                                     <h5 style="margin: 4px;">Quarter</h5>
-                                    <button id="q1" class="qBtn">1</button>
-                                    <button id="q2" class="qBtn">2</button>
-                                    <button id="q3" class="qBtn">3</button>
-                                    <button id="q4" class="qBtn">4</button>
+                                    <button onclick="changeQuarter(1)" id="q1" class="qBtn">1</button>
+                                    <button onclick="changeQuarter(2)" id="q2" class="qBtn">2</button>
+                                    <button onclick="changeQuarter(3)" id="q3" class="qBtn">3</button>
+                                    <button onclick="changeQuarter(4)" id="q4" class="qBtn">4</button>
                                 </div>
                                 <div class="togo">
                                         <h5 style="margin: 4px;">YDS. TO GO</h5>
@@ -121,7 +121,7 @@
                                 </g>
                             </svg></button><br>
                         <button class="purpleBtn" onclick="incrementScore(6, 'g')" id="guestPlusSix">+6 Touchdown</button><br>
-                        <button class="purpleBtn" onclick="incrementScore(4, 'g')" style="width: 100px;" id="guestPlusThree">+3 Field Goal</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(3, 'g')" style="width: 100px;" id="guestPlusThree">+3 Field Goal</button><br>
                         <button class="dnBtn" onclick="decrementScore(1, 'g')" id="decreaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
                                 stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -146,4 +146,6 @@
 <script src="core.js" type="text/javascript"></script>
 <script>
 var gameId = 19; // ID HERE
+var kScore = 1;//initial value
+var gScore = 1;//initial value
 </script>

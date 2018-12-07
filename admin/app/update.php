@@ -1,8 +1,8 @@
 <?php
     
     $jdata = file_get_contents("php://input");
-    $content = json_decode($jdata, true);
-    $gameId = $content["id"];
+    $content[] = json_decode($jdata, true);
+    $gameId = $content[0]["id"];
     require "globalassets/dbinit.php";
     require "globalassets/authentication.php";
     $authBack = authenticate();
@@ -12,7 +12,7 @@
     
     else
     {
-        foreach($content as $key => $val){
+        foreach($content as $root){
             echo $key."::".$val."";
             if($key != "id" && $key != "uid"){
                 // $sql = "SELECT * from events where usrID=".$authBack["id"]." and id=".$event;
@@ -24,6 +24,11 @@
                 $result = $conn->query($sql);
                 if($key === "id" || $key === "uid"){
                     echo "I am an idiot and not supposed to be counting this as a change. I should stop\n";
+                }
+                if(isset($content[0]["misc"])){
+                    foreach($content[0]["misc"] as $key => $value){
+                        
+                    }
                 }
                 //if(!isset($result->num_rows)){
                     //    echo "error_$key:". $key;
