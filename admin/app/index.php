@@ -52,9 +52,6 @@ function showUi(){
     ?>
 <!--KENSTON GT-ADMIN FOOTBALL UI-->
 <!--Designed by Angelo DeLuca-->
-<script>
-window.location.href = "ui.html";
-</script>
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" />
@@ -74,12 +71,17 @@ window.location.href = "ui.html";
 
     <div style="text-align:center;">
         <div class="gamedetails">
-            <p>Logged in as: <?=$authBack["rname"]?></p>
+            <p><?=$authBack["rname"]?></p>
             <p><?=$game["id"]?></p>
             <p><?=$game["sport"]?></p>
             <p>ELAPSED_ACTIVE</p>
         </div>
     </div>
+    <span id="loader" class="loaderHidden">
+        <svg id="determinateSVG" class="determinateLoad" viewBox="0 0 133 133" xmlns="http://www.w3.org/2000/svg">
+              <circle id="dLoad" class="dC" r="50"/>
+            </svg>
+    </span>
     <span id="closeBtn" class="closeBtn">&times;</span>
 
     <div class="app-main">
@@ -87,7 +89,7 @@ window.location.href = "ui.html";
             <tr>
                 <td class="tblCell">
                     <div class="app-ctrls">
-                        <button class="upBtn" id="increaseHomeScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0"
+                        <button class="upBtn" onclick="incrementScore(1, 'k')" id="increaseHomeScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0"
                                 fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <clipPath id="p.0">
@@ -100,9 +102,9 @@ window.location.href = "ui.html";
                                         fill-rule="evenodd" />
                                 </g>
                             </svg></button><br>
-                        <button class="purpleBtn" id="homePlusSix">+6 Touchdown</button><br>
-                        <button class="purpleBtn" style="width: 100px;" id="homePlusThree">+3 Field Goal</button><br>
-                        <button class="dnBtn" id="decreaseHomeScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0"
+                        <button class="purpleBtn" onclick="incrementScore(6, 'k')" id="homePlusSix">+6 Touchdown</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(3, 'k')" style="width: 100px;" id="homePlusThree">+3 Field Goal</button><br>
+                        <button class="dnBtn" onclick="decrementScore(1, 'k')" id="decreaseHomeScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0"
                                 fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <clipPath id="p.0">
@@ -121,25 +123,44 @@ window.location.href = "ui.html";
                     <div style="text-align: center;">
                         <div class="scoreDisplay">
                             <div class="kenston-card">
-                                <p class="tscore" id="kscore">00</p>
+                                <p class="tscore" id="kscore"><?=$game["homeScore"]?></p>
                                 <p class="tname">Kenston</p>
                             </div>
                             <div class="down">
                                 <p class="dtxt">1<span style="font-size:17pt">nd<br>Down</span></p>
                             </div>
                             <div class="guest-card">
-                                <p class="tscore" id="gscore">00</p>
+                                <p class="tscore" id="gscore"><?=$game["oppScore"]?></p>
                                 <p class="tname">GTEAM</p>
                             </div><br>
                             <div class="misc">
-                                
+                                <div class="ball">
+                                    <h5 style="margin: 4px;">Ball on:</h5>
+                                    <div style="text-align:left;">
+                                        <label for="homeHasBall">Kenston</label>
+                                        <input name="hB" type="radio" id="homeHasBall"/><br>
+                                        <label for="guestHasBall">OPPOSING</label>
+                                        <input name="hB" type="radio" id="homeHasBall"/>
+                                    </div>
+                                </div>
+                                <div class="quarter">
+                                    <h5 style="margin: 4px;">Quarter</h5>
+                                    <button id="q1" class="qBtn">1</button>
+                                    <button id="q2" class="qBtn">2</button>
+                                    <button id="q3" class="qBtn">3</button>
+                                    <button id="q4" class="qBtn">4</button>
+                                </div>
+                                <div class="togo">
+                                        <h5 style="margin: 4px;">YDS. TO GO</h5>
+                                        <input type="number" id="t">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </td>
                 <td class="tblCell">
                     <div class="app-ctrls">
-                        <button class="upBtn" id="increaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
+                        <button class="upBtn" onclick="incrementScore(1, 'g')" id="increaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
                                 stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <clipPath id="p.0">
@@ -151,9 +172,9 @@ window.location.href = "ui.html";
                                         fill-rule="evenodd" />
                                 </g>
                             </svg></button><br>
-                        <button class="purpleBtn" id="guestPlusSix">+6 Touchdown</button><br>
-                        <button class="purpleBtn" style="width: 100px;" id="guestPlusThree">+3 Field Goal</button><br>
-                        <button class="dnBtn" id="decreaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
+                        <button class="purpleBtn" onclick="incrementScore(6, 'g')" id="guestPlusSix">+6 Touchdown</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(4, 'g')" style="width: 100px;" id="guestPlusThree">+3 Field Goal</button><br>
+                        <button class="dnBtn" onclick="decrementScore(1, 'g')" id="decreaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
                                 stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <clipPath id="p.0">
@@ -174,6 +195,10 @@ window.location.href = "ui.html";
 </body>
 
 <script src="pageEvents.js" type="text/javascript"></script>
+<script src="core.js" type="text/javascript"></script>
+<script>
+var gameId = <?=$game["id"]?>; // ID HERE
+</script>
 
     <?php
 }

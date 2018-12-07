@@ -1,8 +1,11 @@
-var request = new Array();
+var request = {};
 var xhttp = new XMLHttpRequest();
 var ms = 0;
+
+
 //elements
 var kenstonScoreDisplay = document.getElementById("kscore");
+var guestScoreDisplay = document.getElementById("gscore");
 //scores
 var KenstonScore = 0;
 var GuestScore = 0;
@@ -14,78 +17,87 @@ var GuestScore = 0;
 
 function incrementScore(amount, team) {
     if (team == "k") {
-        if (request.kscore == null) {
-            request.kscore = 0;
+        if (request.homeScore == null) {
+            request.homeScore = 0;
         }
-        request.addk = request.addk + amount;
-        KenstonScore -= amount;
-        ms = 0;
+        KenstonScore += amount;
+        kenstonScoreDisplay.innerHTML = KenstonScore;
+        request.homeScore = KenstonScore;
     } else {
-        if (request.gscore == null) {
-            request.gscore = 0;
+        if (request.oppScore == null) {
+            request.oppScore = 0;
         }
-        request.addg = request.addg + amount;
-        GuestScore -= amount;
-        ms = 0;
+        GuestScore += amount;
+        guestScoreDisplay.innerHTML = GuestScore;
+        request.oppScore = GuestScore;
     }
+    sendTimer();
 }
 
 function decrementScore(amount, team) {
     if (team == "k") {
-        if (request.kscore == null) {
-            request.kscore = 0;
+        if (request.homeScore == null) {
+            request.homeScore = 0;
         }
-        request.remk = request.kscore - amount;
         KenstonScore -= amount;
-        ms = 0;
+        kenstonScoreDisplay.innerHTML = KenstonScore;
+        request.homeScore = KenstonScore;
     } else {
-        if (request.gscore == null) {
-            request.gscore = 0;
+        if (request.oppScore == null) {
+            request.oppScore = 0;
         }
-        request.gscore = request.gscore + amount;
         GuestScore -= amount;
-        ms = 0;
+        guestScoreDisplay.innerHTML = GuestScore;
+        request.oppScore = GuestScore;
     }
+    sendTimer();
 }
 
 function changeMisc() {
     
 }
+
 var dLoad = document.getElementById("dLoad");
 var dLsvg = document.getElementById("determinateSVG");
 var lDiv = document.getElementById("loader");
+var running = false;
 function sendTimer() {
-    dLsvg.style.stroke = "rgb(0, 195, 255)";
-    dLoad.style.strokeDashoffset = -313;
-    lDiv.className = "loaderShown";
-    console.log("start");
-    var timer = setInterval(function () {
-        ms++;
-        dLoad.style.strokeDashoffset = parseInt(-313+((ms/300)*313));
-        kenstonScoreDisplay.innerHTML = ms;
-        if (ms == 300) {
-            readServer();
-            console.log("Done");
-            //clear timer icon
-            ms = 0;
-            clearInterval(timer);
-        }
-    }, 10);
+    if(!running){
+        running = true;
+        dLsvg.style.stroke = "rgb(0, 195, 255)";
+        dLoad.style.strokeDashoffset = -313;
+        lDiv.className = "loaderShown";
+        console.log("start");
+        var timer = setInterval(function () {
+            ms++;
+            dLoad.style.strokeDashoffset = parseInt(-313+((ms/300)*313));
+            if (ms == 300) {
+                postServer();
+                console.log("Done");
+                //clear timer icon
+                ms = 0;
+                clearInterval(timer);
+            }
+        }, 10);
+    }else{
+        ms = 0;
+    }
     
 }
 
-function readServer(){
+function postServer(){
+    request.id = gameId;
+    request.uid = 3;
+    var rawData = JSON.stringify(request);
+    console.log(rawData);
+    xhttp.open("POST", "update.php", true);
+    xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            var updated = JSON.parse(this.responseText);
-            for(var i = 0; i < updated.length; i++){
-                if(updated[i].id == gameId){
-                    KenstonScore = updated[i].homeScore;
-                    GuestScore = updated[i].oppScore;
-                    console.log("GT:Success\nHome:"+ KenstonScore+"\nGuest: "+GuestScore);
-                }
+            if(this.responseText.includes("error")){
+                alert("there was an error contacting the server");
             }
-            
+            console.log(this.responseText);
         }
     }
     xhttp.onloadstart = function(){ //starts the request
@@ -96,21 +108,25 @@ function readServer(){
         
     }
     xhttp.onload = function(){
+        dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         dLoad.className.baseVal = "dC";
+        request = {};
         setTimeout(function(){
             lDiv.className = "loaderHidden";
         }, 1000);
+        running = false;
     }
     xhttp.onerror = function(){
+        dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(255, 73, 73)";
         setTimeout(function(){
             alert("A network error occurred.");
             document.location.reload();
         }, 1000);
+        running = false;
     }
-    xhttp.open("GET", "/data/events.php", true);
-    xhttp.send();
+    xhttp.send(rawData);
 
 }
 
