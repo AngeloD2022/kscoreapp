@@ -146,7 +146,7 @@ function postServer() {
     console.log(kScore);
     request.id = gameId;
     request.uid = uid;
-    if(miscReq != null){
+    if(JSON.stringify(miscReq) != "{}"){
         request.misc = miscReq;
     }
     var rawData = JSON.stringify(request);
@@ -224,7 +224,7 @@ function getUserID(){
             }else{
                 var acc = JSON.parse(this.responseText);
                 var acct = acc[0];
-                uid = acct.id
+                uid = acct.id;
                 
             }
 
