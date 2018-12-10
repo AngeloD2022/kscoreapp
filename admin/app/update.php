@@ -22,9 +22,7 @@
                     $sql = "UPDATE `events` SET `".$key."` = ".$val." WHERE `events`.`id` = ".$gameId." and `events`.`usrID` = ".$authBack["id"]."";
                 }
                 $result = $conn->query($sql);
-                if($key === "id" || $key === "uid"){
-                    echo "I am an idiot and not supposed to be counting this as a change. I should stop\n";
-                }
+                
                 
             }
         }

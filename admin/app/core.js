@@ -13,7 +13,7 @@ var guestScoreDisplay = document.getElementById("gscore");
 var KenstonScore = 0;
 var GuestScore = 0;
 var quarter = 1;
-var toGo;
+var toGo = 0;
 var ballOn;
 var down;
 //misc
@@ -24,12 +24,11 @@ var quarter4Button = document.getElementById("q4");
 
 var ydsToGo = document.getElementById("ydsToGo");
 //readServer();
-window.onload = function(){
-    console.log("GID: "+gameId);
+window.onload = function () {
+    console.log("GID: " + gameId);
     KenstonScore = kScore;
     GuestScore = gScore;
 }
-
 
 
 
@@ -80,29 +79,43 @@ function decrementScore(amount, team) {
 //MISC JSON
 var miscReq = {};
 var psqb;
-function changeQuarter(value){
-    psqb = document.getElementById("q"+quarter);
+
+function changeToGo(){
+    toGo = ydsToGo.value;
+    miscReq.ydsToGo = ydsToGo.value;
+    sendTimer();
+}
+
+ydsToGo.addEventListener("change", function(event) {
+    miscReq.ydsToGo = event.target.value;
+    sendTimer();
+});
+
+function changeQuarter(value) {
+    psqb = document.getElementById("q" + quarter);
     miscReq.quarter = value;
-    if(value == 1){
+    if (value == 1) {
         psqb.className = "qBtn";
         quarter1Button.className = "qBtnSelected";
-    }else if(value == 2){
+    } else if (value == 2) {
         psqb.className = "qBtn";
         quarter2Button.className = "qBtnSelected";
-    }else if(value == 3){
+    } else if (value == 3) {
         psqb.className = "qBtn";
         quarter3Button.className = "qBtnSelected";
-    }else if(value == 4){
+    } else if (value == 4) {
         psqb.className = "qBtn";
         quarter4Button.className = "qBtnSelected";
     }
     quarter = value;
     sendTimer();
 }
-function changeHasBall(team){
+
+function changeHasBall(team) {
     miscReq.hasBall = team;
 }
-function changeToGo(value){
+
+function changeToGo(value) {
     miscReq.toGo = value;
 }
 
@@ -146,7 +159,7 @@ function postServer() {
     console.log(kScore);
     request.id = gameId;
     request.uid = uid;
-    if(JSON.stringify(miscReq) != "{}"){
+    if (JSON.stringify(miscReq) != "{}") {
         request.misc = miscReq;
     }
     var rawData = JSON.stringify(request);
@@ -207,29 +220,30 @@ function sendToSrv() {
 
 var xhttp = new XMLHttpRequest();
 var acct;
-function initializePage(){
+
+function initializePage() {
     contactDB();
 }
 
 
 
-function getUserID(){
-    xhttp.onreadystatechange = function() {
-        if(this.readyState == 4 && this.status == 200){
+function getUserID() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
 
-            if(this.responseText == "not found" || this.responseText == "disabled"){
+            if (this.responseText == "not found" || this.responseText == "disabled") {
                 console.log("not found or disabled");
 
                 window.close();
-            }else{
+            } else {
                 var acc = JSON.parse(this.responseText);
                 var acct = acc[0];
                 uid = acct.id;
-                
+
             }
 
         }
     }
-        xhttp.open("GET", "/admin/script.php", true);
-        xhttp.send();
+    xhttp.open("GET", "/admin/script.php", true);
+    xhttp.send();
 }

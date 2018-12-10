@@ -91,3 +91,43 @@ button:active{
     background-color: rgb(150, 98, 0);
     
 }
+
+
+.addToGobutton{
+    border: none;
+    background-color: rgb(84, 194, 89);
+    /* padding: 8px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color .25s;
+    margin: 3px;
+}
+.addToGobutton:hover{
+    background-color: rgb(0, 216, 11);
+    transition: background-color .25s; 
+}
+.addToGobutton:active{
+    background-color: rgb(3, 143, 10);
+    
+}
+.subToGobutton{
+    border: none;
+    background-color: rgb(253, 81, 81);
+    /* padding: 8px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color .25s;
+    margin: 3px;
+}
+.subToGobutton:hover{
+    background-color: rgb(255, 105, 105);
+    transition: background-color .25s; 
+}
+.subToGobutton:active{
+    background-color: rgb(143, 3, 3);
+    
+}
