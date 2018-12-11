@@ -83,12 +83,12 @@
                             </div><br>
                             <div class="misc">
                                 <div class="ball">
-                                    <h5 style="margin: 4px;">Ball on:</h5>
+                                    <h5 style="margin: 4px;">Ball Possession:</h5>
                                     <div style="text-align:left;">
                                         <label for="homeHasBall">Kenston</label>
-                                        <input name="hB" type="radio" id="homeHasBall"/><br>
+                                        <input onclick="teamHasBall('home')" name="hB" type="radio" id="homeHasBall"/><br>
                                         <label for="guestHasBall">OPPOSING</label>
-                                        <input name="hB" type="radio" id="homeHasBall"/>
+                                        <input onclick="teamHasBall('guest')" name="hB" type="radio" id="guestHasBall"/>
                                     </div>
                                 </div>
                                 <div class="quarter">
@@ -100,9 +100,13 @@
                                 </div>
                                 <div class="togo">
                                         <h5 style="margin: 4px;">YDS. TO GO</h5>
-                                        <button onclick="changeToGo('sub')" class="subToGoButton">-</button>
+                                        <button onclick="changeToGo('sub')" class="subButton">-</button>
                                         <input class="numberInput" id="ydsToGo" type="number" pattern="[0-9]*" min="0" max="99">
-                                        <button onclick="changeToGo('add')" class="addToGoButton">+</button>
+                                        <button onclick="changeToGo('add')" class="addButton">+</button>
+                                        <h5 style="margin: 4px;">BALL ON:</h5>
+                                        <button onclick="changeBallOn('sub')" class="subButton">-</button>
+                                        <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="99">
+                                        <button onclick="changeBallOn('add')" class="addButton">+</button>
                                 </div>
                             </div>
                         </div>

@@ -21,13 +21,22 @@ var quarter1Button = document.getElementById("q1");
 var quarter2Button = document.getElementById("q2");
 var quarter3Button = document.getElementById("q3");
 var quarter4Button = document.getElementById("q4");
+var down1Button = document.getElementById("d1");
+var down2Button = document.getElementById("d2");
+var down3Button = document.getElementById("d3");
+var down4Button = document.getElementById("d4");
 
+var ballPosession;
+var ballPosessonElement = document.getElementsByName("hB");
+var ydsBallOn = document.getElementById("ydsBallOn");
 var ydsToGo = document.getElementById("ydsToGo");
 //readServer();
 window.onload = function () {
     console.log("GID: " + gameId);
     KenstonScore = kScore;
     GuestScore = gScore;
+    kenstonScoreDisplay.innerHTML = kScore;
+    guestScoreDisplay.innerHTML = gScore;
 }
 
 
@@ -79,20 +88,83 @@ function decrementScore(amount, team) {
 //MISC JSON
 var miscReq = {};
 var psqb;
+var downNo = document.getElementById("dtxt");
+var downAfter = document.getElementById("dt2");
+var psdb;
 
-function changeToGo(action){
-    if(action == "add"){
-        ydsToGo.value++;
-    }else{
-        ydsToGo.value--;
+function changeDown(value) {
+    psdb = document.getElementById("d"+ value);
+    down = value;
+    misc.down = down;
+    downNo.innerHTML = value;
+    if (value == 1) {
+        psdb.className = "qBtn";
+        psdb.disabled = false;
+        down1Button.className = "qBtnSelected";
+        down1Button.disabled = true; 
+        downAfter = "st";
+    } else if (value == 2) {
+        psdb.className = "qBtn";
+        psdb.disabled = false;
+        down2Button.className = "qBtnSelected";
+        downButton.disabled = true; 
+        downAfter = "nd";
+    } else if (value == 3) {
+        psdb.className = "qBtn";
+        psdb.disabled = false;
+        down3Button.className = "qBtnSelected";
+        down3Button.disabled = true; 
+        downAfter = "rd";
+    } else if (value == 4) {
+        psdb.className = "qBtn";
+        psdb.disabled = false;
+        down4Button.className = "qBtnSelected";
+        down4Button.disabled = true; 
+        downAfter = "th";
     }
-    toGo = ydsToGo.value;
-    miscReq.ydsToGo = ydsToGo.value;
     sendTimer();
 }
 
-ydsToGo.addEventListener("change", function(event) {
+function changeBallOn(action) {
+    if (action == "add") {
+        ydsBallOn.value++;
+    } else {
+        ydsBallOn.value--;
+    }
+    ballOn = ydsBallOn.value;
+    miscReq.ydsBallOn = ballOn;
+    sendTimer();
+}
+
+function changeToGo(action) {
+    if (action == "add") {
+        ydsToGo.value++;
+    } else {
+        ydsToGo.value--;
+    }
+    toGo = ydsToGo.value;
+    miscReq.ydsToGo = toGo;
+    sendTimer();
+}
+
+function teamHasBall(team) {
+    if (team == "home") {
+        miscReq.ballPosess = "home";
+    } else {
+        miscReq.ballPosess = "guest";
+    }
+    sendTimer();
+}
+
+
+ydsToGo.addEventListener("change", function (event) {
     miscReq.ydsToGo = event.target.value;
+    toGo = event.target.value;
+    sendTimer();
+});
+ydsBallOn.addEventListener("change", function (event) {
+    miscReq.ydsBallOn = event.target.value;
+    ballOn = event.target.value;
     sendTimer();
 });
 
@@ -101,16 +173,24 @@ function changeQuarter(value) {
     miscReq.quarter = value;
     if (value == 1) {
         psqb.className = "qBtn";
+        psqb.disabled = false;
         quarter1Button.className = "qBtnSelected";
+        quarter1Button.disabled = true;
     } else if (value == 2) {
         psqb.className = "qBtn";
+        psqb.disabled = false;
         quarter2Button.className = "qBtnSelected";
+        quarter2Button.disabled = true;
     } else if (value == 3) {
         psqb.className = "qBtn";
+        psqb.disabled = false;
         quarter3Button.className = "qBtnSelected";
+        quarter3Button.disabled = true;
     } else if (value == 4) {
         psqb.className = "qBtn";
+        psqb.disabled = false;
         quarter4Button.className = "qBtnSelected";
+        quarter4Button.disabled = true;
     }
     quarter = value;
     sendTimer();
