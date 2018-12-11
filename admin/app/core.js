@@ -80,7 +80,12 @@ function decrementScore(amount, team) {
 var miscReq = {};
 var psqb;
 
-function changeToGo(){
+function changeToGo(action){
+    if(action == "add"){
+        ydsToGo.value++;
+    }else{
+        ydsToGo.value--;
+    }
     toGo = ydsToGo.value;
     miscReq.ydsToGo = ydsToGo.value;
     sendTimer();
@@ -115,9 +120,7 @@ function changeHasBall(team) {
     miscReq.hasBall = team;
 }
 
-function changeToGo(value) {
-    miscReq.toGo = value;
-}
+
 
 
 
