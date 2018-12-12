@@ -88,40 +88,35 @@ function decrementScore(amount, team) {
 //MISC JSON
 var miscReq = {};
 var psqb;
-var downNo = document.getElementById("dtxt");
-var downAfter = document.getElementById("dt2");
-var psdb;
+var downNo = document.getElementById("dNum");
+var downAfter = document.getElementById("numSuffix");
+var psdb = document.getElementById("d1");
 
 function changeDown(value) {
+    psdb.className = "qBtn";
+    psdb.disabled = false;
     psdb = document.getElementById("d"+ value);
     down = value;
-    misc.down = down;
+    miscReq.down = down;
     downNo.innerHTML = value;
     if (value == 1) {
-        psdb.className = "qBtn";
-        psdb.disabled = false;
         down1Button.className = "qBtnSelected";
         down1Button.disabled = true; 
-        downAfter = "st";
+        downAfter.innerHTML = "st";
     } else if (value == 2) {
-        psdb.className = "qBtn";
-        psdb.disabled = false;
         down2Button.className = "qBtnSelected";
-        downButton.disabled = true; 
-        downAfter = "nd";
+        down2Button.disabled = true; 
+        downAfter.innerHTML = "nd";
     } else if (value == 3) {
-        psdb.className = "qBtn";
-        psdb.disabled = false;
         down3Button.className = "qBtnSelected";
         down3Button.disabled = true; 
-        downAfter = "rd";
+        downAfter.innerHTML = "rd";
     } else if (value == 4) {
-        psdb.className = "qBtn";
-        psdb.disabled = false;
         down4Button.className = "qBtnSelected";
         down4Button.disabled = true; 
-        downAfter = "th";
+        downAfter.innerHTML = "th";
     }
+
     sendTimer();
 }
 

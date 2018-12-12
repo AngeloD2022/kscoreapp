@@ -127,7 +127,7 @@ function showUi(){
                                 <p class="tname">Kenston</p>
                             </div>
                             <div class="down">
-                                <p class="dtxt">1<span id="dt2" style="font-size:17pt">nd<br>Down</span></p>
+                                <p class="dtxt"><span id="dNum">1</span><span id="dt2" style="font-size:17pt"><span id="numSuffix">st</span><br>Down</span></p>
                             </div>
                             <div class="guest-card">
                                 <p class="tscore" id="gscore">00</p>
