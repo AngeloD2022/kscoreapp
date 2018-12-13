@@ -263,7 +263,7 @@ function postServer() {
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         dLoad.className.baseVal = "dC";
-        request = {};
+        request = {}; 
         miscReq = {};
         setTimeout(function () {
             lDiv.className = "loaderHidden";
