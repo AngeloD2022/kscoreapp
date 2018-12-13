@@ -9,13 +9,21 @@ var wloaded = false;
 
 window.onload = function(){wloaded=true;};
 
+setInterval(function(){
+    if(wloaded){
+        fetchData();
+    }
+}, 1000)
+
 function fetchData(){
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
+            console.log(data);
+            changeQIndicator(data["misc"].)
         }
     }
-    xhttp.open("GET", "eventData.php", true);
+    xhttp.open("GET", "eventData.php?id="+gid, true);
     xhttp.send();
 }
 
