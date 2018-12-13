@@ -124,6 +124,22 @@ body {
     background-color: rgb(0, 216, 11);
     transition: background-color .25s; 
 }
+.qIndCurrent{
+    border: none;
+    background-color: rgb(216, 142, 3);
+    padding: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color .25s;
+    margin: 3px;
+    display: inline-block;
+}
+.qIndCurrent:hover{
+    background-color: rgb(255, 166, 0);
+    transition: background-color .25s; 
+}
 .numbers{
     background-color: white;
     border-radius: 4px;
