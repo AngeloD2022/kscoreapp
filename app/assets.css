@@ -104,7 +104,7 @@ body {
     border: 1px solid gray;
     display: inline-block;
     padding: 6px;
-    min-width: 115px;
+    min-width: 83px;
     min-height: 40px;
     vertical-align: middle;
 }
@@ -126,7 +126,7 @@ body {
 }
 .qIndCurrent{
     border: none;
-    background-color: rgb(216, 142, 3);
+    background-color: rgb(255, 177, 31);
     padding: 6px;
     padding-left: 10px;
     padding-right: 10px;

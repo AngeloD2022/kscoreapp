@@ -8,6 +8,8 @@ var data;
 var wloaded = false;
 
 window.onload = function(){wloaded=true;};
+document.getElementById("kball").style.display = "none";
+document.getElementById("gball").style.display = "none";
 
 setInterval(function(){
     if(wloaded){
@@ -19,8 +21,20 @@ function fetchData(){
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
-            console.log(data);
-            changeQIndicator(data["misc"].)
+            changeQIndicator(data["misc"].quarter);
+            updateDown(data["misc"].down);
+            document.getElementById("kscore").innerHTML = data["homeScore"];
+            document.getElementById("gscore").innerHTML = data["oppScore"];
+            document.getElementById("gscore").innerHTML = data["oppScore"];
+            document.getElementById("ydsToGo").innerHTML = data["misc"].ydsToGo == null? 0 : data["misc"].ydsToGo;
+            document.getElementById("ydsBallOn").innerHTML = data["misc"].ydsBallOn == null? 0 : data["misc"].ydsBallOn;
+            if(data["misc"].ballPosess == "home"){
+                document.getElementById("kball").style.display = "inline-block";
+                document.getElementById("gball").style.display = "none";
+            }else if(data["misc"].ballPosess == "guest"){
+                document.getElementById("kball").style.display = "none";
+                document.getElementById("gball").style.display = "inline-block";
+            }
         }
     }
     xhttp.open("GET", "eventData.php?id="+gid, true);
@@ -40,16 +54,18 @@ var psqi = q1;
 function changeQIndicator(v){
     psqi.className = "qInd";
     if(v == 1){
-        q1.className = "qIndSelected";
+        q1.className = "qIndCurrent";
     }else if(v == 2){
-        q2.className = "qIndSelected";
+        q2.className = "qIndCurrent";
     }else if(v == 3){
-        q3.className = "qIndSelected";
+        q3.className = "qIndCurrent";
     }else if(v == 4){
-        q4.className = "qIndSelected";
+        q4.className = "qIndCurrent";
     }
+    psqi = document.getElementById("q"+v);
 }
 function updateDown(v){
+    downNo.innerHTML = v;
     if(v == 1){
         downAfter.innerHTML = "st";
     }else if(v == 2){

@@ -215,8 +215,8 @@ function sendTimer() {
         console.log("start");
         var timer = setInterval(function () {
             ms++;
-            dLoad.style.strokeDashoffset = parseInt(-313 + ((ms / 300) * 313));
-            if (ms == 300) {
+            dLoad.style.strokeDashoffset = parseInt(-313 + ((ms / 200) * 313));
+            if (ms == 200) {
                 postServer();
                 console.log("Done");
                 //clear timer icon
