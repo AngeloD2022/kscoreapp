@@ -37,6 +37,7 @@ window.onload = function () {
     GuestScore = gScore;
     kenstonScoreDisplay.innerHTML = kScore;
     guestScoreDisplay.innerHTML = gScore;
+    loadInitial();
 }
 
 
@@ -324,4 +325,86 @@ function getUserID() {
     }
     xhttp.open("GET", "/admin/script.php", true);
     xhttp.send();
+}
+function loadInitial() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (this.responseText == "not found" || this.responseText == "disabled") {
+                console.log("not found or disabled");
+
+                window.close();
+            } else {
+                var data = JSON.parse(this.responseText);
+                changeDownInit(data["misc"].down);
+                changeQuarterInit(data["misc"].quarter);
+                changeBallOnInit(data["misc"].ydsBallOn);
+                changeToGoInit(data["misc"].ydsToGo);
+            }
+
+        }
+    }
+    xhttp.open("GET", "/app/eventData.php?id="+gameId, true);
+    xhttp.send();
+}
+
+function changeQuarterInit(value) {
+    psqb = document.getElementById("q" + quarter);
+    if (value == 1) {
+        psqb.className = "qBtn";
+        psqb.disabled = false;
+        quarter1Button.className = "qBtnSelected";
+        quarter1Button.disabled = true;
+    } else if (value == 2) {
+        psqb.className = "qBtn";
+        psqb.disabled = false;
+        quarter2Button.className = "qBtnSelected";
+        quarter2Button.disabled = true;
+    } else if (value == 3) {
+        psqb.className = "qBtn";
+        psqb.disabled = false;
+        quarter3Button.className = "qBtnSelected";
+        quarter3Button.disabled = true;
+    } else if (value == 4) {
+        psqb.className = "qBtn";
+        psqb.disabled = false;
+        quarter4Button.className = "qBtnSelected";
+        quarter4Button.disabled = true;
+    }
+    quarter = value;
+}
+function changeDownInit(value) {
+    psdb.className = "qBtn";
+    psdb.disabled = false;
+    psdb = document.getElementById("d"+ value);
+    down = value;
+    downNo.innerHTML = value;
+    if (value == 1) {
+        down1Button.className = "qBtnSelected";
+        down1Button.disabled = true; 
+        downAfter.innerHTML = "st";
+    } else if (value == 2) {
+        down2Button.className = "qBtnSelected";
+        down2Button.disabled = true; 
+        downAfter.innerHTML = "nd";
+    } else if (value == 3) {
+        down3Button.className = "qBtnSelected";
+        down3Button.disabled = true; 
+        downAfter.innerHTML = "rd";
+    } else if (value == 4) {
+        down4Button.className = "qBtnSelected";
+        down4Button.disabled = true; 
+        downAfter.innerHTML = "th";
+    }
+
+}
+
+function changeBallOnInit(value) {
+    ydsBallOn.value = value
+    ballOn = ydsBallOn.value;
+}
+
+function changeToGoInit(value) {
+    ydsToGo.value = value
+    toGo = ydsToGo.value;
 }
