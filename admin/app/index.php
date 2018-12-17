@@ -163,7 +163,9 @@ function showUi(){
                                         <h5 style="margin: 4px;">BALL ON:</h5>
                                         <button onclick="changeBallOn('sub')" class="subButton">-</button>
                                         <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="99">
-                                        <button onclick="changeBallOn('add')" class="addButton">+</button>
+                                        <button onclick="changeBallOn('add')" class="addButton">+</button><br>
+                                        <button id="teambh" class="ballOnTeamBtn" onclick="ballOnSide('h')">Home</button>
+                                        <button id="teambg" class="ballOnTeamBtn" onclick="ballOnSide('g')">Guest</button>
                                 </div>
                             </div>
                         </div>

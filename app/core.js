@@ -28,6 +28,8 @@ function fetchData(){
             document.getElementById("gscore").innerHTML = data["oppScore"];
             document.getElementById("ydsToGo").innerHTML = data["misc"].ydsToGo == null? 0 : data["misc"].ydsToGo;
             document.getElementById("ydsBallOn").innerHTML = data["misc"].ydsBallOn == null? 0 : data["misc"].ydsBallOn;
+            var ballOn = data["misc"].ydsBallOn;
+            document.getElementById("ydsBallOn").innerHTML = ballOn + (data["misc"].ballOnTeam == "home"? " Home" : " Guest");
             if(data["misc"].ballPosess == "home"){
                 document.getElementById("kball").style.display = "inline-block";
                 document.getElementById("gball").style.display = "none";

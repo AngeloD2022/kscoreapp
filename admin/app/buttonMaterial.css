@@ -134,3 +134,33 @@ button:active{
     background-color: rgb(143, 3, 3);
     
 }
+
+
+.ballOnTeamBtn{
+    border: none;
+    background-color: rgb(207, 207, 207);
+    /* padding: 8px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    color: black;
+    border-radius: 3px;
+    transition: background-color .25s, color .25s;
+    margin: 3px;
+}
+.ballOnTeamBtn:hover{
+    color: black;
+    transition: background-color .25s, color .25s; 
+}
+
+.ballOnTeamBtnSelected{
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 0px 2px 0 rgba(0,0,0,.14), 0 0px 1px 0 rgba(0,0,0,.12);
+    background-color: rgb(216, 142, 3);
+    /* padding: 8px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+    border-radius: 3px;
+    transition: background-color .25s;
+    margin: 3px;
+}

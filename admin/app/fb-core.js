@@ -62,8 +62,6 @@ function incrementScore(amount, team) {
 }
 
 
-
-
 function decrementScore(amount, team) {
     if (team == "k") {
         if (request.homeScore == null) {
@@ -92,6 +90,7 @@ var psqb;
 var downNo = document.getElementById("dNum");
 var downAfter = document.getElementById("numSuffix");
 var psdb = document.getElementById("d1");
+var ballonteam;
 
 function changeDown(value) {
     psdb.className = "qBtn";
@@ -117,7 +116,30 @@ function changeDown(value) {
         down4Button.disabled = true; 
         downAfter.innerHTML = "th";
     }
+    
+    sendTimer();
+}
 
+var pstb;
+function ballOnSide(team){
+    if(team == "h"){
+        miscReq.ballOnTeam = "home";
+        ballonteam = "home";
+    }else{
+        miscReq.ballOnTeam = "guest";
+        ballonteam = "guest";
+    }
+    if(pstb == null){
+        document.getElementById("teamb"+team).className = "ballOnTeamBtnSelected";
+        document.getElementById("teamb"+team).disabled = true;
+        pstb = document.getElementById("teamb"+team);
+    }else{
+        pstb.className = "ballOnTeamBtn";
+        pstb.disabled = false;
+        document.getElementById("teamb"+team).className = "ballOnTeamBtnSelected";
+        document.getElementById("teamb"+team).disabled = true;
+        pstb = document.getElementById("teamb"+team);
+    }
     sendTimer();
 }
 
@@ -129,6 +151,13 @@ function changeBallOn(action) {
     }
     ballOn = ydsBallOn.value;
     miscReq.ydsBallOn = ballOn;
+    if(ballOn < 0){
+        if(ballOnTeam == "home"){
+            
+        }else if(ballOnTeam == "guest"){
+
+        }
+    }
     sendTimer();
 }
 
@@ -340,6 +369,9 @@ function loadInitial() {
                 changeQuarterInit(data["misc"].quarter);
                 changeBallOnInit(data["misc"].ydsBallOn);
                 changeToGoInit(data["misc"].ydsToGo);
+                if(data["misc"].ballOnTeam != null){
+                    ballOnSideInit(data["misc"].ballOnTeam);
+                }
             }
 
         }
@@ -407,4 +439,17 @@ function changeBallOnInit(value) {
 function changeToGoInit(value) {
     ydsToGo.value = value
     toGo = ydsToGo.value;
+}
+function ballOnSideInit(team){
+    if(team == "home"){
+        document.getElementById("teambh").className = "ballOnTeamBtnSelected";
+        document.getElementById("teambh").disabled = true;
+        pstb = document.getElementById("teambh");
+        ballonteam = "home";
+    }else if(team = "guest"){
+        document.getElementById("teambg").className = "ballOnTeamBtnSelected";
+        document.getElementById("teambg").disabled = true;
+        pstb = document.getElementById("teambg");
+        ballonteam = "guest";
+    }
 }
