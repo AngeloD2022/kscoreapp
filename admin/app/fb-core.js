@@ -129,6 +129,7 @@ function ballOnSide(team){
     }else{
         miscReq.ballOnTeam = "guest";
         ballonteam = "guest";
+        ballOnRaw*-1;
     }
     if(pstb == null){
         document.getElementById("teamb"+team).className = "ballOnTeamBtnSelected";
@@ -143,7 +144,27 @@ function ballOnSide(team){
     }
     sendTimer();
 }
-
+function ballOnSideAuto(team){
+    if(team == "h"){
+        miscReq.ballOnTeam = "home";
+        ballonteam = "home";
+    }else{
+        miscReq.ballOnTeam = "guest";
+        ballonteam = "guest";
+    }
+    if(pstb == null){
+        document.getElementById("teamb"+team).className = "ballOnTeamBtnSelected";
+        document.getElementById("teamb"+team).disabled = true;
+        pstb = document.getElementById("teamb"+team);
+    }else{
+        pstb.className = "ballOnTeamBtn";
+        pstb.disabled = false;
+        document.getElementById("teamb"+team).className = "ballOnTeamBtnSelected";
+        document.getElementById("teamb"+team).disabled = true;
+        pstb = document.getElementById("teamb"+team);
+    }
+    sendTimer();
+}
 function changeBallOn(action) {
 
     if (action == "add") {
@@ -154,13 +175,14 @@ function changeBallOn(action) {
 
     if(ballOnRaw > 0){
         ydsBallOn.value = ballOnRaw-50;
-        ballOnSide("g");
+        ballOnSideAuto("g");
     }else if(ballOnRaw < 0){
         ydsBallOn.value = ballOnRaw+50;
-        ballOnSide("h");   
+        ballOnSideAuto("h");   
     }
     
     ydsBallOn.value = 50 - Math.abs(ballOnRaw);
+    
     if(ydsBallOn.value > 50){
         if(ballOnRaw > 0){
             ballOnSide("g");
@@ -168,7 +190,7 @@ function changeBallOn(action) {
             ballOnSide("h");
         }
     }
-
+    
     miscReq.ydsBallOn = 50 - Math.abs(ballOnRaw);
     sendTimer();
 }
