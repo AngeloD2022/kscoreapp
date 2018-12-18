@@ -14,7 +14,7 @@ var KenstonScore = 0;
 var GuestScore = 0;
 var quarter = 1;
 var toGo = 0;
-var ballOn;
+var ballOnRaw;
 var down;
 //misc
 var quarter1Button = document.getElementById("q1");
@@ -125,6 +125,7 @@ function ballOnSide(team){
     if(team == "h"){
         miscReq.ballOnTeam = "home";
         ballonteam = "home";
+        ballOnRaw*-1;
     }else{
         miscReq.ballOnTeam = "guest";
         ballonteam = "guest";
@@ -144,20 +145,31 @@ function ballOnSide(team){
 }
 
 function changeBallOn(action) {
-    if (action == "add") {
-        ydsBallOn.value++;
-    } else {
-        ydsBallOn.value--;
-    }
-    ballOn = ydsBallOn.value;
-    miscReq.ydsBallOn = ballOn;
-    if(ballOn < 0){
-        if(ballOnTeam == "home"){
-            
-        }else if(ballOnTeam == "guest"){
 
+    if (action == "add") {
+        ballOnRaw++;
+    } else {
+        ballOnRaw--;
+    }
+
+    if(ballOnRaw > 0){
+        ydsBallOn.value = ballOnRaw-50;
+        ballOnSide("g");
+    }else if(ballOnRaw < 0){
+        ydsBallOn.value = ballOnRaw+50;
+        ballOnSide("h");   
+    }
+    
+    ydsBallOn.value = 50 - Math.abs(ballOnRaw);
+    if(ydsBallOn.value > 50){
+        if(ballOnRaw > 0){
+            ballOnSide("g");
+        }else if(ballOnRaw < 0){
+            ballOnSide("h");
         }
     }
+
+    miscReq.ydsBallOn = 50 - Math.abs(ballOnRaw);
     sendTimer();
 }
 
@@ -189,7 +201,7 @@ ydsToGo.addEventListener("change", function (event) {
 });
 ydsBallOn.addEventListener("change", function (event) {
     miscReq.ydsBallOn = event.target.value;
-    ballOn = event.target.value;
+    ballOnRaw = event.target.value;
     sendTimer();
 });
 
@@ -433,7 +445,7 @@ function changeDownInit(value) {
 
 function changeBallOnInit(value) {
     ydsBallOn.value = value
-    ballOn = ydsBallOn.value;
+    ballOnRaw = ydsBallOn.value;
 }
 
 function changeToGoInit(value) {
