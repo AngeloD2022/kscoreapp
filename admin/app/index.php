@@ -74,7 +74,6 @@ function showUi(){
             <p>Logged in as: <?=$authBack["rname"]?></p>
             <p>Game Identifier: <?=$game["id"]?></p>
             <p>Sport: <?=$game["sport"]?></p>
-            <p>ELAPSED ACTIVE (WIP)</p>
         </div>
     </div>
     <span id="loader" class="loaderHidden">
@@ -161,9 +160,9 @@ function showUi(){
                                         <input class="numberInput" id="ydsToGo" type="number" pattern="[0-9]*" min="0" max="99">
                                         <button onclick="changeToGo('add')" class="addButton">+</button>
                                         <h5 style="margin: 4px;">BALL ON:</h5>
-                                        <button onclick="changeBallOn('sub')" class="subButton">-</button>
-                                        <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="99">
-                                        <button onclick="changeBallOn('add')" class="addButton">+</button><br>
+                                        <button onclick="changeBallOn('sub')" class="addButton"><</button>
+                                        <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="50">
+                                        <button onclick="changeBallOn('add')" class="addButton">></button><br>
                                         <button id="teambh" class="ballOnTeamBtn" onclick="ballOnSide('h')">Home</button>
                                         <button id="teambg" class="ballOnTeamBtn" onclick="ballOnSide('g')">Guest</button>
                                 </div>

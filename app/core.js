@@ -21,11 +21,10 @@ function fetchData(){
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
-            changeQIndicator(data["misc"].quarter);
-            updateDown(data["misc"].down);
-            document.getElementById("kscore").innerHTML = data["homeScore"];
-            document.getElementById("gscore").innerHTML = data["oppScore"];
-            document.getElementById("gscore").innerHTML = data["oppScore"];
+            changeQIndicator(data["misc"].quarter  ? 0 : data["misc"].quarter);
+            updateDown(data["misc"].down  ? 0 : data["misc"].down);
+            document.getElementById("kscore").innerHTML = data["homeScore"] == null? 0 : data["homeScore"];
+            document.getElementById("gscore").innerHTML = data["oppScore"] == null? 0 : data["oppScore"];
             document.getElementById("ydsToGo").innerHTML = data["misc"].ydsToGo == null? 0 : data["misc"].ydsToGo;
             document.getElementById("ydsBallOn").innerHTML = data["misc"].ydsBallOn == null? 0 : data["misc"].ydsBallOn;
             var ballOn = data["misc"].ydsBallOn;
@@ -54,6 +53,7 @@ var downAfter = document.getElementById("numSuffix");
 
 var psqi = q1;
 function changeQIndicator(v){
+
     psqi.className = "qInd";
     if(v == 1){
         q1.className = "qIndCurrent";
@@ -64,9 +64,16 @@ function changeQIndicator(v){
     }else if(v == 4){
         q4.className = "qIndCurrent";
     }
-    psqi = document.getElementById("q"+v);
+    if(v == null){
+        psqi = document.getElementById("q1");
+    }
 }
 function updateDown(v){
+    if(v == null){
+        document.getElementById("down").style.visibility = 0;
+    }else{
+        document.getElementById("down").style.visibility = 1;
+    }
     downNo.innerHTML = v;
     if(v == 1){
         downAfter.innerHTML = "st";
