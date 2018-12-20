@@ -55,25 +55,28 @@
     <p>Please note that not all events may be added.</p>
     <center>
             <?php //perform the sql query here
-            function filterFunction($a) { return !empty($a);}
-            if(isset($_GET["ftime"]) && $_GET["ftime"] !=""||
-            isset($_GET["fsport"]) && $_GET["fsport"] !=""||
-            isset($_GET["fteam"]) && $_GET["fteam"] !=""){
-                
+            function filterFunction($a)
+            {
+                return !empty($a);
+            }
+            if (isset($_GET["ftime"]) && $_GET["ftime"] != "" ||
+                isset($_GET["fsport"]) && $_GET["fsport"] != "" ||
+                isset($_GET["fteam"]) && $_GET["fteam"] != "") {
+
 
                 $strQuery = "";
                 $iter = 0;
-                foreach($_GET as $key => $val){
-                    $k = $key == "ftime" && $val != ""? "Event time: ": ($key == "fsport" && $val != ""? "Sport: ": ($key == "fteam" && $val != ""? "Opposing team: ":""));
-                    $strQuery = $strQuery . ($k.$val);
+                foreach ($_GET as $key => $val) {
+                    $k = $key == "ftime" && $val != "" ? "Event time: " : ($key == "fsport" && $val != "" ? "Sport: " : ($key == "fteam" && $val != "" ? "Opposing team: " : ""));
+                    $strQuery = $strQuery . ($k . $val);
                     if ($iter != count($_GET) - 1 && $val != "") { // makes sure there isn't a comma at the end of the array initialization.
-                        $strQuery = $strQuery.", ";
-                    } 
+                        $strQuery = $strQuery . ", ";
+                    }
                     $iter++;
                 }
                 echo $strQuery;
                 echo '<br><a href="/">Clear query</a>';
-            }?>
+            } ?>
     <center>
 
     
@@ -88,15 +91,15 @@
 
             <?php
             $sql = "SELECT * FROM events WHERE deleted=0"
-            .(isset($_GET["ftime"]) && $_GET["ftime"] !="" ? " AND startingTS='".addslashes($_GET["ftime"])."'" : "")
-            .(isset($_GET["fsport"]) && $_GET["fsport"] !="" ? " AND sport='".addslashes($_GET["fsport"])."'" : "")
-            .(isset($_GET["fteam"]) && $_GET["fteam"] !="" ? " AND opposing='".addslashes($_GET["fteam"])."'" : "");
-            
+                . (isset($_GET["ftime"]) && $_GET["ftime"] != "" ? " AND startingTS='" . addslashes($_GET["ftime"]) . "'" : "")
+                . (isset($_GET["fsport"]) && $_GET["fsport"] != "" ? " AND sport='" . addslashes($_GET["fsport"]) . "'" : "")
+                . (isset($_GET["fteam"]) && $_GET["fteam"] != "" ? " AND opposing='" . addslashes($_GET["fteam"]) . "'" : "");
 
-            
-            
-            
-            
+
+
+
+
+
 
             $conn = new mysqli("localhost", "root", null, "scoreboard");
             if ($conn->connect_error) {
@@ -104,7 +107,7 @@
             }
 
 
-            
+
             $result = $conn->query($sql);
 
 
@@ -112,25 +115,25 @@
 
                 while ($r = $result->fetch_array()) {
                     $dbEntrys[] = $r;
-                    
-                    
-                    
-                    if($r["sport"] == "soccer"){
+
+
+
+                    if ($r["sport"] == "soccer") {
                         $sport = "Soccer";
-                    }else if($r["sport"] == "football"){
+                    } else if ($r["sport"] == "football") {
                         $sport = "Football";
                     }
-                    if($r["teamClass"] == "varsity"){
+                    if ($r["teamClass"] == "varsity") {
                         $tc = "Varsity";
-                    }else if($r["teamClass"] == "jv"){
+                    } else if ($r["teamClass"] == "jv") {
                         $tc = "JV";
-                    }else{
+                    } else {
                         $tc = "";
                     }
-                    
+
                     $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
                     ?>
-        
+                        <a href="app?id=<?= $r["id"] ?>">
                             <div class="eventcard" id="event<?= $r["id"]; ?>">
                                 <div class="cardContents">
                                     <table>
@@ -141,7 +144,7 @@
                                                     <hr width="100%" align="left">
                                                     <div class="gdDetailed">
                                                         <p>Kenston@<?= $r["location"]; ?></p>
-                                                        <p style="margin-top: 5px;" class="smallTxt"><?= $r["school"] ." ". $tc . " " . $sport ?></p>
+                                                        <p style="margin-top: 5px;" class="smallTxt"><?= $r["school"] . " " . $tc . " " . $sport ?></p>
                                                         <p style="margin-top: 3px;" class="smallTxt"><?= $gtime; ?></p>
                                                     </div>
                                                 </div>
@@ -156,9 +159,9 @@
                                                             <td><img class="teamIcon" src="<?= $r["oppLogoUrl"]; ?>" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["homeScore"];?></p></td>
+                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?= $r["homeScore"]; ?></p></td>
                                                             <td style="padding-left:7px;">to</td>
-                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?=$r["oppScore"];?></p></td>
+                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?= $r["oppScore"]; ?></p></td>
                                                         </tr>
 
                                                     </table>
@@ -169,18 +172,20 @@
             
                                 </div>
                             </div><br>
+                        </a>
                         <?php
 
                     }
                 } else {
                     echo "<br><br><p>No events found in the database.</p>";
-                    if(isset($_GET["ftime"]) || isset($_GET["fsport"]) || isset($_GET["fteam"])){
+                    if (isset($_GET["ftime"]) || isset($_GET["fsport"]) || isset($_GET["fteam"])) {
                         ?> 
                         <script>
                             alert("Your search query returned nothing.");
                             document.location.href = "/";
                         </script>
                         <?php
+
                     }
                 }
                 $conn->close();

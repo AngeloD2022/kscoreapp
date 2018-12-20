@@ -21,21 +21,26 @@ function fetchData(){
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
-            changeQIndicator(data["misc"].quarter  ? 0 : data["misc"].quarter);
-            updateDown(data["misc"].down  ? 0 : data["misc"].down);
+            if(data["misc"] != null){
+                changeQIndicator(!'quarter' in data["misc"] ? 0 : data["misc"].quarter);
+                updateDown(!'down' in data["misc"]  ? 1 : data["misc"].down);
+                document.getElementById("ydsToGo").innerHTML = data["misc"].ydsToGo == null? 0 : data["misc"].ydsToGo;
+                document.getElementById("ydsBallOn").innerHTML = data["misc"].ydsBallOn == null? 0 : data["misc"].ydsBallOn;
+                var ballOn = data["misc"].ydsBallOn;
+                document.getElementById("ydsBallOn").innerHTML = ballOn + (data["misc"].ballOnTeam == "home"? " Home" : " Guest");
+                if(data["misc"].ballPosess == "home"){
+                    document.getElementById("kball").style.display = "inline-block";
+                    document.getElementById("gball").style.display = "none";
+                }else if(data["misc"].ballPosess == "guest"){
+                    document.getElementById("kball").style.display = "none";
+                    document.getElementById("gball").style.display = "inline-block";
+                }
+            }else{
+                changeQIndicator(0);
+                updateDown(1);
+            }
             document.getElementById("kscore").innerHTML = data["homeScore"] == null? 0 : data["homeScore"];
             document.getElementById("gscore").innerHTML = data["oppScore"] == null? 0 : data["oppScore"];
-            document.getElementById("ydsToGo").innerHTML = data["misc"].ydsToGo == null? 0 : data["misc"].ydsToGo;
-            document.getElementById("ydsBallOn").innerHTML = data["misc"].ydsBallOn == null? 0 : data["misc"].ydsBallOn;
-            var ballOn = data["misc"].ydsBallOn;
-            document.getElementById("ydsBallOn").innerHTML = ballOn + (data["misc"].ballOnTeam == "home"? " Home" : " Guest");
-            if(data["misc"].ballPosess == "home"){
-                document.getElementById("kball").style.display = "inline-block";
-                document.getElementById("gball").style.display = "none";
-            }else if(data["misc"].ballPosess == "guest"){
-                document.getElementById("kball").style.display = "none";
-                document.getElementById("gball").style.display = "inline-block";
-            }
         }
     }
     xhttp.open("GET", "eventData.php?id="+gid, true);
@@ -69,11 +74,6 @@ function changeQIndicator(v){
     }
 }
 function updateDown(v){
-    if(v == null){
-        document.getElementById("down").style.visibility = 0;
-    }else{
-        document.getElementById("down").style.visibility = 1;
-    }
     downNo.innerHTML = v;
     if(v == 1){
         downAfter.innerHTML = "st";

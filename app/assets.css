@@ -151,4 +151,25 @@ body {
     text-align: center;
     display: inline-block;
 }
+.logo-container{
+    display: inline-block;
+}
+.app-logo{
+    width: 47px;
+    height: 47px;
+    vertical-align: middle;
+    padding-right: 5px;
+}
+.app-logo-text{
+    font-family: 'Comfortaa', cursive;
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 6px;
+}
+.app-logo-text-sub{
+    font-family: 'Comfortaa', cursive;
+    padding-left: 64px;
+    color: rgb(0, 163, 204);
+    font-size: 15px;
+}
 
