@@ -22,6 +22,24 @@ body{
     transition: background-color 0.25s 0s;
     
 }
+.eventcardInactive {
+    text-align: left;
+    margin: 10px;
+    -webkit-box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.47);
+    -moz-box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.47);
+    border-radius: 3px;
+    background-color: white;
+    padding: 10px;
+    display: inline-block;
+    transition: background-color 0.25s 0s;
+}
+
+.eventcardInactive:hover {
+    background-color: rgb(255, 183, 183);
+    transition: background-color 0.25s 0s;
+    
+}
 
 .eventcard p{
     margin: 0px;

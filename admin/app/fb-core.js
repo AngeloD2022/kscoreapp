@@ -201,9 +201,9 @@ function changeBallOn(action) {
 }
 
 function changeToGo(action) {
-    if (action == "add") {
+    if (action == "add" && parseInt(ydsToGo.value) + 1 <= 50) {
         ydsToGo.value++;
-    } else {
+    } else if(action == "sub" && ydsToGo.value-1 >= 0) {
         ydsToGo.value--;
     }
     toGo = ydsToGo.value;

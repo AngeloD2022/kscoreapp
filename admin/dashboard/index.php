@@ -53,8 +53,6 @@ if($result->num_rows > 0)
         <!-- Buttons are here -->
         <div class="buttons">
             <button onclick="toggleDialog('create')" class="createEvent">Create event</button>
-            <button onclick="toggleDialog('mod')" class="modEvent">Modify event</button>
-            <button onclick="toggleDialog('cancel')" class="cancelEvent">Cancel event</button>
         </div>
     </center>
 

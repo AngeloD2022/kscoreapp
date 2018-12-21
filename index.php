@@ -33,8 +33,6 @@
         <h4>Search active events</h4>
         <p>Leave a field as it's default value to ignore it.</p>
         <form action="/" method="get">
-            <p class="searchLabel"><label for="fti">Event starting time:</label><br>
-            <input style="margin: 7px;" id="fti" name="ftime" type="datetime-local"/></p>
             <p class="searchLabel"><label for="fs">Sport:</label><br>
             <select style="margin: 7px;" id="fs" name="fsport">
                 <option>Sport</option>
@@ -59,7 +57,7 @@
             {
                 return !empty($a);
             }
-            if (isset($_GET["ftime"]) && $_GET["ftime"] != "" ||
+            if (
                 isset($_GET["fsport"]) && $_GET["fsport"] != "" ||
                 isset($_GET["fteam"]) && $_GET["fteam"] != "") {
 
@@ -67,7 +65,7 @@
                 $strQuery = "";
                 $iter = 0;
                 foreach ($_GET as $key => $val) {
-                    $k = $key == "ftime" && $val != "" ? "Event time: " : ($key == "fsport" && $val != "" ? "Sport: " : ($key == "fteam" && $val != "" ? "Opposing team: " : ""));
+                    $k = $key == "fsport" && $val != "" ? "Sport: " : ($key == "fteam" && $val != "" ? "Opposing team: " : "");
                     $strQuery = $strQuery . ($k . $val);
                     if ($iter != count($_GET) - 1 && $val != "") { // makes sure there isn't a comma at the end of the array initialization.
                         $strQuery = $strQuery . ", ";
@@ -91,7 +89,6 @@
 
             <?php
             $sql = "SELECT * FROM events WHERE deleted=0"
-                . (isset($_GET["ftime"]) && $_GET["ftime"] != "" ? " AND startingTS='" . addslashes($_GET["ftime"]) . "'" : "")
                 . (isset($_GET["fsport"]) && $_GET["fsport"] != "" ? " AND sport='" . addslashes($_GET["fsport"]) . "'" : "")
                 . (isset($_GET["fteam"]) && $_GET["fteam"] != "" ? " AND opposing='" . addslashes($_GET["fteam"]) . "'" : "");
 
@@ -133,8 +130,8 @@
 
                     $gtime = date('l \a\t g:i a', strtotime($r["startingTS"]));
                     ?>
-                        <a href="app?id=<?= $r["id"] ?>">
-                            <div class="eventcard" id="event<?= $r["id"]; ?>">
+                        <a <?= $r["active"] == 1? 'href="app?id='.$r["id"].'"' : "" ?>>
+                            <div <?=$r["active"] == 0? 'class="eventcardInactive"':'class="eventcard"'?> class="eventcard" id="event<?= $r["id"]; ?>">
                                 <div class="cardContents">
                                     <table>
                                         <tr>
@@ -159,12 +156,14 @@
                                                             <td><img class="teamIcon" src="<?= $r["oppLogoUrl"]; ?>" style="width: 45px; height: 45px; vertical-align: middle;"/></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><p id="hsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?= $r["homeScore"]; ?></p></td>
+                                                            <?= $r["active"] == 1?'
+                                                            <td><p id="hsID'.$r["id"].'" style="display: block;margin-left: 17px;margin-top: 7px;">'.$r["homeScore"].'</p></td>
                                                             <td style="padding-left:7px;">to</td>
-                                                            <td><p id="gsID<?= $r["id"]; ?>" style="display: block;margin-left: 17px;margin-top: 7px;"><?= $r["oppScore"]; ?></p></td>
+                                                            <td><p id="gsID'.$r["id"].'" style="display: block;margin-left: 17px;margin-top: 7px;">'.$r["oppScore"].'</p></td>': ""?>
                                                         </tr>
-
+                                                        
                                                     </table>
+                                                    <?=$r["active"] == 0? '<p style="text-align: center; margin: 4px;">Game not active</p>': ""?>
                                                 </div>
                                             </td>
                                         </tr>
