@@ -2,19 +2,17 @@
 require "globalassets/dbinit.php";
 require "globalassets/authentication.php";
 $authBack = authenticate();
-if(!isset($authBack)){
+if (!isset($authBack)) {
     $authBack = "x";
-}
-else
-{
-    $event = isset($_GET["id"])? $_GET["id"]: "x";
-    $sql = "SELECT * from events where usrID=".$authBack["id"]." and id=".$event;
+} else {
+    $event = isset($_GET["id"]) ? $_GET["id"] : "x";
+    $sql = "SELECT * from events where usrID=" . $authBack["id"] . " and id=" . $event;
     $result = $conn->query($sql);
-    if($result->num_rows < 1)
+    if ($result->num_rows < 1)
         $authBack = "x";
 }
 
-if($authBack == "x"){
+if ($authBack == "x") {
     ?>
 <p id="s">You are not authorized to control this event.</p>
 <script>
@@ -37,15 +35,26 @@ if(secs < 6){
     
     
     <?php
-}else{
-    showUi();
+
+} else {
+    global $event;
+    global $conn;
+    $sql = "SELECT * from events where id=" . $event;
+    $result = $conn->query($sql);
+    $game = $result->fetch_array();
+    if ($game["active"] == 0) {
+        activate();
+    } else {
+        showFootballUi();
+    }
 }
-function showUi(){
+function showFootballUi()
+{
     //gData
     global $event;
     global $conn;
     global $authBack;
-    $sql = "SELECT * from events where id=".$event;
+    $sql = "SELECT * from events where id=" . $event;
     $result = $conn->query($sql);
     $game = $result->fetch_array();
 
@@ -71,9 +80,9 @@ function showUi(){
 
     <div style="text-align:center;">
         <div class="gamedetails">
-            <p>Logged in as: <?=$authBack["rname"]?></p>
-            <p>Game Identifier: <?=$game["id"]?></p>
-            <p>Sport: <?=$game["sport"]?></p>
+            <p>Logged in as: <?= $authBack["rname"] ?></p>
+            <p>Game Identifier: <?= $game["id"] ?></p>
+            <p>Sport: <?= $game["sport"] ?></p>
         </div>
     </div>
     <span id="loader" class="loaderHidden">
@@ -130,7 +139,7 @@ function showUi(){
                             </div>
                             <div class="guest-card">
                                 <p class="tscore" id="gscore">00</p>
-                                <p class="tname"><?=$game["opposing"]?></p>
+                                <p class="tname"><?= $game["opposing"] ?></p>
                             </div><br>
                             <div class="misc">
                                 <div class="ball">
@@ -209,13 +218,42 @@ function showUi(){
 <script src="pageEvents.js" type="text/javascript"></script>
 <script src="fb-core.js" type="text/javascript"></script>
 <script>
-var gameId = <?=$game["id"]?>; // ID HERE
-var kScore = <?=$game["homeScore"]?>;//initial value
-var gScore = <?=$game["oppScore"]?>;//initial value
+var gameId = <?= $game["id"] ?>; // ID HERE
+var kScore = <?= $game["homeScore"] ?>;//initial value
+var gScore = <?= $game["oppScore"] ?>;//initial value
 </script>
 
-    <?php
+<?php
+
 }
 
+function activate()
+{
+    global $game;
+    ?>
+    <head>
+    <link href="actstyles.css" type="text/css" rel="stylesheet"/>
+</head>
+<div style="text-align:center;">
+    <div class="mainCard">
+        <img class="infoImg" src="assets/info.png" style="width: 100px; height: 100px;"/>
+        <div>
+            <h3 class="headTxt">You're about to start a game...</h3>
+            <p>Starting a game means that the event will be listed as active on the main app.</p><br>
+            <p style="margin-top: 7px;">Did you mean to do this?</p><br>
+            <div class="bcontainer" style="float: right">
+                <button id="activatebtn" onclick="activateEvent()" style="background-color:#cfffd4ff;color: #2ea753"><strong>Yes</strong></button>
+                <button onclick="window.close()" style="background-color:#ffd5d5ff; color: #cc0000;"><strong>No</strong></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="activate.js" type="text/javascript" lang="javascript"></script>
+<script>
+var gid = <?= $game["id"] ?>;
+</script>
+<?php
+
+}
 
 ?>
