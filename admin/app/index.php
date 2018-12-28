@@ -85,10 +85,13 @@ function showFootballUi()
             <p>Sport: <?= $game["sport"] ?></p>
         </div>
     </div>
-    <span id="loader" class="loaderHidden">
+    <div style="display:block;text-align:center; font-family: arial;">
+        <span id="loader" class="loaderHidden">
         <svg id="determinateSVG" class="determinateLoad" viewBox="0 0 133 133" xmlns="http://www.w3.org/2000/svg">
-              <circle id="dLoad" class="dC" r="50"/>
-            </svg>
+        <circle id="dLoad" class="dC" r="50"/>
+        </svg><br>
+        <p id="loadlbl" style="margin-top: 5px;"></p>
+    </div>
     </span>
     <span id="closeBtn" class="closeBtn">&times;</span>
 

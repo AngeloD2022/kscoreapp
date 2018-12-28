@@ -274,6 +274,7 @@ var dLoad = document.getElementById("dLoad");
 var dLsvg = document.getElementById("determinateSVG");
 var lDiv = document.getElementById("loader");
 var running = false;
+var loadlbl = document.getElementById("loadlbl");
 
 function sendTimer() {
     if (!running) {
@@ -281,6 +282,8 @@ function sendTimer() {
         dLsvg.style.stroke = "rgb(0, 195, 255)";
         dLoad.style.strokeDashoffset = -313;
         lDiv.className = "loaderShown";
+        loadlbl.innerHTML = "<strong>Waiting...</strong>";
+        loadlbl.style.color = "rgb(0, 195, 255)";
         console.log("start");
         var timer = setInterval(function () {
             ms++;
@@ -323,6 +326,8 @@ function postServer() {
     }
     xhttp.onloadstart = function () { //starts the request
         //show indeterminite
+        loadlbl.innerHTML = "<strong>Syncing...</strong>";
+        loadlbl.style.color = "rgb(255 196, 87)";
         dLoad.style.strokeDashoffset = "";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
         dLoad.className.baseVal = "indeterminateLoad";
