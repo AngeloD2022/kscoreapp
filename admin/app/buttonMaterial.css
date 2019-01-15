@@ -164,3 +164,12 @@ button:active{
     transition: background-color .25s;
     margin: 3px;
 }
+.endgamebtn{
+    background-color: red;
+    color: white;
+    transition: background-color .25s;
+}
+.endgamebtn:hover{
+    color: red;
+    background-color: white;
+}

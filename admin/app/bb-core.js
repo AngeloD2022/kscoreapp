@@ -1,4 +1,4 @@
-//KENSTON GT ADMIN PANEL (FOOTBALL) - CORE FRAMEWORK
+//KENSTON GT ADMIN PANEL - CORE FRAMEWORK
 //CODED BY: ANGELO DELUCA
 //Copyright (c) 2018 Kenston Local School District
 var request = {};
@@ -12,7 +12,7 @@ var guestScoreDisplay = document.getElementById("gscore");
 //stats
 var KenstonScore = 0;
 var GuestScore = 0;
-var quarter = 1;
+var period = 1;
 var toGo = 0;
 var ballOnRaw;
 var down;
@@ -233,7 +233,7 @@ ydsBallOn.addEventListener("change", function (event) {
 });
 
 function changeQuarter(value) {
-    psqb = document.getElementById("q" + quarter);
+    psqb = document.getElementById("q" + period);
     miscReq.quarter = value;
     if (value == 1) {
         psqb.className = "qBtn";
@@ -256,7 +256,7 @@ function changeQuarter(value) {
         quarter4Button.className = "qBtnSelected";
         quarter4Button.disabled = true;
     }
-    quarter = value;
+    period = value;
     sendTimer();
 }
 
@@ -265,32 +265,9 @@ function changeHasBall(team) {
 }
 
 
-document.getElementById("endgamebtn").addEventListener("click", function(event){
-    var endGame = confirm("Do you want to end this event?");
-    if(endGame){
-        endEvent();
-    }
-});
 
 
-function endEvent(){
-xhttp.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-        if(this.responseText.includes("error")){
-            alert("Server error: "+ this.responseText);
-        }else if(this.responseText.includes("error") && this.responseText.includes("auth")){
-            alert("Authentication error");
-            document.location.reload();
-        }else if(this.responseText.includes("success")){
-            alert("Event deletion successful");
-            window.close();
-        }
-    }
-};
-xhttp.open("GET", "delete.php?id="+gameId, true);
-xhttp.send();
 
-}
 
 
 var dLoad = document.getElementById("dLoad");
@@ -455,7 +432,7 @@ function changeQuarterInit(value) {
         qua= 0;
         return;
     }
-    psqb = document.getElementById("q" + quarter);
+    psqb = document.getElementById("q" + period);
     if (value == 1) {
         psqb.className = "qBtn";
         psqb.disabled = false;
@@ -477,7 +454,7 @@ function changeQuarterInit(value) {
         quarter4Button.className = "qBtnSelected";
         quarter4Button.disabled = true;
     }
-    quarter = value;
+    period = value;
 }
 
 function changeDownInit(value) {

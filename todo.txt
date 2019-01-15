@@ -1,0 +1,17 @@
+--TODO FILE--
+
+(organized by highest to lowest priorities)
+
+-- make something to end the game from admin panel.
+-- add capability to edit the event from admin dashboard
+-- add basketball functionalities and user interfaces
+-- add more sports
+-----------------------------------------------------
+
+-- Possibilities --
+-- ad banners on client side with Kenston team sponsors.
+-- make a thing on index to view past scores and game results.
+
+
+-- Thoughts -- 
+-- Maybe for basketball implementation, we could get in touch with coaches and see what is necessary and what isn't for features.
