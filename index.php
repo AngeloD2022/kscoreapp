@@ -119,6 +119,8 @@
                         $sport = "Soccer";
                     } else if ($r["sport"] == "football") {
                         $sport = "Football";
+                    }else if ($r["sport"] == "basketball") {
+                        $sport = "Basketball";
                     }
                     if ($r["teamClass"] == "varsity") {
                         $tc = "Varsity";

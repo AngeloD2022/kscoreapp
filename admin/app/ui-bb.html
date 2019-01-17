@@ -3,8 +3,8 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="stylesheet" type="text/css" href="assets.css" />
-    <link rel="stylesheet" type="text/css" href="buttonMaterial.css" />
+    <link rel="stylesheet" type="text/css" href="assets-bb.css" />
+    <link rel="stylesheet" type="text/css" href="buttonMaterial-bb.css" />
 </head>
 
 <body>
@@ -50,8 +50,8 @@
                                         fill-rule="evenodd" />
                                 </g>
                             </svg></button><br>
-                        <button class="purpleBtn" onclick="incrementScore(6, 'k')" id="homePlusSix">+6 Touchdown</button><br>
-                        <button class="purpleBtn" onclick="incrementScore(3, 'k')" style="width: 100px;" id="homePlusThree">+3 Field Goal</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(3, 'k')" style="width: 100px;" id="homePlusThree">+3</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(2, 'k')" style="width: 100px;" id="homePlusTwo">+2</button><br>
                         <button class="dnBtn" onclick="decrementScore(1, 'k')" id="decreaseHomeScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0"
                                 fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -75,14 +75,17 @@
                                 <p class="tname">Kenston</p>
                             </div>
                             <div class="down">
-                                <p class="dtxt">1<span style="font-size:17pt">nd<br>Down</span></p>
+                                <p class="timetxt">--:--</p>
+                                <button class="timerbtn_start" onclick="timerTogglePause()">PAUSE</button>
+                                <button class="timerbtn_set" onclick="setTimer()">SET</button><br>
+                                <button onclick="setTimer()">15:00</button>
                             </div>
                             <div class="guest-card">
                                 <p class="tscore" id="gscore">00</p>
                                 <p class="tname">GTEAM</p>
                             </div><br>
                             <div class="misc">
-                                <div class="ball">
+                                <div class="sqFrame">
                                     <h5 style="margin: 4px;">Ball Possession:</h5>
                                     <div style="text-align:left;">
                                         <label for="homeHasBall">Kenston</label>
@@ -91,22 +94,16 @@
                                         <input onclick="teamHasBall('guest')" name="hB" type="radio" id="guestHasBall"/>
                                     </div>
                                 </div>
-                                <div class="quarter">
+                                <div class="sqFrame">
                                     <h5 style="margin: 4px;">Period</h5>
-                                    <button onclick="changeQuarter(1)" id="q1" class="qBtn">1</button>
-                                    <button onclick="changeQuarter(2)" id="q2" class="qBtn">2</button>
-                                    <button onclick="changeQuarter(3)" id="q3" class="qBtn">3</button>
-                                    <button onclick="changeQuarter(4)" id="q4" class="qBtn">4</button>
+                                    <button onclick="changePeriod(1)" id="p1" class="pBtn">1</button>
+                                    <button onclick="changePeriod(2)" id="p2" class="pBtn">2</button>
+                                    <button onclick="changePeriod(3)" id="p3" class="pBtn">3</button>
+                                    <button onclick="changePeriod(4)" id="p4" class="pBtn">4</button>
                                 </div>
-                                <div class="togo">
-                                        <h5 style="margin: 4px;">YDS. TO GO</h5>
-                                        <button onclick="changeToGo('sub')" class="subButton">-</button>
-                                        <input class="numberInput" id="ydsToGo" type="number" pattern="[0-9]*" min="0" max="99">
-                                        <button onclick="changeToGo('add')" class="addButton">+</button>
-                                        <h5 style="margin: 4px;">BALL ON:</h5>
-                                        <button onclick="changeBallOn('sub')" class="subButton">-</button>
-                                        <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="99">
-                                        <button onclick="changeBallOn('add')" class="addButton">+</button>
+                                <div class="sqFrame">
+                                    <h5 style="margin: 4px;">Bonus</h5>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -126,8 +123,8 @@
                                         fill-rule="evenodd" />
                                 </g>
                             </svg></button><br>
-                        <button class="purpleBtn" onclick="incrementScore(6, 'g')" id="guestPlusSix">+6 Touchdown</button><br>
-                        <button class="purpleBtn" onclick="incrementScore(3, 'g')" style="width: 100px;" id="guestPlusThree">+3 Field Goal</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(3, 'g')" style="width: 100px;" id="guestPlusThree">+3</button><br>
+                        <button class="purpleBtn" onclick="incrementScore(2, 'g')" style="width: 100px;" id="guestPlusTwo">+2</button><br>
                         <button class="dnBtn" onclick="decrementScore(1, 'g')" id="decreaseGuestScore"><svg version="1.1" viewBox="0.0 0.0 100.0 100.0" fill="none"
                                 stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -144,6 +141,9 @@
                 </td>
             </tr>
         </table>
+        <div style="text-align: center;">
+                <button onclick="confirmEndGame()" id="endgamebtn" class="endgamebtn">END GAME</button>
+                </div>
     </div>
 
 </body>
@@ -151,7 +151,17 @@
 <script src="pageEvents.js" type="text/javascript"></script>
 <script src="bb-core.js" type="text/javascript"></script>
 <script>
-var gameId = 25; // ID HERE
+var gameId = 19; // ID HERE
 var kScore = 0;//initial value
 var gScore = 0;//initial value
 </script>
+<!-- NUMERIC Up Down CODE
+                                        <h5 style="margin: 4px;">YDS. TO GO</h5>
+                                        <button onclick="changeToGo('sub')" class="subButton">-</button>
+                                        <input class="numberInput" id="ydsToGo" type="number" pattern="[0-9]*" min="0" max="99">
+                                        <button onclick="changeToGo('add')" class="addButton">+</button>
+                                        <h5 style="margin: 4px;">BALL ON:</h5>
+                                        <button onclick="changeBallOn('sub')" class="subButton">-</button>
+                                        <input class="numberInput" id="ydsBallOn" type="number" pattern="[0-9]*" min="0" max="99">
+                                        <button onclick="changeBallOn('add')" class="addButton">+</button>
+                                    -->

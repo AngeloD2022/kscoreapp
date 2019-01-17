@@ -2,7 +2,7 @@
 
 (organized by highest to lowest priorities)
 
--- make something to end the game from admin panel.
+-- make something to end the game from admin panel. (Done, Make finished events from past few days greyed out on dashboard, after a vew days, disappear entirely)
 -- add capability to edit the event from admin dashboard
 -- add basketball functionalities and user interfaces
 -- add more sports

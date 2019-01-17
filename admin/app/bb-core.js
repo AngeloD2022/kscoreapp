@@ -1,6 +1,7 @@
-//KENSTON GT ADMIN PANEL - CORE FRAMEWORK
+//KENSTON BASKETBALL GT ADMIN PANEL - CORE FRAMEWORK
 //CODED BY: ANGELO DELUCA
 //Copyright (c) 2018 Kenston Local School District
+
 var request = {};
 var xhttp = new XMLHttpRequest();
 var ms = 0;
@@ -13,18 +14,11 @@ var guestScoreDisplay = document.getElementById("gscore");
 var KenstonScore = 0;
 var GuestScore = 0;
 var period = 1;
-var toGo = 0;
-var ballOnRaw;
-var down;
 //misc
-var quarter1Button = document.getElementById("q1");
-var quarter2Button = document.getElementById("q2");
-var quarter3Button = document.getElementById("q3");
-var quarter4Button = document.getElementById("q4");
-var down1Button = document.getElementById("d1");
-var down2Button = document.getElementById("d2");
-var down3Button = document.getElementById("d3");
-var down4Button = document.getElementById("d4");
+var period1Button = document.getElementById("p1");
+var period2Button = document.getElementById("p2");
+var period3Button = document.getElementById("p3");
+var period4Button = document.getElementById("p4");
 
 var ballPosession;
 var ballPosessonElement = document.getElementsByName("hB");
@@ -279,6 +273,7 @@ var loadlbl = document.getElementById("loadlbl");
 function sendTimer() {
     if (!running) {
         running = true;
+        loadlbl.className = "";
         dLsvg.style.stroke = "rgb(0, 195, 255)";
         dLoad.style.strokeDashoffset = -313;
         lDiv.className = "loaderShown";
@@ -327,13 +322,15 @@ function postServer() {
     xhttp.onloadstart = function () { //starts the request
         //show indeterminite
         loadlbl.innerHTML = "<strong>Syncing...</strong>";
-        loadlbl.style.color = "rgb(255 196, 87)";
+        loadlbl.style.color = "rgb(255, 196, 87)";
         dLoad.style.strokeDashoffset = "";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
         dLoad.className.baseVal = "indeterminateLoad";
 
     }
     xhttp.onload = function () {
+        loadlbl.innerHTML = "<strong>Synchronized</strong>";
+        loadlbl.style.color = "rgb(0, 216, 11)";
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         dLoad.className.baseVal = "dC";
@@ -341,10 +338,13 @@ function postServer() {
         miscReq = {};
         setTimeout(function () {
             lDiv.className = "loaderHidden";
+            loadlbl.className = "loaderHidden";
         }, 1000);
         running = false;
     }
     xhttp.onerror = function () {
+        loadlbl.innerHTML = "<strong>Error</strong>";
+        loadlbl.style.color = "rgb(255, 73, 73)";
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(255, 73, 73)";
         setTimeout(function () {
@@ -355,49 +355,6 @@ function postServer() {
     }
     xhttp.send(rawData);
 
-}
-
-
-
-
-function sendToSrv() {
-    for (var k in request) {
-        console.log("POST: " + k + " || " + request[k]);
-    }
-
-}
-
-
-
-
-var xhttp = new XMLHttpRequest();
-var acct;
-
-function initializePage() {
-    contactDB();
-}
-
-
-
-function getUserID() {
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-
-            if (this.responseText == "not found" || this.responseText == "disabled") {
-                console.log("not found or disabled");
-
-                window.close();
-            } else {
-                var acc = JSON.parse(this.responseText);
-                var acct = acc[0];
-                uid = acct.id;
-
-            }
-
-        }
-    }
-    xhttp.open("GET", "/admin/script.php", true);
-    xhttp.send();
 }
 
 function loadInitial() {

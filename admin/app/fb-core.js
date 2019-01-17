@@ -1,6 +1,7 @@
-//KENSTON GT ADMIN PANEL (FOOTBALL) - CORE FRAMEWORK
+//KENSTON FOOTBALL GT ADMIN PANEL (FOOTBALL) - CORE FRAMEWORK
 //CODED BY: ANGELO DELUCA
 //Copyright (c) 2018 Kenston Local School District
+
 var request = {};
 var xhttp = new XMLHttpRequest();
 var ms = 0;
@@ -302,6 +303,7 @@ var loadlbl = document.getElementById("loadlbl");
 function sendTimer() {
     if (!running) {
         running = true;
+        loadlbl.className = "";
         dLsvg.style.stroke = "rgb(0, 195, 255)";
         dLoad.style.strokeDashoffset = -313;
         lDiv.className = "loaderShown";
@@ -350,13 +352,15 @@ function postServer() {
     xhttp.onloadstart = function () { //starts the request
         //show indeterminite
         loadlbl.innerHTML = "<strong>Syncing...</strong>";
-        loadlbl.style.color = "rgb(255 196, 87)";
+        loadlbl.style.color = "rgb(255, 196, 87)";
         dLoad.style.strokeDashoffset = "";
         dLsvg.style.stroke = "rgb(255, 196, 87)";
         dLoad.className.baseVal = "indeterminateLoad";
 
     }
     xhttp.onload = function () {
+        loadlbl.innerHTML = "<strong>Synchronized</strong>";
+        loadlbl.style.color = "rgb(0, 216, 11)";
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(0, 216, 11)";
         dLoad.className.baseVal = "dC";
@@ -364,10 +368,13 @@ function postServer() {
         miscReq = {};
         setTimeout(function () {
             lDiv.className = "loaderHidden";
+            loadlbl.className = "loaderHidden";
         }, 1000);
         running = false;
     }
     xhttp.onerror = function () {
+        loadlbl.innerHTML = "<strong>Error</strong>";
+        loadlbl.style.color = "rgb(255, 73, 73)";
         dLoad.style.strokeDashoffset = 0;
         dLsvg.style.stroke = "rgb(255, 73, 73)";
         setTimeout(function () {

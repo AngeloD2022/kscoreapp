@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.app-ctrls{
+    background-color: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 24px;
+    padding: 12px;
+    min-height: 100px;
+    width: 148px;
+    left: 45px;
+    text-align: center;
+    float: left;
+}
+
+.scoreDisplay{
+    background-color: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 24px;
+    display: inline-block;
+    width: 600px;
+    padding: 10px;
+    min-height: 6px;
+    padding-bottom: 33px;
+}
+.app-main{
+    padding-top: 0px;
+}
+.tblCell{
+    padding:9px;
+}
+.kenston-card{
+    background-color: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 24px;
+    padding: 12px;
+    display: inline-block;
+    min-width: 160px;
+    min-height: 160px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.guest-card{
+    background-color: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 24px;
+    padding: 12px;
+    display: inline-block;
+    min-width: 160px;
+    min-height: 160px;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.tscore{
+    font-size: 80px;
+    margin:23px;
+    font-family: 'Comfortaa', cursive;
+    margin-bottom: 0px;
+}
+.tname{
+    margin: 0;
+    font-size: 25px;
+    padding-top: 12px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.down{
+    background-color: #ffffff;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 9px;
+    text-align: center;
+    display: inline-block;
+    min-width: 71px;
+    min-height: 71px;
+    margin-top: 78px;
+    padding: 9px;
+}
+.timetxt{
+    font-family: 'Roboto', sans-serif;
+    font-size: 35pt;
+    margin: 0;
+}
+.misc{
+    background-color: #eaeaea;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 9px;
+    text-align: center;
+    display: inline-block;
+    min-width: 530px;
+    min-height: 110px;
+    margin-top: 24px;
+    padding: 9px;
+}
+
+.sqFrame{
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid gray;
+    display: inline-block;
+    padding: 6px;
+    float: left;
+    min-width: 115px;
+    min-height: 40px;
+}
+
+.loaderShown{/*FOR SVG TAG*/
+    opacity: 1;
+}
+.loaderHidden{/*FOR SVG TAG*/
+    opacity: 0;
+    transition: opacity .2s;
+}
+
+.determinateLoad{ /*FOR SVG TAG*/
+    fill: none;
+    stroke: rgb(0, 195, 255);
+    stroke-width: 10px;
+    stroke-linecap: round;
+    height: 40px;
+    transform: rotate(-90deg);
+}
+.dC{ /*FOR CIRCLE TAG*/
+    cx: 50%;
+    cy: 50%;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: -313;
+}
+
+.indeterminateLoad{/*FOR CIRCLE TAG*/
+    cx: 50%;
+    cy: 50%;
+    stroke-dashoffset: -150;
+    stroke-dasharray: 1000;
+    animation: indeterminateLoadSpin .5s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes indeterminateLoadSpin {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+.numberInput{
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    outline: none;
+    padding: 6px;
+    width: 50px;
+    text-align: center;
+}
+.numberInput::-webkit-inner-spin-button, ::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
