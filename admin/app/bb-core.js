@@ -496,3 +496,14 @@ function ballOnSideInit(team) {
         ballonteam = "guest";
     }
 }
+
+//Bonus CTRL mouseover handlers
+
+document.getElementById("kbx1").addEventListener("mouseover", function(event){
+    this.style.color = "orange";
+})
+document.getElementById("kbx2").addEventListener("mouseover", function(event){
+    document.getElementById("kbx1").style.color = "orange";
+    this.style.color = "orange";
+})
+
