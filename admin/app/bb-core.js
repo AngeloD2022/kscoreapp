@@ -77,133 +77,63 @@ function decrementScore(amount, team) {
 
 
 
-
 //MISC JSON
 var miscReq = {};
-var psqb;
-var downNo = document.getElementById("dNum");
-var downAfter = document.getElementById("numSuffix");
-var psdb = document.getElementById("d1");
-var ballonteam;
+var kbx1;
+var kbx2;
+var gbx1;
+var gbx2;
+document.onload = function(){
+    console.log("DOC LOADED");
+};
+kbx1 = document.getElementById("kbx1");
+kbx2 = document.getElementById("kbx2");
+gbx1 = document.getElementById("gbx1");
+gbx2 = document.getElementById("gbx2");
 
-function changeDown(value) {
-    psdb.className = "qBtn";
-    psdb.disabled = false;
-    psdb = document.getElementById("d" + value);
-    down = value;
-    miscReq.down = down;
-    downNo.innerHTML = value;
-    if (value == 1) {
-        down1Button.className = "qBtnSelected";
-        down1Button.disabled = true;
-        downAfter.innerHTML = "st";
-    } else if (value == 2) {
-        down2Button.className = "qBtnSelected";
-        down2Button.disabled = true;
-        downAfter.innerHTML = "nd";
-    } else if (value == 3) {
-        down3Button.className = "qBtnSelected";
-        down3Button.disabled = true;
-        downAfter.innerHTML = "rd";
-    } else if (value == 4) {
-        down4Button.className = "qBtnSelected";
-        down4Button.disabled = true;
-        downAfter.innerHTML = "th";
-    }
-
-    sendTimer();
-}
-
-var pstb;
-
-function ballOnSide(team) {
-    if (team == "h") {
-        miscReq.ballOnTeam = "home";
-        ballonteam = "home";
-        ballOnRaw *= -1;
-    } else {
-        miscReq.ballOnTeam = "guest";
-        ballonteam = "guest";
-        ballOnRaw *= -1;
-    }
-    if (pstb == null) {
-        document.getElementById("teamb" + team).className = "ballOnTeamBtnSelected";
-        document.getElementById("teamb" + team).disabled = true;
-        pstb = document.getElementById("teamb" + team);
-    } else {
-        pstb.className = "ballOnTeamBtn";
-        pstb.disabled = false;
-        document.getElementById("teamb" + team).className = "ballOnTeamBtnSelected";
-        document.getElementById("teamb" + team).disabled = true;
-        pstb = document.getElementById("teamb" + team);
-    }
-    sendTimer();
-}
-
-function ballOnSideAuto(team) {
-    if (team == "h") {
-        miscReq.ballOnTeam = "home";
-        ballonteam = "home";
-    } else {
-        miscReq.ballOnTeam = "guest";
-        ballonteam = "guest";
-    }
-    if (pstb == null) {
-        document.getElementById("teamb" + team).className = "ballOnTeamBtnSelected";
-        document.getElementById("teamb" + team).disabled = true;
-        pstb = document.getElementById("teamb" + team);
-    } else {
-        pstb.className = "ballOnTeamBtn";
-        pstb.disabled = false;
-        document.getElementById("teamb" + team).className = "ballOnTeamBtnSelected";
-        document.getElementById("teamb" + team).disabled = true;
-        pstb = document.getElementById("teamb" + team);
-    }
-    sendTimer();
-}
-
-function changeBallOn(action) {
-
-    if (action == "add" && ballOnRaw < 50) {
-        ballOnRaw++;
-    } else if (action == "sub" && ballOnRaw > -50) {
-        ballOnRaw--;
-    }
-
-    if (ballOnRaw > 0) {
-        ydsBallOn.value = ballOnRaw - 50;
-        ballOnSideAuto("g");
-    } else if (ballOnRaw < 0) {
-        ydsBallOn.value = ballOnRaw + 50;
-        ballOnSideAuto("h");
-    }
-
-    ydsBallOn.value = 50 - Math.abs(ballOnRaw);
-
-
-    if (ballOnRaw > 0) {
-        ballOnSideAuto("g");
-    } else if (ballOnRaw < 0) {
-        ballOnSideAuto("h");
-    }
-
-
-    miscReq.ydsBallOn = 50 - Math.abs(ballOnRaw);
-    sendTimer();
-
+function bonusSelect(team, value) {
 
 }
 
-function changeToGo(action) {
-    if (action == "add" && parseInt(ydsToGo.value) + 1 <= 50) {
-        ydsToGo.value++;
-    } else if(action == "sub" && ydsToGo.value-1 >= 0) {
-        ydsToGo.value--;
+function bonusMouseover(team, value) {
+    if (team == "k") {
+        if (value == 2) {
+            kbx1.style.color = "#ffb800";
+            kbx2.style.color = "#ffb800";
+        }
+        if (value == 1) {
+            kbx1.style.color = "#ffb800";
+        }
+    }else if (team == "g") {
+        if (value == 2) {
+            gbx1.style.color = "#ffb800";
+            gbx2.style.color = "#ffb800";
+        }
+        if (value == 1) {
+            gbx1.style.color = "#ffb800";
+        }
     }
-    toGo = ydsToGo.value;
-    miscReq.ydsToGo = toGo;
-    sendTimer();
 }
+function bonusMouseout(team, value) {
+    if (team == "k") {
+        if (value == 2) {
+            kbx1.style.color = "#a7a7a7";
+            kbx2.style.color = "#a7a7a7";
+        }
+        if (value == 1) {
+            kbx1.style.color = "#a7a7a7";
+        }
+    }else if (team == "g") {
+        if (value == 2) {
+            gbx1.style.color = "#a7a7a7";
+            gbx2.style.color = "#a7a7a7";
+        }
+        if (value == 1) {
+            gbx1.style.color = "#a7a7a7";
+        }
+    }
+}
+
 
 function teamHasBall(team) {
     if (team == "home") {
@@ -215,16 +145,6 @@ function teamHasBall(team) {
 }
 
 
-ydsToGo.addEventListener("change", function (event) {
-    miscReq.ydsToGo = event.target.value;
-    toGo = event.target.value;
-    sendTimer();
-});
-ydsBallOn.addEventListener("change", function (event) {
-    miscReq.ydsBallOn = event.target.value;
-    ballOnRaw = event.target.value - 50;
-    sendTimer();
-});
 
 function changeQuarter(value) {
     psqb = document.getElementById("q" + period);
@@ -357,7 +277,28 @@ function postServer() {
 
 }
 
+function getUserID() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (this.responseText == "not found" || this.responseText == "disabled") {
+                console.log("not found or disabled");
+
+                window.close();
+            } else {
+                var acc = JSON.parse(this.responseText);
+                var acct = acc[0];
+                uid = acct.id;
+
+            }
+
+        }
+    }
+    xhttp.open("GET", "/admin/script.php", true);
+    xhttp.send();
+}
 function loadInitial() {
+    /*
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
@@ -382,11 +323,12 @@ function loadInitial() {
     }
     xhttp.open("GET", "/app/eventData.php?id=" + gameId, true);
     xhttp.send();
+    */
 }
 
 function changeQuarterInit(value) {
-    if(value == null){
-        qua= 0;
+    if (value == null) {
+        qua = 0;
         return;
     }
     psqb = document.getElementById("q" + period);
@@ -415,7 +357,7 @@ function changeQuarterInit(value) {
 }
 
 function changeDownInit(value) {
-    if(value == null){
+    if (value == null) {
         down = 0;
         return;
     }
@@ -445,43 +387,44 @@ function changeDownInit(value) {
 }
 
 function changeBallOnInit(value) {
-    if(value == null){
-     ballOnRaw = 0;
+    if (value == null) {
+        ballOnRaw = 0;
         return;
     }
-    
+
     ydsBallOn.value = value
-    if(ballonteam == "home"){
+    if (ballonteam == "home") {
         ballOnRaw = value - 50;
-    }else if (ballonteam == "guest") {
+    } else if (ballonteam == "guest") {
         ballOnRaw = 50 - value;
     }
 }
 
 function changeToGoInit(value) {
-    if(value == null){
+    if (value == null) {
         togo = 50;
         return;
     }
-    
+
     ydsToGo.value = value
     toGo = ydsToGo.value;
 }
+
 function changeBallPosessInit(value) {
-    if(value == null){
+    if (value == null) {
         ballPosession = "x";
         return;
     }
-    
-    if(value == "home"){
+
+    if (value == "home") {
         document.getElementById("homeHasBall").checked = true;
-    }else if(value == "guest"){
+    } else if (value == "guest") {
         document.getElementById("guestHasBall").checked = true;
     }
 }
 
 function ballOnSideInit(team) {
-    if(team == null){
+    if (team == null) {
         ballonteam = "x";
     }
     if (team == "home") {
@@ -499,11 +442,10 @@ function ballOnSideInit(team) {
 
 //Bonus CTRL mouseover handlers
 
-document.getElementById("kbx1").addEventListener("mouseover", function(event){
+document.getElementById("kbx1").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 })
-document.getElementById("kbx2").addEventListener("mouseover", function(event){
+document.getElementById("kbx2").addEventListener("mouseover", function (event) {
     document.getElementById("kbx1").style.color = "orange";
     this.style.color = "orange";
 })
-
