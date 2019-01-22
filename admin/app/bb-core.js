@@ -449,3 +449,27 @@ document.getElementById("kbx2").addEventListener("mouseover", function (event) {
     document.getElementById("kbx1").style.color = "orange";
     this.style.color = "orange";
 })
+
+//-------------------------------------------------------------------------------------------
+//TIMER CORE
+
+var timerbutton = document.getElementById("tbtn");
+var timerdisplay = document.getElementById("tdisplay");
+var timersetbutton = document.getElementById("tsetbtn");
+var txhttp = new XMLHttpRequest();
+var timerSTATUS;
+
+function toggleTimer(){
+//get current timestamp down to ms
+
+//get status of timer
+
+//build request
+
+
+    txhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+
+        }
+    }
+}
