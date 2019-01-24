@@ -4,6 +4,7 @@
 
 var request = {};
 var xhttp = new XMLHttpRequest();
+var timerSTATUS;
 var ms = 0;
 var uid;
 getUserID();
@@ -83,7 +84,7 @@ var kbx1;
 var kbx2;
 var gbx1;
 var gbx2;
-document.onload = function(){
+document.onload = function () {
     console.log("DOC LOADED");
 };
 kbx1 = document.getElementById("kbx1");
@@ -104,7 +105,7 @@ function bonusMouseover(team, value) {
         if (value == 1) {
             kbx1.style.color = "#ffb800";
         }
-    }else if (team == "g") {
+    } else if (team == "g") {
         if (value == 2) {
             gbx1.style.color = "#ffb800";
             gbx2.style.color = "#ffb800";
@@ -123,7 +124,7 @@ function bonusMouseout(team, value) {
         if (value == 1) {
             kbx1.style.color = "#a7a7a7";
         }
-    }else if (team == "g") {
+    } else if (team == "g") {
         if (value == 2) {
             gbx1.style.color = "#a7a7a7";
             gbx2.style.color = "#a7a7a7";
@@ -457,19 +458,49 @@ var timerbutton = document.getElementById("tbtn");
 var timerdisplay = document.getElementById("tdisplay");
 var timersetbutton = document.getElementById("tsetbtn");
 var txhttp = new XMLHttpRequest();
-var timerSTATUS;
+var timerSeconds = 0;
+//10:50
 
-function toggleTimer(){
-//get current timestamp down to ms
+/*
+TIMERSTATUS KEY
+---------------
+E - ended
+R - running
 
-//get status of timer
 
-//build request
+*/
 
 
-    txhttp.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200){
+var timer = setInterval(function(){
+    
+}, 1000)
 
+function toggleTimer() {
+    //get current timestamp down to ms
+    timerSTATUS = timerSTATUS == "P"? "R" : "P";
+
+    console.log(kScore);
+    var treq = {};
+    treq.id = gameId;
+    treq.uid = uid;
+    treq.startValue = timerValueInitial;
+    treq.currentState = timerSTATUS;
+    var tRaw = JSON.stringify(treq);
+    console.log(tRaw);
+    txhttp.open("POST", "bb-T_IN.php", true);
+    txhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    txhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.includes("error")) {
+                alert("there was an error contacting the server");
+            }
+            console.log(this.responseText);
         }
     }
+    txhttp.send(tRaw);
+
+    //get status of timer
+
+    //build request
 }
+
