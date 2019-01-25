@@ -459,6 +459,9 @@ var timerdisplay = document.getElementById("tdisplay");
 var timersetbutton = document.getElementById("tsetbtn");
 var txhttp = new XMLHttpRequest();
 var timerSeconds = 0;
+var timerc;
+var timerIsRunning = false;
+var timerms;
 //10:50
 
 /*
@@ -470,21 +473,47 @@ R - running
 
 */
 
+function toggleTimer(){
+    if(timerIsRunning)
+    clearInterval(timerc);
+    timerSend(new Date().getTime(), timerSeconds, "E");
+}
 
-var timer = setInterval(function(){
+
+function runTimer(seconds){ //timer counter;
+    var m;
+//    m = s/60;
+//    s = s%60;
+    var now = new Date().getTime();
+    var future = now + 1000*seconds;
+    timerms = future - now;
     
-}, 1000)
+    timerc = setInterval(function(){
+        timerIsRunning = true;
+        now = new Date().getTime();
+        timerms = future - now;
+        timerSeconds = Math.floor(timerms/1000);
+        m = Math.floor(timerSeconds/60);
+        console.log(Math.floor(timerSeconds/60) + ":" +timerSeconds%60);
+        timerdisplay.innerHTML = (m <10? "0" + m: m) + ":" +(timerSeconds%60 < 10? "0" + timerSeconds%60: timerSeconds%60);
+        if(m == 0 && timerSeconds%60 == 0){
+            clearInterval(timerc);
+            timerSend(now, 0, "E"); // sends XHR to server
+            timerIsRunning = false;
+        }
+    }, 200);
+}
 
-function toggleTimer() {
+//timerSTATUS = timerSTATUS == "P"? "R" : "P";
+function timerSend(unix, secondsvalue, state) {
     //get current timestamp down to ms
-    timerSTATUS = timerSTATUS == "P"? "R" : "P";
 
     console.log(kScore);
     var treq = {};
     treq.id = gameId;
     treq.uid = uid;
-    treq.startValue = timerValueInitial;
-    treq.currentState = timerSTATUS;
+    treq.startValue = secondsvalue;
+    treq.currentState = state;
     var tRaw = JSON.stringify(treq);
     console.log(tRaw);
     txhttp.open("POST", "bb-T_IN.php", true);
