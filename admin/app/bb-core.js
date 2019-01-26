@@ -115,6 +115,7 @@ function bonusMouseover(team, value) {
         }
     }
 }
+
 function bonusMouseout(team, value) {
     if (team == "k") {
         if (value == 2) {
@@ -298,6 +299,7 @@ function getUserID() {
     xhttp.open("GET", "/admin/script.php", true);
     xhttp.send();
 }
+
 function loadInitial() {
     /*
     xhttp.onreadystatechange = function () {
@@ -473,35 +475,85 @@ R - running
 
 */
 
-function toggleTimer(){
-    if(timerIsRunning)
-    clearInterval(timerc);
-    timerSend(new Date().getTime(), timerSeconds, "E");
+function toggleTimer() {
+    if (timerIsRunning) { //timer paused
+        clearInterval(timerc);
+        timerSend(new Date().getTime(), timerSeconds, "P");
+        timerbutton.style.background = "rgb(16, 220, 14)";
+        timerbutton.innerHTML = "PLAY";
+        timerIsRunning = false;
+    } else { //timer play
+        if (timerSeconds > 0) {
+            runTimer(timerSeconds);
+            timerSend(new Date().getTime(), timerSeconds, "R");
+            timerbutton.style.background = "rgb(253, 81, 81)";
+            timerbutton.innerHTML = "PAUSE";
+            timerIsRunning = true;
+        } else {
+            alert("You must set a value for the timer before it can count down.");
+        }
+
+    }
 }
 
 
-function runTimer(seconds){ //timer counter;
+function runTimer(seconds) { //timer counter;
     var m;
-//    m = s/60;
-//    s = s%60;
+    //    m = s/60;
+    //    s = s%60;
     var now = new Date().getTime();
-    var future = now + 1000*seconds;
+    var future = now + 1000 * seconds;
     timerms = future - now;
-    
-    timerc = setInterval(function(){
+    timerc = setInterval(function () {
         timerIsRunning = true;
         now = new Date().getTime();
         timerms = future - now;
-        timerSeconds = Math.floor(timerms/1000);
-        m = Math.floor(timerSeconds/60);
-        console.log(Math.floor(timerSeconds/60) + ":" +timerSeconds%60);
-        timerdisplay.innerHTML = (m <10? "0" + m: m) + ":" +(timerSeconds%60 < 10? "0" + timerSeconds%60: timerSeconds%60);
-        if(m == 0 && timerSeconds%60 == 0){
+        timerSeconds = Math.floor(timerms / 1000);
+        m = Math.floor(timerSeconds / 60);
+        console.log(Math.floor(timerSeconds / 60) + ":" + timerSeconds % 60);
+        timerdisplay.innerHTML = (m < 10 ? "0" + m : m) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
+        if (m == 0 && timerSeconds % 60 == 0) {
             clearInterval(timerc);
             timerSend(now, 0, "E"); // sends XHR to server
             timerIsRunning = false;
+            timerbutton.style.background = "rgb(16, 220, 14)";
+            timerbutton.innerHTML = "PLAY";
         }
     }, 200);
+}
+
+function timerSetPrompt() {
+    while (true) {
+        var minutes = prompt("How many minutes? (Leave blank for none)");
+        var seconds = prompt("How many seconds? (Leave blank for none)");
+
+        if (minutes != "" || seconds != "") {
+            minutes = minutes == "" ? 0 : parseInt(minutes);
+            seconds = seconds == "" ? 0 : parseInt(seconds);
+            if (confirm("The timer will be set to " + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds))) {
+                setTimer((minutes * 60) + seconds);
+                break;
+            } else {
+                if (!confirm("Would you like to set the timer again?")) {
+                    break;
+                }
+            }
+        } else {
+            break;
+        }
+    }
+}
+
+function setTimer(seconds) {
+    timerdisplay.innerHTML = (Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60)) + ":" + (seconds % 60 < 10? "0"+seconds%60:seconds%60);
+    timerSeconds = seconds;
+    if (timerIsRunning) {
+        timerbutton.style.background = "rgb(16, 220, 14)";
+        timerbutton.innerHTML = "PLAY";
+        clearInterval(timerc);
+        timerIsRunning = false;
+    }
+    sendTimer(new Date().getTime(), seconds, "S");
 }
 
 //timerSTATUS = timerSTATUS == "P"? "R" : "P";
@@ -512,6 +564,7 @@ function timerSend(unix, secondsvalue, state) {
     var treq = {};
     treq.id = gameId;
     treq.uid = uid;
+    treq.unix = unix;
     treq.startValue = secondsvalue;
     treq.currentState = state;
     var tRaw = JSON.stringify(treq);
@@ -532,4 +585,3 @@ function timerSend(unix, secondsvalue, state) {
 
     //build request
 }
-

@@ -77,10 +77,10 @@
                             </div>
                             <div class="down">
                                 <!--CLOCK HERE-->
-                                <p id="tdisplay" class="timetxt">--:--</p>
-                                <button id="tbtn" class="timerbtn_start" disabled="disabled" onclick="timerTogglePause()" style="background-color: rgb(179, 179, 179);">PLAY</button>
-                                <button id="tsetbtn" class="timerbtn_set" onclick="setTimer()" style="background-color: #ffb800;">SET</button><br>
-                                <button onclick="setTimer()">15:00</button>
+                                <p id="tdisplay" class="timetxt">00:00</p>
+                                <button id="tbtn" class="timerBtn" onclick="toggleTimer()">PLAY</button>
+                                <button id="tsetbtn" class="timerbtn_set" onclick="timerSetPrompt()" style="background-color: #ffb800;">SET</button><br>
+                                <button onclick="">15:00</button>
                             </div>
                             <!--
 
@@ -179,7 +179,7 @@
 <script src="pageEvents.js" type="text/javascript"></script>
 <script src="bb-core.js" type="text/javascript"></script>
 <script>
-    var gameId = 12; // ID HERE
+    var gameId = 26; // ID HERE
     var kScore = 0; //initial value
     var gScore = 0; //initial value
 </script>
