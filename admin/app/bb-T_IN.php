@@ -15,7 +15,7 @@ if(!isset($authBack)){
     $MiscArr = json_decode($readArr[0], true);
 
     //MISC->TIMER -- VALUES
-    $timer["startedat"] = time();
+    $timer["unix"] = $content["unix"];
     $timer["startValue"] = $content["startValue"];
     $timer["currentState"] = $content["currentState"];
 
