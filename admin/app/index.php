@@ -118,9 +118,9 @@ function showFootballUi()
         <svg id="determinateSVG" class="determinateLoad" viewBox="0 0 133 133" xmlns="http://www.w3.org/2000/svg">
         <circle id="dLoad" class="dC" r="50"/>
         </svg><br>
-        <p id="loadlbl" style="margin-top: 5px;"></p>
+        <p id="loadlbl" class="loaderHidden" style="margin-top: 5px;"><strong>-----</strong></p>
+        </span>
     </div>
-    </span>
     <span id="closeBtn" class="closeBtn">&times;</span>
 
     <div class="app-main">

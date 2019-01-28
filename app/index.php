@@ -11,6 +11,8 @@ if(isset($result)){
         displayFootball();
     }else if($game["sport"] == "soccer"){
         displaySoccer();
+    }else if($game["sport"] == "basketball"){
+        displayBasketball();
     }
 }
 
@@ -80,5 +82,16 @@ function displaySoccer(){
 echo "soccer ui WIP";
 }
 
+
+function displayBasketball(){
+    ?>
+<script>
+document.location.href = "ui-bb.html";
+
+</script>
+
+
+    <?php
+}
 
 ?>
