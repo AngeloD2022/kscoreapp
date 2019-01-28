@@ -96,45 +96,6 @@ function bonusSelect(team, value) {
 
 }
 
-function bonusMouseover(team, value) {
-    if (team == "k") {
-        if (value == 2) {
-            kbx1.style.color = "#ffb800";
-            kbx2.style.color = "#ffb800";
-        }
-        if (value == 1) {
-            kbx1.style.color = "#ffb800";
-        }
-    } else if (team == "g") {
-        if (value == 2) {
-            gbx1.style.color = "#ffb800";
-            gbx2.style.color = "#ffb800";
-        }
-        if (value == 1) {
-            gbx1.style.color = "#ffb800";
-        }
-    }
-}
-
-function bonusMouseout(team, value) {
-    if (team == "k") {
-        if (value == 2) {
-            kbx1.style.color = "#a7a7a7";
-            kbx2.style.color = "#a7a7a7";
-        }
-        if (value == 1) {
-            kbx1.style.color = "#a7a7a7";
-        }
-    } else if (team == "g") {
-        if (value == 2) {
-            gbx1.style.color = "#a7a7a7";
-            gbx2.style.color = "#a7a7a7";
-        }
-        if (value == 1) {
-            gbx1.style.color = "#a7a7a7";
-        }
-    }
-}
 
 
 function teamHasBall(team) {
@@ -148,29 +109,29 @@ function teamHasBall(team) {
 
 
 
-function changeQuarter(value) {
-    psqb = document.getElementById("q" + period);
-    miscReq.quarter = value;
+function changePeriod(value) {
+    pspb = document.getElementById("p" + period);
+    miscReq.period = value;
     if (value == 1) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
-        quarter1Button.className = "qBtnSelected";
-        quarter1Button.disabled = true;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
+        period1Button.className = "pBtnSelected";
+        period1Button.disabled = true;
     } else if (value == 2) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
-        quarter2Button.className = "qBtnSelected";
-        quarter2Button.disabled = true;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
+        period2Button.className = "pBtnSelected";
+        period2Button.disabled = true;
     } else if (value == 3) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
-        quarter3Button.className = "qBtnSelected";
+        pspb.className = "pBtn";
+        pspb.disabled = false;
+        period3Button.className = "pBtnSelected";
         quarter3Button.disabled = true;
     } else if (value == 4) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
-        quarter4Button.className = "qBtnSelected";
-        quarter4Button.disabled = true;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
+        period4Button.className = "pBtnSelected";
+        period4Button.disabled = true;
     }
     period = value;
     sendTimer();
@@ -181,7 +142,32 @@ function changeHasBall(team) {
 }
 
 
+document.getElementById("endgamebtn").addEventListener("click", function(event){
+    var endGame = confirm("Do you want to end this event?");
+    if(endGame){
+        endEvent();
+    }
+});
 
+
+function endEvent(){
+xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+        if(this.responseText.includes("error")){
+            alert("Server error: "+ this.responseText);
+        }else if(this.responseText.includes("error") && this.responseText.includes("auth")){
+            alert("Authentication error");
+            document.location.reload();
+        }else if(this.responseText.includes("success")){
+            alert("Event deletion successful");
+            window.close();
+        }
+    }
+};
+xhttp.open("GET", "delete.php?id="+gameId, true);
+xhttp.send();
+
+}
 
 
 
@@ -478,14 +464,14 @@ R - running
 function toggleTimer() {
     if (timerIsRunning) { //timer paused
         clearInterval(timerc);
-        timerSend(new Date().getTime(), timerSeconds, "P");
+        timerToSrv(new Date().getTime(), timerSeconds, "P");
         timerbutton.style.background = "rgb(16, 220, 14)";
         timerbutton.innerHTML = "PLAY";
         timerIsRunning = false;
     } else { //timer play
         if (timerSeconds > 0) {
             runTimer(timerSeconds);
-            timerSend(new Date().getTime(), timerSeconds, "R");
+            timerToSrv(new Date().getTime(), timerSeconds, "R");
             timerbutton.style.background = "rgb(253, 81, 81)";
             timerbutton.innerHTML = "PAUSE";
             timerIsRunning = true;
@@ -514,7 +500,7 @@ function runTimer(seconds) { //timer counter;
         timerdisplay.innerHTML = (m < 10 ? "0" + m : m) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
         if (m == 0 && timerSeconds % 60 == 0) {
             clearInterval(timerc);
-            timerSend(now, 0, "E"); // sends XHR to server
+            timerToSrv(now, 0, "E"); // sends XHR to server
             timerIsRunning = false;
             timerbutton.style.background = "rgb(16, 220, 14)";
             timerbutton.innerHTML = "PLAY";
@@ -553,14 +539,12 @@ function setTimer(seconds) {
         clearInterval(timerc);
         timerIsRunning = false;
     }
-    sendTimer(new Date().getTime(), seconds, "S");
+    timerToSrv(new Date().getTime(), seconds, "S");
 }
 
 //timerSTATUS = timerSTATUS == "P"? "R" : "P";
-function timerSend(unix, secondsvalue, state) {
+function timerToSrv(unix, secondsvalue, state) {
     //get current timestamp down to ms
-
-    console.log(kScore);
     var treq = {};
     treq.id = gameId;
     treq.uid = uid;
