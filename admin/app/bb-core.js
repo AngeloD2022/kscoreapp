@@ -126,7 +126,7 @@ function changePeriod(value) {
         pspb.className = "pBtn";
         pspb.disabled = false;
         period3Button.className = "pBtnSelected";
-        quarter3Button.disabled = true;
+        period3Button.disabled = true;
     } else if (value == 4) {
         pspb.className = "pBtn";
         pspb.disabled = false;
@@ -510,9 +510,11 @@ function runTimer(seconds) { //timer counter;
 
 function timerSetPrompt() {
     while (true) {
-        var minutes = prompt("How many minutes? (Leave blank for none)");
-        var seconds = prompt("How many seconds? (Leave blank for none)");
-
+        var time = prompt("How much time? Formatted like: \"MM/SS\"");
+        //Parse Input
+        time = time.split(/\D+/);
+        minutes = time[0];
+        seconds = time[1];
         if (minutes != "" || seconds != "") {
             minutes = minutes == "" ? 0 : parseInt(minutes);
             seconds = seconds == "" ? 0 : parseInt(seconds);

@@ -72,6 +72,7 @@ function launchEvent(id, btn){
         var timer = setInterval(function() {   
             if(newWindow.closed) {    
                 closed(btn); 
+                document.location.reload();
                 clearInterval(timer);
             }  
         }, 1000);
