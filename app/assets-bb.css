@@ -122,7 +122,7 @@ body {
     min-height: 40px;
     vertical-align: middle;
 }
-.qInd{
+.pInd{
     border: none;
     background-color: rgb(84, 194, 89);
     padding: 6px;
@@ -134,11 +134,11 @@ body {
     margin: 3px;
     display: inline-block;
 }
-.qInd:hover{
+.pInd:hover{
     background-color: rgb(0, 216, 11);
     transition: background-color .25s; 
 }
-.qIndCurrent{
+.pIndCurrent{
     border: none;
     background-color: rgb(255, 177, 31);
     padding: 6px;
@@ -150,7 +150,7 @@ body {
     margin: 3px;
     display: inline-block;
 }
-.qIndCurrent:hover{
+.pIndCurrent:hover{
     background-color: rgb(255, 166, 0);
     transition: background-color .25s; 
 }
