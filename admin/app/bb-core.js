@@ -159,12 +159,12 @@ xhttp.onreadystatechange = function(){
             alert("Authentication error");
             document.location.reload();
         }else if(this.responseText.includes("success")){
-            alert("Event deletion successful");
+            alert("Event marked as finished");
             window.close();
         }
     }
 };
-xhttp.open("GET", "delete.php?id="+gameId, true);
+xhttp.open("GET", "setFinished.php?id="+gameId, true);
 xhttp.send();
 
 }

@@ -204,7 +204,7 @@ function changeBallOn(action) {
 function changeToGo(action) {
     if (action == "add" && parseInt(ydsToGo.value) + 1 <= 50) {
         ydsToGo.value++;
-    } else if(action == "sub" && ydsToGo.value-1 >= 0) {
+    } else if (action == "sub" && ydsToGo.value - 1 >= 0) {
         ydsToGo.value--;
     }
     toGo = ydsToGo.value;
@@ -266,30 +266,30 @@ function changeHasBall(team) {
 }
 
 
-document.getElementById("endgamebtn").addEventListener("click", function(event){
+document.getElementById("endgamebtn").addEventListener("click", function (event) {
     var endGame = confirm("Do you want to end this event?");
-    if(endGame){
+    if (endGame) {
         endEvent();
     }
 });
 
 
-function endEvent(){
-xhttp.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-        if(this.responseText.includes("error")){
-            alert("Server error: "+ this.responseText);
-        }else if(this.responseText.includes("error") && this.responseText.includes("auth")){
-            alert("Authentication error");
-            document.location.reload();
-        }else if(this.responseText.includes("success")){
-            alert("Event deletion successful");
-            window.close();
+function endEvent() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.includes("error")) {
+                alert("Server error: " + this.responseText);
+            } else if (this.responseText.includes("error") && this.responseText.includes("auth")) {
+                alert("Authentication error");
+                document.location.reload();
+            } else if (this.responseText.includes("success")) {
+                alert("Event marked as finished");
+                window.close();
+            }
         }
-    }
-};
-xhttp.open("GET", "delete.php?id="+gameId, true);
-xhttp.send();
+    };
+    xhttp.open("GET", "setFinished.php?id=" + gameId, true);
+    xhttp.send();
 
 }
 
@@ -458,8 +458,8 @@ function loadInitial() {
 }
 
 function changeQuarterInit(value) {
-    if(value == null){
-        qua= 0;
+    if (value == null) {
+        qua = 0;
         return;
     }
     psqb = document.getElementById("q" + quarter);
@@ -488,7 +488,7 @@ function changeQuarterInit(value) {
 }
 
 function changeDownInit(value) {
-    if(value == null){
+    if (value == null) {
         down = 0;
         return;
     }
@@ -518,43 +518,43 @@ function changeDownInit(value) {
 }
 
 function changeBallOnInit(value) {
-    if(value == null){
-     ballOnRaw = 0;
+    if (value == null) {
+        ballOnRaw = 0;
         return;
     }
-    
+
     ydsBallOn.value = value
-    if(ballonteam == "home"){
+    if (ballonteam == "home") {
         ballOnRaw = value - 50;
-    }else if (ballonteam == "guest") {
+    } else if (ballonteam == "guest") {
         ballOnRaw = 50 - value;
     }
 }
 
 function changeToGoInit(value) {
-    if(value == null){
+    if (value == null) {
         togo = 50;
         return;
     }
-    
+
     ydsToGo.value = value
     toGo = ydsToGo.value;
 }
 function changeBallPosessInit(value) {
-    if(value == null){
+    if (value == null) {
         ballPosession = "x";
         return;
     }
-    
-    if(value == "home"){
+
+    if (value == "home") {
         document.getElementById("homeHasBall").checked = true;
-    }else if(value == "guest"){
+    } else if (value == "guest") {
         document.getElementById("guestHasBall").checked = true;
     }
 }
 
 function ballOnSideInit(team) {
-    if(team == null){
+    if (team == null) {
         ballonteam = "x";
     }
     if (team == "home") {

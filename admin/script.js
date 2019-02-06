@@ -55,6 +55,14 @@ function cookieTest() {
 
 function contactDB(url) {
   showLoad();
+  //STARTED WORK FOR SECURITY BUG FIX
+  var request = {};
+  request.
+  xhttp.open("POST", "script.php", true);
+  xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+
+
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       if (this.responseText == "not found") {
@@ -74,7 +82,6 @@ function contactDB(url) {
       endLoad();
     }
   };
-  xhttp.open("GET", url, true);
   xhttp.send();
 }
 
