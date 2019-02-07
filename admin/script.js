@@ -3,6 +3,7 @@ var uname = document.querySelector("#uname");
 var password = document.querySelector("#pswd");
 var xhttp = new XMLHttpRequest();
 var statbar = document.querySelector("#stat");
+var request = {};
 
 function Login() {
   showLoad();
@@ -10,7 +11,9 @@ function Login() {
     alert("You can't leave fields blank.");
     endLoad();
   } else {
-    contactDB("script.php?u=" + uname.value + "&p=" + password.value);
+    request.u = uname.value;
+    request.p = password.value;
+    contactDB();
   }
 }
 
@@ -53,14 +56,13 @@ function cookieTest() {
   endLoad();
 }
 
-function contactDB(url) {
+
+
+function contactDB() {
   showLoad();
-  //STARTED WORK FOR SECURITY BUG FIX
-  var request = {};
-  request.
   xhttp.open("POST", "script.php", true);
   xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
+  var raw = JSON.stringify(request);
 
 
   xhttp.onreadystatechange = function () {
@@ -82,7 +84,7 @@ function contactDB(url) {
       endLoad();
     }
   };
-  xhttp.send();
+  xhttp.send(raw);
 }
 
 function endLoad() {

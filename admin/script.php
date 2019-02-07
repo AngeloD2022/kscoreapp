@@ -1,4 +1,6 @@
 <?php
+ $jdata = file_get_contents("php://input");
+ $content = json_decode($jdata, true);
 $username = "0";
 $password = "0";
 
@@ -6,8 +8,8 @@ if (isset($_COOKIE["ksb_usr"]) && isset($_COOKIE["ksb_pswd"])) {
 	$username = $_COOKIE["ksb_usr"];
 	$password = $_COOKIE["ksb_pswd"];
 }
-$username = isset($_GET["u"]) ? $_GET["u"] : $username;
-$password = isset($_GET["p"]) ? $_GET["p"] : $password;
+$username = isset($content["u"]) ? $content["u"] : $username;
+$password = isset($content["p"]) ? $content["p"] : $password;
 
 
 //Checks if username or password == null
