@@ -4,7 +4,7 @@
 
 var xhttp = new XMLHttpRequest();
 var data;
-
+var fireworks = false;
 var wloaded = false;
 
 window.onload = function () {
@@ -19,13 +19,20 @@ setInterval(function () {
     }
 }, 1000)
 
+
 function fetchData() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             data = JSON.parse(this.responseText);
             if (data['misc'] != null) {
                 changePIndicator(!('period' in data['misc']) ? 0 : data['misc'].period);
-
+                if(data["finished"] == 1 && data["homeScore"] > data["oppScore"] && !fireworks){
+                    fireworks = true;
+                    endFw.play();
+                }else if(fireworks && data["finished"] == 0){
+                    fireworks = false;
+                    endFw.stop();
+                }
                 if (data['misc'].ballPosess == "home") {
                     document.getElementById("kball").style.display = "inline-block";
                     document.getElementById("gball").style.display = "none";

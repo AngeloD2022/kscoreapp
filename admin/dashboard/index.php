@@ -30,12 +30,12 @@ $result = $conn->query($sql);
 if($result->num_rows > 0)
 {
     while($row = $result->fetch_assoc()){
-        $dbEntrys[] = $row;
+        $dbEntrys[] = $row;//style="background-color: rgb(193, 193, 193);"
         ?>
-        <tr <?= $row["active"] == 1? 'style="background-color:rgb(153, 255, 153);"':""?>>
+        <tr <?= $row["active"] == 1? 'style="background-color:rgb(153, 255, 153);"':'style="background-color: rgb(193, 193, 193);"'?>>
             <td><?=$row["id"];?></td>
             <td><?=$row["name"];?></td>
-            <td><?=$row["active"] == 1? "Active":"Inactive"?></td>
+            <td><?=$row["active"] == 1? "Active": $row["finished"] == 1? "Ended": "Inactive"?></td>
             <td><?=$row["opposing"];?></td>
             <td><?=$row["sport"];?></td>
             <td><?=$row["teamClass"];?></td>

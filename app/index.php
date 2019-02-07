@@ -22,6 +22,7 @@ global $game;
 ?>
 
 <link href="assets.css" type="text/css" rel="stylesheet"/>
+<div id="endFw"></div>
 <br>
 <br>
 <div class="logo-container">
@@ -69,6 +70,7 @@ global $game;
         </div>
     </div>
     <script src="core.js" type="text/javascript"></script>
+    <script src="fireworks.js" type="text/javascript"></script>
     <script>
     var gid = <?=$game["id"];?>;
     </script>

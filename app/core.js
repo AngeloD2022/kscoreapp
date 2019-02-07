@@ -4,7 +4,7 @@
 
 var xhttp = new XMLHttpRequest();
 var data;
-
+var fireworks = false;
 var wloaded = false;
 
 window.onload = function(){wloaded=true;};
@@ -22,6 +22,13 @@ function fetchData(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
             if(data['misc'] != null){
+                if(data["finished"] == 1 && data["homeScore"] > data["oppScore"] && !fireworks){
+                    fireworks = true;
+                    endFw.play();
+                }else if(fireworks && data["finished"] == 0){
+                    fireworks = false;
+                    endFw.stop();
+                }
                 changeQIndicator(!('quarter' in data['misc']) ? 0 : data['misc'].quarter);
                 updateDown(!('down' in data['misc'])  ? 1 :  data['misc'].down);
                 document.getElementById("ydsToGo").innerHTML = data['misc'].ydsToGo == null? 0 : data['misc'].ydsToGo;
