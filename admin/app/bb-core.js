@@ -287,7 +287,7 @@ function getUserID() {
 }
 
 function loadInitial() {
-    /*
+    
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
 
@@ -298,106 +298,46 @@ function loadInitial() {
             } else {
                 var data = JSON.parse(this.responseText);
                 ballonteam = data["misc"].ballOnTeam;
-                changeDownInit(data["misc"].down);
-                changeQuarterInit(data["misc"].quarter);
-                changeBallOnInit(data["misc"].ydsBallOn);
-                changeToGoInit(data["misc"].ydsToGo);
+                changePeriodInit(data["misc"].quarter);
                 changeBallPosessInit(data["misc"].ballPosess);
-                if (data["misc"].ballOnTeam != null) {
-                    ballOnSideInit(data["misc"].ballOnTeam);
-                }
             }
 
         }
     }
     xhttp.open("GET", "/app/eventData.php?id=" + gameId, true);
     xhttp.send();
-    */
+    
 }
 
-function changeQuarterInit(value) {
+function changePeriodInit(value) {
     if (value == null) {
-        qua = 0;
         return;
     }
-    psqb = document.getElementById("q" + period);
+    psqb = document.getElementById("p" + period);
     if (value == 1) {
-        psqb.className = "qBtn";
+        psqb.className = "pBtn";
         psqb.disabled = false;
-        quarter1Button.className = "qBtnSelected";
-        quarter1Button.disabled = true;
+        period1Button.className = "pBtnSelected";
+        period1Button.disabled = true;
     } else if (value == 2) {
         psqb.className = "qBtn";
         psqb.disabled = false;
-        quarter2Button.className = "qBtnSelected";
-        quarter2Button.disabled = true;
+        period2Button.className = "pBtnSelected";
+        period2Button.disabled = true;
     } else if (value == 3) {
         psqb.className = "qBtn";
         psqb.disabled = false;
-        quarter3Button.className = "qBtnSelected";
-        quarter3Button.disabled = true;
+        period3Button.className = "pBtnSelected";
+        period3Button.disabled = true;
     } else if (value == 4) {
         psqb.className = "qBtn";
         psqb.disabled = false;
-        quarter4Button.className = "qBtnSelected";
-        quarter4Button.disabled = true;
+        period4Button.className = "pBtnSelected";
+        period4Button.disabled = true;
     }
     period = value;
 }
 
-function changeDownInit(value) {
-    if (value == null) {
-        down = 0;
-        return;
-    }
-    psdb.className = "qBtn";
-    psdb.disabled = false;
-    psdb = document.getElementById("d" + value);
-    down = value;
-    downNo.innerHTML = value;
-    if (value == 1) {
-        down1Button.className = "qBtnSelected";
-        down1Button.disabled = true;
-        downAfter.innerHTML = "st";
-    } else if (value == 2) {
-        down2Button.className = "qBtnSelected";
-        down2Button.disabled = true;
-        downAfter.innerHTML = "nd";
-    } else if (value == 3) {
-        down3Button.className = "qBtnSelected";
-        down3Button.disabled = true;
-        downAfter.innerHTML = "rd";
-    } else if (value == 4) {
-        down4Button.className = "qBtnSelected";
-        down4Button.disabled = true;
-        downAfter.innerHTML = "th";
-    }
-
-}
-
-function changeBallOnInit(value) {
-    if (value == null) {
-        ballOnRaw = 0;
-        return;
-    }
-
-    ydsBallOn.value = value
-    if (ballonteam == "home") {
-        ballOnRaw = value - 50;
-    } else if (ballonteam == "guest") {
-        ballOnRaw = 50 - value;
-    }
-}
-
-function changeToGoInit(value) {
-    if (value == null) {
-        togo = 50;
-        return;
-    }
-
-    ydsToGo.value = value
-    toGo = ydsToGo.value;
-}
 
 function changeBallPosessInit(value) {
     if (value == null) {
@@ -412,22 +352,7 @@ function changeBallPosessInit(value) {
     }
 }
 
-function ballOnSideInit(team) {
-    if (team == null) {
-        ballonteam = "x";
-    }
-    if (team == "home") {
-        document.getElementById("teambh").className = "ballOnTeamBtnSelected";
-        document.getElementById("teambh").disabled = true;
-        pstb = document.getElementById("teambh");
-        ballonteam = "home";
-    } else if (team = "guest") {
-        document.getElementById("teambg").className = "ballOnTeamBtnSelected";
-        document.getElementById("teambg").disabled = true;
-        pstb = document.getElementById("teambg");
-        ballonteam = "guest";
-    }
-}
+
 
 //Bonus CTRL mouseover handlers
 

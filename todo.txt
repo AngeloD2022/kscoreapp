@@ -1,18 +1,18 @@
---TODO FILE--
-
+--TODO--
 (organized by highest to lowest priorities)
 
 -- make something to end the game from admin panel. (Done, Make finished events from past few days greyed out on dashboard, after a few days, disappear entirely)
--- add capability to edit the event from admin dashboard
+-- add capability to edit the event from admin dashboard 
 -- add basketball functionalities and user interfaces (almost Done)
--- fix critical security flaw (change admin login to use POST instead of GET)
+-- fix bugs w/ football app (undefined defaults)
+-- O R G A N I Z E  T H E  F R E A K I N G  F O L D E R
 -- add more sports
--- design custom ball icons
 -----------------------------------------------------
 
 -- Possibilities --
 -- ad banners on client side with Kenston team sponsors.
 -- make a thing on index to view past scores and game results.
+-- design custom ball icons
 
 
 -- Thoughts -- 

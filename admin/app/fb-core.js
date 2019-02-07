@@ -459,7 +459,6 @@ function loadInitial() {
 
 function changeQuarterInit(value) {
     if (value == null) {
-        qua = 0;
         return;
     }
     psqb = document.getElementById("q" + quarter);
