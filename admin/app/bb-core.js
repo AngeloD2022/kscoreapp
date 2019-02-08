@@ -23,8 +23,6 @@ var period4Button = document.getElementById("p4");
 
 var ballPosession;
 var ballPosessonElement = document.getElementsByName("hB");
-var ydsBallOn = document.getElementById("ydsBallOn");
-var ydsToGo = document.getElementById("ydsToGo");
 //readServer();
 window.onload = function () {
     console.log("GID: " + gameId);
@@ -290,15 +288,27 @@ function loadInitial() {
     
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
 
             if (this.responseText == "not found" || this.responseText == "disabled") {
-                console.log("not found or disabled");
+                alert("404");
 
                 window.close();
+                
             } else {
-                var data = JSON.parse(this.responseText);
-                ballonteam = data["misc"].ballOnTeam;
-                changePeriodInit(data["misc"].quarter);
+                var now = new Date().getTime();
+                var difference = now - data["misc"].timer["unix"];
+                if(data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E" ){
+                    timerSeconds = data["misc"].timer["startValue"] - Math.floor(difference / 1000);
+                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
+
+                    runTimer(timerSeconds);
+                }
+                KenstonScore = data["homeScore"];
+                GuestScore = data["oppScore"];
+                kenstonScoreDisplay.innerHTML = KenstonScore;
+                guestScoreDisplay.innerHTML = GuestScore;
+                changePeriodInit(data["misc"].period);
                 changeBallPosessInit(data["misc"].ballPosess);
             }
 
@@ -313,25 +323,25 @@ function changePeriodInit(value) {
     if (value == null) {
         return;
     }
-    psqb = document.getElementById("p" + period);
+    pspb = document.getElementById("p" + period);
     if (value == 1) {
-        psqb.className = "pBtn";
-        psqb.disabled = false;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
         period1Button.className = "pBtnSelected";
         period1Button.disabled = true;
     } else if (value == 2) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
         period2Button.className = "pBtnSelected";
         period2Button.disabled = true;
     } else if (value == 3) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
         period3Button.className = "pBtnSelected";
         period3Button.disabled = true;
     } else if (value == 4) {
-        psqb.className = "qBtn";
-        psqb.disabled = false;
+        pspb.className = "pBtn";
+        pspb.disabled = false;
         period4Button.className = "pBtnSelected";
         period4Button.disabled = true;
     }

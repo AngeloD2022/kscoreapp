@@ -103,8 +103,6 @@ var checkTime = setInterval(function () {
             srvTime = reply["unix"];
             srvInitial = reply["startValue"];
             srvState = reply["currentState"];
-
-            
             if (reply["currentState"] == "S" || reply["currentState"] == "P" || reply["currentState"] == "E") {
                 if (tEnabled) {
                     clearInterval(timer);
