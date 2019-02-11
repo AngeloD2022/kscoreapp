@@ -303,6 +303,9 @@ function loadInitial() {
                     timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
 
                     runTimer(timerSeconds);
+                }else{
+                    timerSeconds = data["misc"].timer["startValue"];
+                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
                 }
                 KenstonScore = data["homeScore"];
                 GuestScore = data["oppScore"];
