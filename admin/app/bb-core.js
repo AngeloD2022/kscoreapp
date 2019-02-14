@@ -20,7 +20,8 @@ var period1Button = document.getElementById("p1");
 var period2Button = document.getElementById("p2");
 var period3Button = document.getElementById("p3");
 var period4Button = document.getElementById("p4");
-
+var kenstonBonus = 0;
+var guestBonus = 0;
 var ballPosession;
 var ballPosessonElement = document.getElementsByName("hB");
 //readServer();
@@ -105,6 +106,9 @@ function teamHasBall(team) {
     sendTimer();
 }
 
+kbx1.onmouseenter = function(){
+    
+}
 
 
 function changePeriod(value) {
@@ -140,30 +144,30 @@ function changeHasBall(team) {
 }
 
 
-document.getElementById("endgamebtn").addEventListener("click", function(event){
+document.getElementById("endgamebtn").addEventListener("click", function (event) {
     var endGame = confirm("Do you want to end this event?");
-    if(endGame){
+    if (endGame) {
         endEvent();
     }
 });
 
 
-function endEvent(){
-xhttp.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-        if(this.responseText.includes("error")){
-            alert("Server error: "+ this.responseText);
-        }else if(this.responseText.includes("error") && this.responseText.includes("auth")){
-            alert("Authentication error");
-            document.location.reload();
-        }else if(this.responseText.includes("success")){
-            alert("Event marked as finished");
-            window.close();
+function endEvent() {
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText.includes("error")) {
+                alert("Server error: " + this.responseText);
+            } else if (this.responseText.includes("error") && this.responseText.includes("auth")) {
+                alert("Authentication error");
+                document.location.reload();
+            } else if (this.responseText.includes("success")) {
+                alert("Event marked as finished");
+                window.close();
+            }
         }
-    }
-};
-xhttp.open("GET", "setFinished.php?id="+gameId, true);
-xhttp.send();
+    };
+    xhttp.open("GET", "setFinished.php?id=" + gameId, true);
+    xhttp.send();
 
 }
 
@@ -285,7 +289,7 @@ function getUserID() {
 }
 
 function loadInitial() {
-    
+
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
@@ -294,18 +298,21 @@ function loadInitial() {
                 alert("404");
 
                 window.close();
-                
+
             } else {
                 var now = new Date().getTime();
                 var difference = now - data["misc"].timer["unix"];
-                if(data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E" ){
+                if (data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E") {
                     timerSeconds = data["misc"].timer["startValue"] - Math.floor(difference / 1000);
                     timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-
+                    timerbutton.style.background = "rgb(253, 81, 81)";
+                    timerbutton.innerHTML = "PAUSE";
                     runTimer(timerSeconds);
-                }else{
+                } else {
                     timerSeconds = data["misc"].timer["startValue"];
                     timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
+                    
+
                 }
                 KenstonScore = data["homeScore"];
                 GuestScore = data["oppScore"];
@@ -319,7 +326,7 @@ function loadInitial() {
     }
     xhttp.open("GET", "/app/eventData.php?id=" + gameId, true);
     xhttp.send();
-    
+
 }
 
 function changePeriodInit(value) {
@@ -371,11 +378,93 @@ function changeBallPosessInit(value) {
 
 document.getElementById("kbx1").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
-})
+});
 document.getElementById("kbx2").addEventListener("mouseover", function (event) {
     document.getElementById("kbx1").style.color = "orange";
     this.style.color = "orange";
-})
+});
+document.getElementById("kbx1").addEventListener("mouseout", function (event) {
+    this.style.color = "#a7a7a7";
+});
+document.getElementById("kbx2").addEventListener("mouseout", function (event) {
+    if(kenstonBonus == 2 || kenstonBonus == 0){
+        document.getElementById("kbx1").style.color = "gray";
+        this.style.color = "#a7a7a7";
+    }else{
+        this.style.color = "#a7a7a7";
+    }
+
+});
+document.getElementById("gbx1").addEventListener("mouseover", function (event) {
+    this.style.color = "orange";
+});
+document.getElementById("gbx2").addEventListener("mouseover", function (event) {
+    document.getElementById("gbx1").style.color = "orange";
+    this.style.color = "orange";
+});
+document.getElementById("gbx1").addEventListener("mouseout", function (event) {
+    this.style.color = "#a7a7a7";
+});
+document.getElementById("gbx2").addEventListener("mouseout", function (event) {
+    if(guestBonus == 2 || guestBonus == 0){
+        document.getElementById("gbx1").style.color = "gray";
+        this.style.color = "#a7a7a7";
+    }else{
+        this.style.color = "#a7a7a7";
+    }
+
+});
+
+document.getElementById("gbx1").addEventListener("mouseover", function (event) {
+    if(guestBonus == 1){//toggle
+        guestBonus = 0;
+        miscReq.gbx = 0;
+    }else{
+        guestBonus = 1;
+        miscReq.gbx = 1;
+        this.style.color = "green";
+    }
+    sendTimer();
+    });
+document.getElementById("gbx2").addEventListener("mouseover", function (event) {
+    if(guestBonus == 2){//toggle
+        guestBonus = 0;
+        miscReq.gbx = 0;
+    }else{
+        guestBonus = 2;
+        miscReq.gbx = 2;
+        document.getElementById("gbx1").style.color = "green";
+        this.style.color = "green";
+    }
+    sendTimer();
+});
+
+document.getElementById("kbx1").addEventListener("mouseover", function (event) {
+    if(KenstonBonus == 1){//toggle
+        kenstonBonus = 0;
+        miscReq.kbx = 0;
+
+    }else{
+        kenstonBonus = 1;
+        miscReq.kbx = 1;
+        this.style.color = "green";
+    }
+    sendTimer();
+    });
+    
+document.getElementById("kbx2").addEventListener("mouseover", function (event) {
+    if(KenstonBonus == 2){//toggle
+        kenstonBonus = 0;
+        miscReq.kbx = 0;
+
+    }else{
+        kenstonBonus = 2;
+        miscReq.kbx = 2;
+        document.getElementById("kbx1").style.color = "green";
+        this.style.color = "green";
+    }
+    sendTimer();
+});
 
 //-------------------------------------------------------------------------------------------
 //TIMER CORE
@@ -471,7 +560,7 @@ function timerSetPrompt() {
 }
 
 function setTimer(seconds) {
-    timerdisplay.innerHTML = (Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60)) + ":" + (seconds % 60 < 10? "0"+seconds%60:seconds%60);
+    timerdisplay.innerHTML = (Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60)) + ":" + (seconds % 60 < 10 ? "0" + seconds % 60 : seconds % 60);
     timerSeconds = seconds;
     if (timerIsRunning) {
         timerbutton.style.background = "rgb(16, 220, 14)";
