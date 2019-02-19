@@ -296,6 +296,7 @@ function loadInitial() {
                 window.close();
 
             } else {
+                //timer stuff
                 var now = new Date().getTime();
                 var difference = now - data["misc"].timer["unix"];
                 if(data["misc"].timer["startValue"] - Math.floor(difference / 1000) < 0){
@@ -314,6 +315,29 @@ function loadInitial() {
     
                     }
                 }
+                // other critical things
+                guestBonus = data["misc"].gbx;
+                kenstonBonus = data["misc"].kbx;
+                switch(data["misc"].gbx){
+                    case 1:
+                        document.getElementById("gbx1").style.color = "green";
+                        break;
+                    case 2:
+                        document.getElementById("gbx1").style.color = "green";
+                        document.getElementById("gbx2").style.color = "green";
+                        break;
+                }
+                switch(data["misc"].kbx){
+                    case 1:
+                        document.getElementById("kbx1").style.color = "green";
+                        break;
+                    case 2:
+                        document.getElementById("kbx1").style.color = "green";
+                        document.getElementById("kbx2").style.color = "green";
+                        break;
+                }
+
+
                 KenstonScore = parseInt(data["homeScore"]);
                 GuestScore = parseInt(data["oppScore"]);
                 kenstonScoreDisplay.innerHTML = KenstonScore;

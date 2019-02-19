@@ -46,6 +46,33 @@ function fetchData() {
             }
             document.getElementById("kscore").innerHTML = data["homeScore"] == null ? 0 : data["homeScore"];
             document.getElementById("gscore").innerHTML = data["oppScore"] == null ? 0 : data["oppScore"];
+
+            switch(data["misc"].gbx){
+                case 1:
+                    document.getElementById("gbx1").style.color = "green";
+                    document.getElementById("gbx2").style.color = "#a7a7a7";
+                    break;
+                case 2:
+                    document.getElementById("gbx1").style.color = "green";
+                    document.getElementById("gbx2").style.color = "green";
+                    break;
+                default:
+                document.getElementById("gbx1").style.color = "#a7a7a7";
+                document.getElementById("gbx2").style.color = "#a7a7a7";
+            }
+            switch(data["misc"].kbx){
+                case 1:
+                    document.getElementById("kbx1").style.color = "green";
+                    document.getElementById("kbx2").style.color = "#a7a7a7";
+                    break;
+                case 2:
+                    document.getElementById("kbx1").style.color = "green";
+                    document.getElementById("kbx2").style.color = "green";
+                    break;
+                default:
+                document.getElementById("kbx1").style.color = "#a7a7a7";
+                document.getElementById("kbx2").style.color = "#a7a7a7";
+            }
         }
     }
     xhttp.open("GET", "eventData.php?id=" + gid, true);
