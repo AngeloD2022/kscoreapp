@@ -302,17 +302,21 @@ function loadInitial() {
             } else {
                 var now = new Date().getTime();
                 var difference = now - data["misc"].timer["unix"];
-                if (data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E") {
-                    timerSeconds = data["misc"].timer["startValue"] - Math.floor(difference / 1000);
-                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-                    timerbutton.style.background = "rgb(253, 81, 81)";
-                    timerbutton.innerHTML = "PAUSE";
-                    runTimer(timerSeconds);
-                } else {
-                    timerSeconds = data["misc"].timer["startValue"];
-                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-                    
-
+                if(data["misc"].timer["startValue"] - Math.floor(difference / 1000) < 0){
+                    setTimer(0);
+                }else{
+                    if (data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E") {
+                        timerSeconds = data["misc"].timer["startValue"] - Math.floor(difference / 1000);
+                        timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
+                        timerbutton.style.background = "rgb(253, 81, 81)";
+                        timerbutton.innerHTML = "PAUSE";
+                        runTimer(timerSeconds);
+                    } else {
+                        timerSeconds = data["misc"].timer["startValue"];
+                        timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
+                        
+    
+                    }
                 }
                 KenstonScore = data["homeScore"];
                 GuestScore = data["oppScore"];
