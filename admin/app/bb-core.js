@@ -298,7 +298,6 @@ function loadInitial() {
             } else {
                 var now = new Date().getTime();
                 var difference = now - data["misc"].timer["unix"];
-<<<<<<< HEAD
                 if(data["misc"].timer["startValue"] - Math.floor(difference / 1000) < 0){
                     setTimer(0);
                 }else{
@@ -314,19 +313,6 @@ function loadInitial() {
                         
     
                     }
-=======
-                if (data["misc"].timer["currentState"] != "P" && data["misc"].timer["currentState"] != "S" && data["misc"].timer["currentState"] != "E") {
-                    timerSeconds = data["misc"].timer["startValue"] - Math.floor(difference / 1000);
-                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-                    timerbutton.style.background = "rgb(253, 81, 81)";
-                    timerbutton.innerHTML = "PAUSE";
-                    runTimer(timerSeconds);
-                } else {
-                    timerSeconds = data["misc"].timer["startValue"];
-                    timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-
-
->>>>>>> f6b2db7661deabe5dd9d8c8597db41ea0fa29e1d
                 }
                 KenstonScore = parseInt(data["homeScore"]);
                 GuestScore = parseInt(data["oppScore"]);
