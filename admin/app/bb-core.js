@@ -1,5 +1,5 @@
 //KENSTON BASKETBALL GT ADMIN PANEL - CORE FRAMEWORK
-//CODED BY: ANGELO DELUCA
+//WRITTEN BY: ANGELO DELUCA
 //Copyright (c) 2018 Kenston Local School District
 
 var request = {};
@@ -104,10 +104,6 @@ function teamHasBall(team) {
         miscReq.ballPosess = "guest";
     }
     sendTimer();
-}
-
-kbx1.onmouseenter = function(){
-    
 }
 
 
@@ -311,11 +307,11 @@ function loadInitial() {
                 } else {
                     timerSeconds = data["misc"].timer["startValue"];
                     timerdisplay.innerHTML = (Math.floor(timerSeconds / 60) < 10 ? "0" + Math.floor(timerSeconds / 60) : Math.floor(timerSeconds / 60)) + ":" + (timerSeconds % 60 < 10 ? "0" + timerSeconds % 60 : timerSeconds % 60);
-                    
+
 
                 }
-                KenstonScore = data["homeScore"];
-                GuestScore = data["oppScore"];
+                KenstonScore = parseInt(data["homeScore"]);
+                GuestScore = parseInt(data["oppScore"]);
                 kenstonScoreDisplay.innerHTML = KenstonScore;
                 guestScoreDisplay.innerHTML = GuestScore;
                 changePeriodInit(data["misc"].period);
@@ -384,17 +380,15 @@ document.getElementById("kbx2").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 });
 document.getElementById("kbx1").addEventListener("mouseout", function (event) {
-    this.style.color = "#a7a7a7";
+    this.style.color = kenstonBonus >= 1 ? "green" : "#a7a7a7";
 });
 document.getElementById("kbx2").addEventListener("mouseout", function (event) {
-    if(kenstonBonus == 2 || kenstonBonus == 0){
-        document.getElementById("kbx1").style.color = "gray";
-        this.style.color = "#a7a7a7";
-    }else{
-        this.style.color = "#a7a7a7";
-    }
-
+    document.getElementById("kbx1").style.color = kenstonBonus >= 1 ? "green" : "#a7a7a7";
+    this.style.color = kenstonBonus == 2 ? "green" : "#a7a7a7";
 });
+
+
+
 document.getElementById("gbx1").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 });
@@ -403,34 +397,31 @@ document.getElementById("gbx2").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 });
 document.getElementById("gbx1").addEventListener("mouseout", function (event) {
-    this.style.color = "#a7a7a7";
+    this.style.color = guestBonus >= 1 ? "green" : "#a7a7a7";
 });
 document.getElementById("gbx2").addEventListener("mouseout", function (event) {
-    if(guestBonus == 2 || guestBonus == 0){
-        document.getElementById("gbx1").style.color = "gray";
-        this.style.color = "#a7a7a7";
-    }else{
-        this.style.color = "#a7a7a7";
-    }
+    document.getElementById("gbx1").style.color = guestBonus >= 1 ? "green" : "#a7a7a7";
+    this.style.color = guestBonus == 2 ? "green" : "#a7a7a7";
 
 });
 
-document.getElementById("gbx1").addEventListener("mouseover", function (event) {
-    if(guestBonus == 1){//toggle
+document.getElementById("gbx1").addEventListener("click", function (event) {
+    if (guestBonus == 1) { //toggle
         guestBonus = 0;
         miscReq.gbx = 0;
-    }else{
+    } else {
         guestBonus = 1;
         miscReq.gbx = 1;
+        document.getElementById("gbx2").style.color = "#a7a7a7";
         this.style.color = "green";
     }
     sendTimer();
-    });
-document.getElementById("gbx2").addEventListener("mouseover", function (event) {
-    if(guestBonus == 2){//toggle
+});
+document.getElementById("gbx2").addEventListener("click", function (event) {
+    if (guestBonus == 2) { //toggle
         guestBonus = 0;
         miscReq.gbx = 0;
-    }else{
+    } else {
         guestBonus = 2;
         miscReq.gbx = 2;
         document.getElementById("gbx1").style.color = "green";
@@ -439,25 +430,24 @@ document.getElementById("gbx2").addEventListener("mouseover", function (event) {
     sendTimer();
 });
 
-document.getElementById("kbx1").addEventListener("mouseover", function (event) {
-    if(KenstonBonus == 1){//toggle
+document.getElementById("kbx1").addEventListener("click", function (event) {
+    if (kenstonBonus == 1) { //toggle
         kenstonBonus = 0;
         miscReq.kbx = 0;
-
-    }else{
+    } else {
         kenstonBonus = 1;
         miscReq.kbx = 1;
+        document.getElementById("kbx2").style.color = "#a7a7a7";
         this.style.color = "green";
     }
     sendTimer();
-    });
-    
-document.getElementById("kbx2").addEventListener("mouseover", function (event) {
-    if(KenstonBonus == 2){//toggle
+});
+
+document.getElementById("kbx2").addEventListener("click", function (event) {
+    if (kenstonBonus == 2) { //toggle
         kenstonBonus = 0;
         miscReq.kbx = 0;
-
-    }else{
+    } else {
         kenstonBonus = 2;
         miscReq.kbx = 2;
         document.getElementById("kbx1").style.color = "green";
