@@ -86,6 +86,7 @@ echo "soccer ui WIP";
 
 
 function displayBasketball(){
+    global $game;
     ?>
 <link href="assets-bb.css" type="text/css" rel="stylesheet" />
 <div id="endFw"></div>

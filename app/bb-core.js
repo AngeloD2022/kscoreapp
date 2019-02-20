@@ -42,7 +42,6 @@ function fetchData() {
                 }
             } else {
                 changePIndicator(0);
-                updateDown(1);
             }
             document.getElementById("kscore").innerHTML = data["homeScore"] == null ? 0 : data["homeScore"];
             document.getElementById("gscore").innerHTML = data["oppScore"] == null ? 0 : data["oppScore"];
