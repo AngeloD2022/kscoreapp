@@ -3,8 +3,8 @@
 
 -- make something to end the game from admin panel. (Done, Make finished events from past few days greyed out on dashboard, after a few days, disappear entirely)
 -- add capability to edit the event from admin dashboard 
--- add basketball functionalities and user interfaces (almost Done)
--- fix bugs w/ football app (undefined defaults)
+-- add basketball functionalities and user interfaces -- DONE
+-- fix bugs w/ football app (undefined defaults) -- DONE
 -- O R G A N I Z E  T H E  F R E A K I N G  F O L D E R
 -- add more sports
 -----------------------------------------------------
