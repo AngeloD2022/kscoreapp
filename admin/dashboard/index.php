@@ -32,10 +32,17 @@ if($result->num_rows > 0)
     while($row = $result->fetch_assoc()){
         $dbEntrys[] = $row;
         ?>
-        <tr <?= $row["active"] == 1? 'style="background-color:rgb(153, 255, 153);"':'style="background-color: rgb(193, 193, 193);"'?>>
+        <tr <?= $row["finished"] == 1 || $row["active"] == 0? 'style="background-color: rgb(193, 193, 193);"':'style="background-color:rgb(153, 255, 153);"'?>>
             <td><?=$row["id"];?></td>
             <td><?=$row["name"];?></td>
-            <td><?= $row["active"] === 1? "Active": $row["finished"] === 1? "Ended": "Inactive"; ?></td>
+            <td><?=
+
+            $row["active"] == 0 && $row["finished"] == 0? "Inactive" : 
+            $row["active"] == 0 && $row["finished"] == 1?  "Finished":
+            "Active";
+            
+            ?></td>
+            
             <td><?=$row["opposing"];?></td>
             <td><?=$row["sport"];?></td>
             <td><?=$row["teamClass"];?></td>
@@ -65,6 +72,13 @@ if($result->num_rows > 0)
             <!--EVENT NAME-->
             <input class="ins" type="text" placeholder="Event Name" id="ce_name"><br>
             <input class="ins" type="text" placeholder="Opposing Team" id="ce_opposing"><br>
+            <select class="ins" id="ce_sport">
+                <option value="NONE">- Sport -</option>
+                <option value="football">Football</option>
+                <option value="basketball">Basketball</option>
+                <option value="soccer">Soccer</option>
+                <option value="lacrosse">Lacrosse</option>
+            </select><br/><br/>
             <label for="ce_timestart">Event start time:</label>
             <input class="ins" type="datetime-local" id="ce_timestart"><br>
             <p style="margin-bottom: 0px;">Team Class</p>
@@ -73,9 +87,9 @@ if($result->num_rows > 0)
                 <option value="jv">Junior Varsity</option>
                 <option value="other">Other</option>
             </select><br>
-            <label for="ce_school">School: </label>
+
             <select class="ins" id="ce_school">
-                <option value="NONE">- Select one -</option>
+                <option value="NONE">- Select School -</option>
                 <option value="pre">Preschool</option>
                 <option value="elem">Elementary School</option>
                 <option value="ms">Middle School</option>
@@ -83,12 +97,6 @@ if($result->num_rows > 0)
             </select><br>
             <input class="ins" type="text" placeholder="Event location" id="ce_location"><br>
             <input class="ins" type="text" placeholder="Opponent's logo URL" id="ce_oppLogo"><br>
-            <select class="ins" id="ce_sport">
-                <option value="NONE">- Select one -</option>
-                <option value="football">Football</option>
-                <option value="basketball">Basketball</option>
-                <option value="soccer">Soccer</option>
-            </select><br/><br/>
 
             <button onclick="createSportEvent()" style="float: right;margin-bottom: 11px;margin-right: 19px;" class="ins" id="subm">OK</button>
             <button class="ins" style="float: right;margin-top: 6px;margin-right: 25px;" onclick="toggleDialog(lastClicked)">Cancel</button>

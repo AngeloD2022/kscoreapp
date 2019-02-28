@@ -15,13 +15,14 @@ header{
     border-radius: 5px;
 }
 #ctrlPanel{
-    border: 1px solid rgb(80, 80, 80);
+    border: 1px solid rgb(117, 117, 117);
     margin-top: 70px;
     height: 120px;
     display: inline-block;
     height: auto;
     width: -webkit-fill-available;
     padding-bottom: 14px;
+    border-radius: 10px;
 }
 
 #loginas{
@@ -86,6 +87,7 @@ th{
 
 #evTbl{
     border-collapse: collapse;
+    font-family: 'Open-Sans', sans-serif;
 }
 .launch{
     border: none;

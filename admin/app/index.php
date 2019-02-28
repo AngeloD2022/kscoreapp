@@ -72,6 +72,8 @@ if(secs < 6){
                 showFootballUi();
             }else if($game["sport"] == "basketball"){
                 showBasketballUI();
+            }else if($game["sport"] == "lacrosse"){
+                showLacrosseUI();
             }
         }
     }
@@ -490,6 +492,17 @@ var gScore = <?= $game["oppScore"] ?>;//initial value
                                         <button onclick="changeBallOn('add')" class="addButton">+</button>
                                     -->
                                     
+<?php
+}
+
+
+function showLacrosseUI(){
+?>
+
+<script>
+window.location.href = "lc-ui.html";
+    </script>
+
 <?php
 }
 ?>
