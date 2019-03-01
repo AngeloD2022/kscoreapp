@@ -32,8 +32,8 @@ if($result->num_rows > 0)
     while($row = $result->fetch_assoc()){
         $dbEntrys[] = $row;
         ?>
-        <tr <?= $row["finished"] == 1 || $row["active"] == 0? 'style="background-color: rgb(193, 193, 193);"':'style="background-color:rgb(153, 255, 153);"'?>>
-            <td><?=$row["id"];?></td>
+        <tr <?= $row["finished"] == 1 || $row["active"] == 0 ? 'style="background-color: rgb(193, 193, 193);"':'style="background-color:rgb(153, 255, 153);"'?>>
+            <td><?=$row["id"]?></td>
             <td><?=$row["name"];?></td>
             <td><?=
 
