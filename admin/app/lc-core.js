@@ -22,7 +22,7 @@ var period3Button = document.getElementById("p3");
 var period4Button = document.getElementById("p4");
 var kenstonPenalty = 0;
 var guestPenalty = 0;
-var goal = "";
+var goal = "-";
 var ballPosession;
 var ballPosessonElement = document.getElementsByName("hB");
 //readServer();
@@ -486,28 +486,42 @@ document.getElementById("kpx2").addEventListener("click", function (event) {
 });
 
 document.getElementById("kg").addEventListener("click", function (event) {
-    if (kenstonPenalty == 1) { //toggle
-        kenstonPenalty = 0;
-        miscReq.kpx = 0;
+    if (goal == "k") { //toggle
+        goal = "-";
+        miscReq.goal = goal;
+        this.style.color = "#a7a7a7";
     } else {
-        kenstonPenalty = 1;
-        miscReq.kpx = 1;
-        document.getElementById("kpx2").style.color = "#a7a7a7";
+        document.getElementById("gg").style.color = "#a7a7a7";
+        goal = "k";
+        miscReq.goal = goal;
         this.style.color = "green";
     }
     sendTimer();
 });
+document.getElementById("kg").addEventListener("mouseover", function (event) {
+    this.style.color = "orange";
+});
+document.getElementById("kg").addEventListener("mouseout", function (event) {
+    this.style.color = goal == "k" ? "green" : "#a7a7a7";
+});
 document.getElementById("gg").addEventListener("click", function (event) {
-    if (kenstonPenalty == 1) { //toggle
-        kenstonPenalty = 0;
-        miscReq.kpx = 0;
+    if (goal == "g") { //toggle
+        goal = "-";
+        miscReq.goal = goal;
+        this.style.color = "#a7a7a7";
     } else {
-        kenstonPenalty = 1;
-        miscReq.kpx = 1;
-        document.getElementById("kpx2").style.color = "#a7a7a7";
+        document.getElementById("kg").style.color = "#a7a7a7";
+        goal = "g";
+        miscReq.goal = goal;
         this.style.color = "green";
     }
     sendTimer();
+});
+document.getElementById("gg").addEventListener("mouseover", function (event) {
+    this.style.color = "orange";
+});
+document.getElementById("gg").addEventListener("mouseout", function (event) {
+    this.style.color = goal == "g" ? "green" : "#a7a7a7";
 });
 
 

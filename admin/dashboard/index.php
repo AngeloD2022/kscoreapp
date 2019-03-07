@@ -38,8 +38,8 @@ if($result->num_rows > 0)
             <td><?=
 
             $row["active"] == 0 && $row["finished"] == 0? "Inactive" : 
-            $row["active"] == 0 && $row["finished"] == 1?  "Finished":
-            "Active";
+            ($row["active"] == 0 && $row["finished"] == 1?  "Finished":
+            "Active");
             
             ?></td>
             
