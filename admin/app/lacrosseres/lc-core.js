@@ -163,7 +163,7 @@ function endEvent() {
             }
         }
     };
-    xhttp.open("GET", "../setFinished.php?id=" + gameId, true);
+    xhttp.open("GET", "./setFinished.php?id=" + gameId, true);
     xhttp.send();
 
 }
@@ -216,7 +216,7 @@ function postServer() {
     }
     var rawData = JSON.stringify(request);
     console.log(rawData);
-    xhttp.open("POST", "../update.php", true);
+    xhttp.open("POST", "./update.php", true);
     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -649,7 +649,7 @@ function timerToSrv(unix, secondsvalue, state) {
     treq.currentState = state;
     var tRaw = JSON.stringify(treq);
     console.log(tRaw);
-    txhttp.open("POST", "../T_IN.php", true);
+    txhttp.open("POST", "./T_IN.php", true);
     txhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     txhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
