@@ -319,6 +319,8 @@ function loadInitial() {
                 // other critical things
                 guestPenalty = data["misc"].gpx;
                 kenstonPenalty = data["misc"].kpx;
+                goal = data["misc"].goal;
+
                 switch(data["misc"].gpx){
                     case 1:
                         document.getElementById("gpx1").style.color = "green";
@@ -337,6 +339,12 @@ function loadInitial() {
                         document.getElementById("kpx2").style.color = "green";
                         break;
                 }
+                if(data["misc"].goal == "k"){
+                    document.getElementById("kg").style.color = "green";
+                } else if(data["misc"].goal == "g"){
+                    document.getElementById("gg").style.color = "green";
+                }
+                
 
 
                 KenstonScore = parseInt(data["homeScore"]);
