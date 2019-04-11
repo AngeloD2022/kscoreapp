@@ -1,6 +1,6 @@
-//KENSTON BASKETBALL GT ADMIN PANEL - CORE FRAMEWORK
+//KENSTON LACROSSE GT ADMIN PANEL - CORE FRAMEWORK
 //WRITTEN BY: ANGELO DELUCA
-//Copyright (c) 2018 Kenston Local School District
+//Copyright (c) 2019 Kenston Local School District
 
 var request = {};
 var xhttp = new XMLHttpRequest();
@@ -20,8 +20,9 @@ var period1Button = document.getElementById("p1");
 var period2Button = document.getElementById("p2");
 var period3Button = document.getElementById("p3");
 var period4Button = document.getElementById("p4");
-var kenstonBonus = 0;
-var guestBonus = 0;
+var kenstonPenalty = 0;
+var guestPenalty = 0;
+var goal = "-";
 var ballPosession;
 var ballPosessonElement = document.getElementsByName("hB");
 //readServer();
@@ -79,17 +80,17 @@ function decrementScore(amount, team) {
 
 //MISC JSON
 var miscReq = {};
-var kbx1;
-var kbx2;
-var gbx1;
-var gbx2;
+var kpx1;
+var kpx2;
+var gpx1;
+var gpx2;
 document.onload = function () {
     console.log("DOC LOADED");
 };
-kbx1 = document.getElementById("kbx1");
-kbx2 = document.getElementById("kbx2");
-gbx1 = document.getElementById("gbx1");
-gbx2 = document.getElementById("gbx2");
+kpx1 = document.getElementById("kpx1");
+kpx2 = document.getElementById("kpx2");
+gpx1 = document.getElementById("gpx1");
+gpx2 = document.getElementById("gpx2");
 
 function bonusSelect(team, value) {
 
@@ -162,7 +163,7 @@ function endEvent() {
             }
         }
     };
-    xhttp.open("GET", "setFinished.php?id=" + gameId, true);
+    xhttp.open("GET", "../setFinished.php?id=" + gameId, true);
     xhttp.send();
 
 }
@@ -215,7 +216,7 @@ function postServer() {
     }
     var rawData = JSON.stringify(request);
     console.log(rawData);
-    xhttp.open("POST", "update.php", true);
+    xhttp.open("POST", "../update.php", true);
     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -316,26 +317,34 @@ function loadInitial() {
                     }
                 }
                 // other critical things
-                guestBonus = data["misc"].gbx;
-                kenstonBonus = data["misc"].kbx;
-                switch(data["misc"].gbx){
+                guestPenalty = data["misc"].gpx;
+                kenstonPenalty = data["misc"].kpx;
+                goal = data["misc"].goal;
+
+                switch(data["misc"].gpx){
                     case 1:
-                        document.getElementById("gbx1").style.color = "green";
+                        document.getElementById("gpx1").style.color = "green";
                         break;
                     case 2:
-                        document.getElementById("gbx1").style.color = "green";
-                        document.getElementById("gbx2").style.color = "green";
+                        document.getElementById("gpx1").style.color = "green";
+                        document.getElementById("gpx2").style.color = "green";
                         break;
                 }
-                switch(data["misc"].kbx){
+                switch(data["misc"].kpx){
                     case 1:
-                        document.getElementById("kbx1").style.color = "green";
+                        document.getElementById("kpx1").style.color = "green";
                         break;
                     case 2:
-                        document.getElementById("kbx1").style.color = "green";
-                        document.getElementById("kbx2").style.color = "green";
+                        document.getElementById("kpx1").style.color = "green";
+                        document.getElementById("kpx2").style.color = "green";
                         break;
                 }
+                if(data["misc"].goal == "k"){
+                    document.getElementById("kg").style.color = "green";
+                } else if(data["misc"].goal == "g"){
+                    document.getElementById("gg").style.color = "green";
+                }
+                
 
 
                 KenstonScore = parseInt(data["homeScore"]);
@@ -400,89 +409,129 @@ function changeBallPosessInit(value) {
 
 //Bonus CTRL mouseover handlers
 
-document.getElementById("kbx1").addEventListener("mouseover", function (event) {
+document.getElementById("kpx1").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 });
-document.getElementById("kbx2").addEventListener("mouseover", function (event) {
-    document.getElementById("kbx1").style.color = "orange";
+document.getElementById("kpx2").addEventListener("mouseover", function (event) {
+    document.getElementById("kpx1").style.color = "orange";
     this.style.color = "orange";
 });
-document.getElementById("kbx1").addEventListener("mouseout", function (event) {
-    this.style.color = kenstonBonus >= 1 ? "green" : "#a7a7a7";
+document.getElementById("kpx1").addEventListener("mouseout", function (event) {
+    this.style.color = kenstonPenalty >= 1 ? "green" : "#a7a7a7";
 });
-document.getElementById("kbx2").addEventListener("mouseout", function (event) {
-    document.getElementById("kbx1").style.color = kenstonBonus >= 1 ? "green" : "#a7a7a7";
-    this.style.color = kenstonBonus == 2 ? "green" : "#a7a7a7";
+document.getElementById("kpx2").addEventListener("mouseout", function (event) {
+    document.getElementById("kpx1").style.color = kenstonPenalty >= 1 ? "green" : "#a7a7a7";
+    this.style.color = kenstonPenalty == 2 ? "green" : "#a7a7a7";
 });
 
 
 
-document.getElementById("gbx1").addEventListener("mouseover", function (event) {
+document.getElementById("gpx1").addEventListener("mouseover", function (event) {
     this.style.color = "orange";
 });
-document.getElementById("gbx2").addEventListener("mouseover", function (event) {
-    document.getElementById("gbx1").style.color = "orange";
+document.getElementById("gpx2").addEventListener("mouseover", function (event) {
+    document.getElementById("gpx1").style.color = "orange";
     this.style.color = "orange";
 });
-document.getElementById("gbx1").addEventListener("mouseout", function (event) {
-    this.style.color = guestBonus >= 1 ? "green" : "#a7a7a7";
+document.getElementById("gpx1").addEventListener("mouseout", function (event) {
+    this.style.color = guestPenalty >= 1 ? "green" : "#a7a7a7";
 });
-document.getElementById("gbx2").addEventListener("mouseout", function (event) {
-    document.getElementById("gbx1").style.color = guestBonus >= 1 ? "green" : "#a7a7a7";
-    this.style.color = guestBonus == 2 ? "green" : "#a7a7a7";
+document.getElementById("gpx2").addEventListener("mouseout", function (event) {
+    document.getElementById("gpx1").style.color = guestPenalty >= 1 ? "green" : "#a7a7a7";
+    this.style.color = guestPenalty == 2 ? "green" : "#a7a7a7";
 
 });
 
-document.getElementById("gbx1").addEventListener("click", function (event) {
-    if (guestBonus == 1) { //toggle
-        guestBonus = 0;
-        miscReq.gbx = 0;
+document.getElementById("gpx1").addEventListener("click", function (event) {
+    if (guestPenalty == 1) { //toggle
+        guestPenalty = 0;
+        miscReq.gpx = 0;
     } else {
-        guestBonus = 1;
-        miscReq.gbx = 1;
-        document.getElementById("gbx2").style.color = "#a7a7a7";
+        guestPenalty = 1;
+        miscReq.gpx = 1;
+        document.getElementById("gpx2").style.color = "#a7a7a7";
         this.style.color = "green";
     }
     sendTimer();
 });
-document.getElementById("gbx2").addEventListener("click", function (event) {
-    if (guestBonus == 2) { //toggle
-        guestBonus = 0;
-        miscReq.gbx = 0;
+document.getElementById("gpx2").addEventListener("click", function (event) {
+    if (guestPenalty == 2) { //toggle
+        guestPenalty = 0;
+        miscReq.gpx = 0;
     } else {
-        guestBonus = 2;
-        miscReq.gbx = 2;
-        document.getElementById("gbx1").style.color = "green";
-        this.style.color = "green";
-    }
-    sendTimer();
-});
-
-document.getElementById("kbx1").addEventListener("click", function (event) {
-    if (kenstonBonus == 1) { //toggle
-        kenstonBonus = 0;
-        miscReq.kbx = 0;
-    } else {
-        kenstonBonus = 1;
-        miscReq.kbx = 1;
-        document.getElementById("kbx2").style.color = "#a7a7a7";
+        guestPenalty = 2;
+        miscReq.gpx = 2;
+        document.getElementById("gpx1").style.color = "green";
         this.style.color = "green";
     }
     sendTimer();
 });
 
-document.getElementById("kbx2").addEventListener("click", function (event) {
-    if (kenstonBonus == 2) { //toggle
-        kenstonBonus = 0;
-        miscReq.kbx = 0;
+document.getElementById("kpx1").addEventListener("click", function (event) {
+    if (kenstonPenalty == 1) { //toggle
+        kenstonPenalty = 0;
+        miscReq.kpx = 0;
     } else {
-        kenstonBonus = 2;
-        miscReq.kbx = 2;
-        document.getElementById("kbx1").style.color = "green";
+        kenstonPenalty = 1;
+        miscReq.kpx = 1;
+        document.getElementById("kpx2").style.color = "#a7a7a7";
         this.style.color = "green";
     }
     sendTimer();
 });
+
+document.getElementById("kpx2").addEventListener("click", function (event) {
+    if (kenstonPenalty == 2) { //toggle
+        kenstonPenalty = 0;
+        miscReq.kpx = 0;
+    } else {
+        kenstonPenalty = 2;
+        miscReq.kpx = 2;
+        document.getElementById("kpx1").style.color = "green";
+        this.style.color = "green";
+    }
+    sendTimer();
+});
+
+document.getElementById("kg").addEventListener("click", function (event) {
+    if (goal == "k") { //toggle
+        goal = "-";
+        miscReq.goal = goal;
+        this.style.color = "#a7a7a7";
+    } else {
+        document.getElementById("gg").style.color = "#a7a7a7";
+        goal = "k";
+        miscReq.goal = goal;
+        this.style.color = "green";
+    }
+    sendTimer();
+});
+document.getElementById("kg").addEventListener("mouseover", function (event) {
+    this.style.color = "orange";
+});
+document.getElementById("kg").addEventListener("mouseout", function (event) {
+    this.style.color = goal == "k" ? "green" : "#a7a7a7";
+});
+document.getElementById("gg").addEventListener("click", function (event) {
+    if (goal == "g") { //toggle
+        goal = "-";
+        miscReq.goal = goal;
+        this.style.color = "#a7a7a7";
+    } else {
+        document.getElementById("kg").style.color = "#a7a7a7";
+        goal = "g";
+        miscReq.goal = goal;
+        this.style.color = "green";
+    }
+    sendTimer();
+});
+document.getElementById("gg").addEventListener("mouseover", function (event) {
+    this.style.color = "orange";
+});
+document.getElementById("gg").addEventListener("mouseout", function (event) {
+    this.style.color = goal == "g" ? "green" : "#a7a7a7";
+});
+
 
 //-------------------------------------------------------------------------------------------
 //TIMER CORE
@@ -600,7 +649,7 @@ function timerToSrv(unix, secondsvalue, state) {
     treq.currentState = state;
     var tRaw = JSON.stringify(treq);
     console.log(tRaw);
-    txhttp.open("POST", "bb-T_IN.php", true);
+    txhttp.open("POST", "../T_IN.php", true);
     txhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     txhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
