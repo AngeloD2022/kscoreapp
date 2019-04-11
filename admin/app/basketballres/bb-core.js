@@ -162,7 +162,7 @@ function endEvent() {
             }
         }
     };
-    xhttp.open("GET", "setFinished.php?id=" + gameId, true);
+    xhttp.open("GET", "../setFinished.php?id=" + gameId, true);
     xhttp.send();
 
 }
