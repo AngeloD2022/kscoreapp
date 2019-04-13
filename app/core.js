@@ -22,7 +22,7 @@ function fetchData(){
         if(this.readyState == 4 && this.status == 200){
             data = JSON.parse(this.responseText);
             if(data['misc'] != null){
-                if(data["finished"] == 1 && data["homeScore"] > data["oppScore"] && !fireworks){
+                if(parseInt(data["finished"]) == 1 && parseInt(data["homeScore"]) > parseInt(data["oppScore"]) && !fireworks){
                     fireworks = true;
                     endFw.play();
                 }else if(fireworks && data["finished"] == 0){

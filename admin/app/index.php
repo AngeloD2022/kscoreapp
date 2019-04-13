@@ -306,8 +306,8 @@ function showBasketballUI()
 
 <head>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link rel="stylesheet" type="text/css" href="footballres/assets-bb.css" />
-    <link rel="stylesheet" type="text/css" href="footballres/buttonMaterial-bb.css" />
+    <link rel="stylesheet" type="text/css" href="basketballres/assets-bb.css" />
+    <link rel="stylesheet" type="text/css" href="basketballres/buttonMaterial-bb.css" />
 </head>
 
 <body>
@@ -390,7 +390,7 @@ function showBasketballUI()
 
                             <div class="guest-card">
                                 <p class="tscore" id="gscore">00</p>
-                                <p class="tname">GTEAM</p>
+                                <p class="tname"><?=$game["opposing"]?></p>
                             </div><br>
                             <div class="misc">
                                 <div class="sqFrame">
@@ -475,7 +475,7 @@ function showBasketballUI()
 </body>
 
 <script src="pageEvents.js" type="text/javascript"></script>
-<script src="footballres/bb-core.js" type="text/javascript"></script>
+<script src="basketballres/bb-core.js" type="text/javascript"></script>
 <script>
 var gameId = <?= $game["id"] ?>; // ID HERE
 var kScore = <?= $game["homeScore"] ?>;//initial value

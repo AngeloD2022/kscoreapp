@@ -26,7 +26,7 @@ function fetchData() {
             data = JSON.parse(this.responseText);
             if (data['misc'] != null) {
                 changePIndicator(!('period' in data['misc']) ? 0 : data['misc'].period);
-                if(data["finished"] == 1 && data["homeScore"] > data["oppScore"] && !fireworks){
+                if(parseInt(data["finished"]) == 1 && parseInt(data["homeScore"]) > parseInt(data["oppScore"]) && !fireworks){
                     fireworks = true;
                     endFw.play();
                 }else if(fireworks && data["finished"] == 0){
