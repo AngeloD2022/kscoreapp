@@ -497,8 +497,9 @@ var gScore = <?= $game["oppScore"] ?>;//initial value
 
 
 function showLacrosseUI(){
+    global $game;
+    global $authBack;
 ?>
-
 <!--KENSTON GT-ADMIN LACROSSE UI-->
 <!--Designed by Angelo DeLuca-->
 

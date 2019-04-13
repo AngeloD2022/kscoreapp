@@ -288,7 +288,7 @@ function endEvent() {
             }
         }
     };
-    xhttp.open("GET", "../setFinished.php?id=" + gameId, true);
+    xhttp.open("GET", "./setFinished.php?id=" + gameId, true);
     xhttp.send();
 
 }
@@ -339,7 +339,7 @@ function postServer() {
     }
     var rawData = JSON.stringify(request);
     console.log(rawData);
-    xhttp.open("POST", "../update.php", true);
+    xhttp.open("POST", "./update.php", true);
     xhttp.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
